@@ -1,8 +1,8 @@
 {
   "__inputs": [
     {
-      "name": "DS_OPENNMS_PERFORMANCE",
-      "label": "OpenNMS Performance",
+      "name": "DS_OPENNMS_HORIZON PM",
+      "label": "OpenNMS Horizon PM",
       "description": "",
       "type": "datasource",
       "pluginId": "opennms-helm-performance-datasource",
@@ -14,7 +14,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "5.1.1"
+      "version": "5.2.4"
     },
     {
       "type": "panel",
@@ -47,7 +47,7 @@
   "gnetId": 6164,
   "graphTooltip": 1,
   "id": null,
-  "iteration": 1526685167425,
+  "iteration": 1538655884693,
   "links": [],
   "panels": [
     {
@@ -72,7 +72,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_OPENNMS_PERFORMANCE}",
+      "datasource": "${DS_OPENNMS_HORIZON PM}",
       "decimals": null,
       "fill": 1,
       "gridPos": {
@@ -234,7 +234,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_OPENNMS_PERFORMANCE}",
+      "datasource": "${DS_OPENNMS_HORIZON PM}",
       "decimals": null,
       "fill": 1,
       "gridPos": {
@@ -370,7 +370,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_OPENNMS_PERFORMANCE}",
+      "datasource": "${DS_OPENNMS_HORIZON PM}",
       "decimals": null,
       "fill": 1,
       "gridPos": {
@@ -582,7 +582,7 @@
       {
         "allValue": null,
         "current": {},
-        "datasource": "${DS_OPENNMS_PERFORMANCE}",
+        "datasource": "${DS_OPENNMS_HORIZON PM}",
         "hide": 0,
         "includeAll": true,
         "label": null,
@@ -633,5 +633,5 @@
   "timezone": "",
   "title": "OpenNMS Windows Node Performance (multirow)",
   "uid": "xdZyTC7mz",
-  "version": 5
+  "version": 1
 }
