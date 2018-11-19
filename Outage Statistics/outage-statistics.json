@@ -1,0 +1,837 @@
+{
+  "__inputs": [
+    {
+      "name": "DS_OPENNMS_PSQL",
+      "label": "OpenNMS PSQL",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "postgres",
+      "pluginName": "PostgreSQL"
+    }
+  ],
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "5.3.1"
+    },
+    {
+      "type": "panel",
+      "id": "heatmap",
+      "name": "Heatmap",
+      "version": "5.0.0"
+    },
+    {
+      "type": "datasource",
+      "id": "postgres",
+      "name": "PostgreSQL",
+      "version": "5.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "table",
+      "name": "Table",
+      "version": "5.0.0"
+    }
+  ],
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "Statistics about current outages with calculated availability and mean time to restore service in a custom time frame.",
+  "editable": true,
+  "gnetId": 8499,
+  "graphTooltip": 0,
+  "id": null,
+  "iteration": 1541874164207,
+  "links": [],
+  "panels": [
+    {
+      "cards": {
+        "cardPadding": null,
+        "cardRound": null
+      },
+      "color": {
+        "cardColor": "#b4ff00",
+        "colorScale": "sqrt",
+        "colorScheme": "interpolateSpectral",
+        "exponent": 0.5,
+        "mode": "spectrum"
+      },
+      "dataFormat": "timeseries",
+      "datasource": "${DS_OPENNMS_PSQL}",
+      "gridPos": {
+        "h": 5,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "heatmap": {},
+      "highlightCards": true,
+      "id": 13,
+      "legend": {
+        "show": true
+      },
+      "links": [],
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  DATE_TRUNC('second', no.iflostservice) AS time,\n  0 AS value\nFROM\n  node_outages no\nWHERE\n  (no.iflostservice, COALESCE(no.ifregainedservice, to_timestamp($__unixEpochTo()))) OVERLAPS\n  (to_timestamp($__unixEpochFrom()), to_timestamp($__unixEpochTo())) AND\n  no.location IN ($location) AND\n  no.categoryname IN ($category) AND\n  no.nodelabel IN ($node) AND\n  no.servicename IN ($servicename)\nGROUP BY\n  no.iflostservice\n",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "responsetime"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "location_specific_status_changes",
+          "timeColumn": "statustime",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "Outage Distribution",
+      "tooltip": {
+        "show": true,
+        "showHistogram": false
+      },
+      "type": "heatmap",
+      "xAxis": {
+        "show": true
+      },
+      "xBucketNumber": null,
+      "xBucketSize": null,
+      "yAxis": {
+        "decimals": null,
+        "format": "short",
+        "logBase": 1,
+        "max": "1.0",
+        "min": "0",
+        "show": true,
+        "splitFactor": null
+      },
+      "yBucketBound": "auto",
+      "yBucketNumber": null,
+      "yBucketSize": null
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 5
+      },
+      "id": 11,
+      "panels": [],
+      "title": "Network Node",
+      "type": "row"
+    },
+    {
+      "columns": [],
+      "datasource": "${DS_OPENNMS_PSQL}",
+      "fontSize": "100%",
+      "gridPos": {
+        "h": 5,
+        "w": 24,
+        "x": 0,
+        "y": 6
+      },
+      "id": 2,
+      "links": [],
+      "pageSize": 5,
+      "scroll": false,
+      "showHeader": true,
+      "sort": {
+        "col": 1,
+        "desc": false
+      },
+      "styles": [
+        {
+          "alias": "Time",
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "pattern": "Time",
+          "type": "date"
+        },
+        {
+          "alias": "Node Label",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "nodelabel",
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
+        },
+        {
+          "alias": "Number Outages",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 0,
+          "mappingType": 1,
+          "pattern": "number_outages",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "Total Outage Time",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "total_outage_time",
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
+        },
+        {
+          "alias": "MTTR",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "mttr",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "Availability",
+          "colorMode": "value",
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 4,
+          "mappingType": 1,
+          "pattern": "availability",
+          "thresholds": [
+            "95",
+            "98"
+          ],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "decimals": 2,
+          "pattern": "/.*/",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        }
+      ],
+      "targets": [
+        {
+          "filter": {
+            "clauses": [],
+            "limit": 1000
+          },
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  nodelabel,\n  100.0 - SUM((100.0 * outage_duration_sec::DOUBLE PRECISION) / report_duration_sec::DOUBLE PRECISION) AS availability,\n  date_trunc('second', SUM(outages.outage_duration)) AS total_outage_time,\n  date_trunc('second', SUM(outages.outage_duration) / COUNT(svclosteventid)) AS mttr,\n  COUNT(svclosteventid) AS number_outages\nFROM\n  (SELECT\n    no.nodelabel,\n    no.duration AS outage_duration,\n    date_trunc('second', to_timestamp($__unixEpochTo()) - to_timestamp($__unixEpochFrom())) AS report_duration,\n    EXTRACT (EPOCH FROM date_trunc('second', to_timestamp($__unixEpochTo()) - to_timestamp($__unixEpochFrom()))) AS report_duration_sec,\n    EXTRACT (EPOCH FROM date_trunc('second', no.duration)) AS outage_duration_sec,\n    no.svclosteventid\n  FROM\n    node_outages no\n  WHERE\n    no.svclosteventuei = 'uei.opennms.org/nodes/nodeDown' AND\n    (no.iflostservice, COALESCE(no.ifregainedservice, to_timestamp($__unixEpochTo()))) OVERLAPS\n    (to_timestamp($__unixEpochFrom()), to_timestamp($__unixEpochTo())) AND\n    no.location IN ($location) AND\n    no.categoryname IN ($category) AND\n    no.nodelabel IN ($node) AND\n    no.servicename IN ($servicename)\n  GROUP BY\n    no.nodelabel,\n    no.svclosteventid,\n    outage_duration,\n    report_duration,\n    outage_duration_sec,\n    report_duration_sec) AS outages\nGROUP BY\n  nodelabel\nORDER BY\n  mttr ASC,\n  nodelabel ASC",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "time",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "Node Availability",
+      "transform": "table",
+      "type": "table"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 11
+      },
+      "id": 9,
+      "panels": [],
+      "title": "IP Interface",
+      "type": "row"
+    },
+    {
+      "columns": [],
+      "datasource": "${DS_OPENNMS_PSQL}",
+      "fontSize": "100%",
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 12
+      },
+      "id": 3,
+      "links": [],
+      "pageSize": 4,
+      "scroll": false,
+      "showHeader": true,
+      "sort": {
+        "col": 2,
+        "desc": false
+      },
+      "styles": [
+        {
+          "alias": "Time",
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "pattern": "Time",
+          "type": "date"
+        },
+        {
+          "alias": "Node Label",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "nodelabel",
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
+        },
+        {
+          "alias": "Number Outages",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 0,
+          "mappingType": 1,
+          "pattern": "number_outages",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "Total Outage Time",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "total_outage_time",
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
+        },
+        {
+          "alias": "MTTR",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "mttr",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "Availability",
+          "colorMode": "value",
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 4,
+          "mappingType": 1,
+          "pattern": "availability",
+          "thresholds": [
+            "95",
+            "98"
+          ],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "IP address",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "ipaddr",
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
+        },
+        {
+          "alias": "",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "decimals": 2,
+          "pattern": "/.*/",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        }
+      ],
+      "targets": [
+        {
+          "filter": {
+            "clauses": [],
+            "limit": 1000
+          },
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  nodelabel,\n  ipaddr,\n  100.0 - SUM((100.0 * outage_duration_sec::DOUBLE PRECISION) / report_duration_sec::DOUBLE PRECISION) AS availability,\n  date_trunc('second', SUM(outages.outage_duration)) AS total_outage_time,\n  date_trunc('second', SUM(outages.outage_duration) / COUNT(svclosteventid)) AS mttr,\n  COUNT(svclosteventid) AS number_outages\nFROM\n  (SELECT\n    no.nodelabel,\n    no.ipaddr,\n    no.duration AS outage_duration,\n    date_trunc('second', to_timestamp($__unixEpochTo()) - to_timestamp($__unixEpochFrom())) AS report_duration,\n    EXTRACT (EPOCH FROM date_trunc('second', to_timestamp($__unixEpochTo()) - to_timestamp($__unixEpochFrom()))) AS report_duration_sec,\n    EXTRACT (EPOCH FROM date_trunc('second', no.duration)) AS outage_duration_sec,\n    no.svclosteventid\n  FROM\n    node_outages no\n  WHERE\n    no.svclosteventuei = 'uei.opennms.org/nodes/interfaceDown' AND\n    (no.iflostservice, COALESCE(no.ifregainedservice, to_timestamp($__unixEpochTo()))) OVERLAPS\n    (to_timestamp($__unixEpochFrom()), to_timestamp($__unixEpochTo())) AND\n    no.location IN ($location) AND\n    no.categoryname IN ($category) AND\n    no.nodelabel IN ($node) AND\n    no.servicename IN ($servicename)\n  GROUP BY\n    no.nodelabel,\n    no.ipaddr,\n    no.svclosteventid,\n    outage_duration,\n    report_duration,\n    outage_duration_sec,\n    report_duration_sec) AS outages\nGROUP BY\n  nodelabel,\n  ipaddr\nORDER BY\n  mttr ASC,\n  nodelabel ASC,\n  ipaddr ASC",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "time",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "IP Interface Availability",
+      "transform": "table",
+      "type": "table"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 18
+      },
+      "id": 7,
+      "panels": [],
+      "title": "Service",
+      "type": "row"
+    },
+    {
+      "columns": [],
+      "datasource": "${DS_OPENNMS_PSQL}",
+      "fontSize": "100%",
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 19
+      },
+      "id": 5,
+      "links": [],
+      "pageSize": 4,
+      "scroll": false,
+      "showHeader": true,
+      "sort": {
+        "col": 3,
+        "desc": false
+      },
+      "styles": [
+        {
+          "alias": "Time",
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "pattern": "Time",
+          "type": "date"
+        },
+        {
+          "alias": "Node Label",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "nodelabel",
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
+        },
+        {
+          "alias": "Number Outages",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 0,
+          "mappingType": 1,
+          "pattern": "number_outages",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "Total Outage Time",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "total_outage_time",
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
+        },
+        {
+          "alias": "MTTR",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "mttr",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "Availability",
+          "colorMode": "value",
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 4,
+          "mappingType": 1,
+          "pattern": "availability",
+          "thresholds": [
+            "95",
+            "98"
+          ],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "IP address",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "ipaddr",
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
+        },
+        {
+          "alias": "Service Name",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "servicename",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "decimals": 2,
+          "pattern": "/.*/",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        }
+      ],
+      "targets": [
+        {
+          "filter": {
+            "clauses": [],
+            "limit": 1000
+          },
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  nodelabel,\n  ipaddr,\n  servicename,\n  100.0 - SUM((100.0 * outage_duration_sec::DOUBLE PRECISION) / report_duration_sec::DOUBLE PRECISION) AS availability,\n  date_trunc('second', SUM(outages.outage_duration)) AS total_outage_time,\n  date_trunc('second', SUM(outages.outage_duration) / COUNT(svclosteventid)) AS mttr,\n  COUNT(svclosteventid) AS number_outages\nFROM\n  (SELECT\n    no.nodelabel,\n    no.ipaddr,\n    no.servicename,\n    no.duration AS outage_duration,\n    date_trunc('second', to_timestamp($__unixEpochTo()) - to_timestamp($__unixEpochFrom())) AS report_duration,\n    EXTRACT (EPOCH FROM date_trunc('second', to_timestamp($__unixEpochTo()) - to_timestamp($__unixEpochFrom()))) AS report_duration_sec,\n    EXTRACT (EPOCH FROM date_trunc('second', no.duration)) AS outage_duration_sec,\n    no.svclosteventid\n  FROM\n    node_outages no\n  WHERE\n    no.svclosteventuei = 'uei.opennms.org/nodes/nodeLostService' AND\n    (no.iflostservice, COALESCE(no.ifregainedservice, to_timestamp($__unixEpochTo()))) OVERLAPS\n    (to_timestamp($__unixEpochFrom()), to_timestamp($__unixEpochTo())) AND\n    no.location IN ($location) AND\n    no.categoryname IN ($category) AND\n    no.nodelabel IN ($node) AND\n    no.servicename IN ($servicename)\n  GROUP BY\n    no.nodelabel,\n    no.ipaddr,\n    no.servicename,\n    no.svclosteventid,\n    outage_duration,\n    report_duration,\n    outage_duration_sec,\n    report_duration_sec) AS outages\nGROUP BY\n  nodelabel,\n  ipaddr,\n  servicename\nORDER BY\n  mttr ASC,\n  nodelabel ASC,\n  ipaddr ASC,\n  servicename ASC",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "time",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "Service Availability",
+      "transform": "table",
+      "type": "table"
+    }
+  ],
+  "refresh": false,
+  "schemaVersion": 16,
+  "style": "dark",
+  "tags": [
+    "opennms",
+    "mttr",
+    "availability"
+  ],
+  "templating": {
+    "list": [
+      {
+        "allValue": null,
+        "current": {},
+        "datasource": "${DS_OPENNMS_PSQL}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Location",
+        "multi": true,
+        "name": "location",
+        "options": [],
+        "query": "SELECT location FROM node_outages;",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {},
+        "datasource": "${DS_OPENNMS_PSQL}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Surveillance Category",
+        "multi": true,
+        "name": "category",
+        "options": [],
+        "query": "SELECT 'no category' UNION (SELECT categoryname FROM node_outages)",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {},
+        "datasource": "${DS_OPENNMS_PSQL}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Node Label",
+        "multi": true,
+        "name": "node",
+        "options": [],
+        "query": "SELECT nodelabel FROM node_outages",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {},
+        "datasource": "${DS_OPENNMS_PSQL}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Service Name",
+        "multi": true,
+        "name": "servicename",
+        "options": [],
+        "query": "SELECT DISTINCT(servicename) FROM node_outages",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
+  },
+  "time": {
+    "from": "now-30d",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ],
+    "time_options": [
+      "5m",
+      "15m",
+      "1h",
+      "6h",
+      "12h",
+      "24h",
+      "2d",
+      "7d",
+      "30d"
+    ]
+  },
+  "timezone": "",
+  "title": "OpenNMS Outage Statistics",
+  "uid": "Ffe-A0xmz",
+  "version": 14
+}
