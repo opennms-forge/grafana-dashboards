@@ -1,4 +1,25 @@
 {
+  "__inputs": [],
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "5.3.4"
+    },
+    {
+      "type": "panel",
+      "id": "graph",
+      "name": "Graph",
+      "version": "5.0.0"
+    },
+    {
+      "type": "datasource",
+      "id": "opennms-helm-performance-datasource",
+      "name": "OpenNMS Performance",
+      "version": "1.0.0"
+    }
+  ],
   "annotations": {
     "list": [
       {
@@ -16,8 +37,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 1,
-  "id": 63,
-  "iteration": 1542667502815,
+  "id": null,
+  "iteration": 1543868085979,
   "links": [],
   "panels": [
     {
@@ -31,13 +52,6 @@
       "id": 7,
       "panels": [],
       "repeat": "netSnmpLinux",
-      "scopedVars": {
-        "netSnmpLinux": {
-          "selected": true,
-          "text": "PSP-AuthGw-n0",
-          "value": "PSP:frapeha060-n0"
-        }
-      },
       "title": "$netSnmpLinux",
       "type": "row"
     },
@@ -76,13 +90,6 @@
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
-      "scopedVars": {
-        "netSnmpLinux": {
-          "selected": true,
-          "text": "PSP-AuthGw-n0",
-          "value": "PSP:frapeha060-n0"
-        }
-      },
       "seriesOverrides": [],
       "spaceLength": 10,
       "stack": false,
@@ -457,13 +464,6 @@
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
-      "scopedVars": {
-        "netSnmpLinux": {
-          "selected": true,
-          "text": "PSP-AuthGw-n0",
-          "value": "PSP:frapeha060-n0"
-        }
-      },
       "seriesOverrides": [],
       "spaceLength": 10,
       "stack": false,
@@ -761,13 +761,6 @@
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
-      "scopedVars": {
-        "netSnmpLinux": {
-          "selected": true,
-          "text": "PSP-AuthGw-n0",
-          "value": "PSP:frapeha060-n0"
-        }
-      },
       "seriesOverrides": [
         {
           "alias": "memCached",
@@ -1072,13 +1065,6 @@
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
-      "scopedVars": {
-        "netSnmpLinux": {
-          "selected": true,
-          "text": "PSP-AuthGw-n0",
-          "value": "PSP:frapeha060-n0"
-        }
-      },
       "seriesOverrides": [
         {
           "alias": "Cores",
@@ -1263,8 +1249,8 @@
       {
         "current": {
           "tags": [],
-          "text": "OpenNMS FUL Performance",
-          "value": "OpenNMS FUL Performance"
+          "text": "ONMS Test System",
+          "value": "ONMS Test System"
         },
         "hide": 0,
         "label": "OpenNMS Instance",
@@ -1278,12 +1264,7 @@
       },
       {
         "allValue": null,
-        "current": {
-          "text": "PSP-AuthGw-n0",
-          "value": [
-            "PSP:frapeha060-n0"
-          ]
-        },
+        "current": {},
         "datasource": "$instance",
         "hide": 0,
         "includeAll": true,
@@ -1336,5 +1317,5 @@
   "timezone": "",
   "title": "OpenNMS Linux Node Performance (multirow)",
   "uid": "000000063",
-  "version": 23
+  "version": 24
 }
