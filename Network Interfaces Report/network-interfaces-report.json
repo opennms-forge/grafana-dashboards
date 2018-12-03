@@ -1,20 +1,11 @@
 {
-  "__inputs": [
-    {
-      "name": "DS_OPENNMS_HORIZON PM",
-      "label": "OpenNMS Horizon PM",
-      "description": "",
-      "type": "datasource",
-      "pluginId": "opennms-helm-performance-datasource",
-      "pluginName": "OpenNMS Performance"
-    }
-  ],
+  "__inputs": [],
   "__requires": [
     {
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "5.2.4"
+      "version": "5.3.4"
     },
     {
       "type": "panel",
@@ -47,7 +38,7 @@
   "gnetId": 5053,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1539768709443,
+  "iteration": 1543870778775,
   "links": [],
   "panels": [
     {
@@ -55,7 +46,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_OPENNMS_HORIZON PM}",
+      "datasource": "$instance",
       "description": "The total number of bits received and transmitted on the interface, including framing characters.",
       "fill": 1,
       "gridPos": {
@@ -113,7 +104,7 @@
         },
         {
           "attribute": "ifHCOutOctets",
-          "fallbackAttribute": "ifOutOctets",          
+          "fallbackAttribute": "ifOutOctets",
           "hide": true,
           "label": "$index_out",
           "nodeId": "$node",
@@ -174,7 +165,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_OPENNMS_HORIZON PM}",
+      "datasource": "$instance",
       "description": "Network interface utilisation.",
       "fill": 1,
       "gridPos": {
@@ -294,7 +285,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_OPENNMS_HORIZON PM}",
+      "datasource": "$instance",
       "description": "For packet-oriented interfaces, the number of inbound or outbound packets that contained errors preventing them from being deliverable to a higher-layer protocol.  For character-oriented or fixed-length interfaces, the number of inbound transmission units that contained errors preventing them from being deliverable to a higher-layer protocol.",
       "fill": 1,
       "gridPos": {
@@ -396,7 +387,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_OPENNMS_HORIZON PM}",
+      "datasource": "$instance",
       "description": "The number of outbound and inbound packets which were chosen to be discarded even though no errors had been detected to prevent their being deliverable to a higher-layer protocol. One possible reason for discarding such a packet could be to free up buffer space.",
       "fill": 1,
       "gridPos": {
@@ -498,7 +489,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_OPENNMS_HORIZON PM}",
+      "datasource": "$instance",
       "description": "Number of received or transmitted Unicast, Broadcast and Multicast packets.",
       "fill": 1,
       "gridPos": {
@@ -540,7 +531,7 @@
         {
           "aggregation": "AVERAGE",
           "attribute": "ifHCInUcastPkts",
-          "fallbackAttribute": "ifInUcastPkts",          
+          "fallbackAttribute": "ifInUcastPkts",
           "label": "In Unicast $node $interface",
           "nodeId": "$node",
           "refId": "A",
@@ -550,7 +541,7 @@
         {
           "aggregation": "AVERAGE",
           "attribute": "ifHCInMulticastPkts",
-          "fallbackAttribute": "ifInMulticastPkts",          
+          "fallbackAttribute": "ifInMulticastPkts",
           "label": "In Multicast on $node $interface",
           "nodeId": "$node",
           "refId": "B",
@@ -646,9 +637,25 @@
   "templating": {
     "list": [
       {
+        "current": {
+          "tags": [],
+          "text": "OpenNMS FUL Performance",
+          "value": "OpenNMS FUL Performance"
+        },
+        "hide": 0,
+        "label": "OpenNMS Instance",
+        "name": "instance",
+        "options": [],
+        "query": "opennms-helm-performance-datasource",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
         "allValue": null,
         "current": {},
-        "datasource": "${DS_OPENNMS_HORIZON PM}",
+        "datasource": "$instance",
         "hide": 0,
         "includeAll": false,
         "label": null,
@@ -658,6 +665,7 @@
         "query": "nodeFilter(nodeSysOid like '.1.3.6.1.4.1.%')",
         "refresh": 1,
         "regex": "",
+        "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
         "tags": [],
@@ -668,7 +676,7 @@
       {
         "allValue": null,
         "current": {},
-        "datasource": "${DS_OPENNMS_HORIZON PM}",
+        "datasource": "$instance",
         "hide": 0,
         "includeAll": false,
         "label": null,
@@ -678,6 +686,7 @@
         "query": "nodeResources($node)",
         "refresh": 1,
         "regex": "^interfaceSnmp\\[.*",
+        "skipUrlSync": false,
         "sort": 1,
         "tagValuesQuery": "",
         "tags": [],
@@ -719,5 +728,5 @@
   "timezone": "",
   "title": "OpenNMS Network Interfaces Report",
   "uid": "5A-Imb7mz",
-  "version": 3
+  "version": 4
 }
