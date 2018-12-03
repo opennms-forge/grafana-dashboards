@@ -1,20 +1,11 @@
 {
-  "__inputs": [
-    {
-      "name": "DS_OPENNMS_PSQL",
-      "label": "OpenNMS PSQL",
-      "description": "",
-      "type": "datasource",
-      "pluginId": "postgres",
-      "pluginName": "PostgreSQL"
-    }
-  ],
+  "__inputs": [],
   "__requires": [
     {
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "5.3.1"
+      "version": "5.3.4"
     },
     {
       "type": "datasource",
@@ -59,11 +50,11 @@
   "gnetId": 5915,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1540202573760,
+  "iteration": 1543870262409,
   "links": [],
   "panels": [
     {
-      "collapsed": false,
+      "collapsed": true,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -71,267 +62,268 @@
         "y": 0
       },
       "id": 37,
-      "panels": [],
+      "panels": [
+        {
+          "cacheTimeout": null,
+          "colorBackground": true,
+          "colorValue": false,
+          "colors": [
+            "#299c46",
+            "rgba(237, 129, 40, 0.89)",
+            "#d44a3a"
+          ],
+          "datasource": "$instance",
+          "description": "Outstanding alarms related to business services.",
+          "format": "none",
+          "gauge": {
+            "maxValue": 100,
+            "minValue": 0,
+            "show": false,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 4,
+            "x": 0,
+            "y": 1
+          },
+          "id": 30,
+          "interval": null,
+          "links": [],
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": false
+          },
+          "tableColumn": "count",
+          "targets": [
+            {
+              "alias": "",
+              "format": "table",
+              "group": [],
+              "metricColumn": "none",
+              "rawQuery": true,
+              "rawSql": "SELECT\n  COUNT(*)\nFROM\n  alarms\nWHERE\n  alarms.eventuei = 'uei.opennms.org/bsm/serviceProblem' AND\n  alarms.alarmacktime isnull",
+              "refId": "A",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "column"
+                  }
+                ]
+              ],
+              "timeColumn": "time",
+              "where": [
+                {
+                  "name": "$__timeFilter",
+                  "params": [],
+                  "type": "macro"
+                }
+              ]
+            }
+          ],
+          "thresholds": "1,1",
+          "title": "",
+          "type": "singlestat",
+          "valueFontSize": "200%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueName": "avg"
+        },
+        {
+          "columns": [],
+          "datasource": "$instance",
+          "fontSize": "150%",
+          "gridPos": {
+            "h": 8,
+            "w": 20,
+            "x": 4,
+            "y": 1
+          },
+          "id": 39,
+          "links": [],
+          "pageSize": null,
+          "scroll": true,
+          "showHeader": true,
+          "sort": {
+            "col": 0,
+            "desc": true
+          },
+          "styles": [
+            {
+              "alias": "Time",
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "pattern": "Time",
+              "type": "date"
+            },
+            {
+              "alias": "Affected since last event time",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "pattern": "duration",
+              "preserveFormat": false,
+              "sanitize": false,
+              "thresholds": [],
+              "type": "string",
+              "unit": "short"
+            },
+            {
+              "alias": "Last Event Time",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "pattern": "lasteventtime",
+              "thresholds": [],
+              "type": "date",
+              "unit": "short"
+            },
+            {
+              "alias": "Business Service Name",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "pattern": "name",
+              "sanitize": true,
+              "thresholds": [],
+              "type": "string",
+              "unit": "short"
+            },
+            {
+              "alias": "",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "decimals": 2,
+              "pattern": "/.*/",
+              "thresholds": [],
+              "type": "number",
+              "unit": "short"
+            }
+          ],
+          "targets": [
+            {
+              "alias": "",
+              "filter": {
+                "clauses": [
+                  {
+                    "operator": {
+                      "id": 1,
+                      "label": "AND"
+                    },
+                    "restriction": {
+                      "attribute": "uei",
+                      "comparator": {
+                        "id": 1,
+                        "label": "EQ"
+                      },
+                      "value": "uei.opennms.org/bsm/serviceProblem"
+                    }
+                  },
+                  {
+                    "operator": {
+                      "id": 1,
+                      "label": "AND"
+                    },
+                    "restriction": {
+                      "attribute": "alarmAckTime",
+                      "comparator": {
+                        "id": 1,
+                        "label": "EQ"
+                      },
+                      "value": "null"
+                    }
+                  }
+                ],
+                "limit": 0
+              },
+              "format": "table",
+              "group": [],
+              "metricColumn": "none",
+              "rawQuery": true,
+              "rawSql": "SELECT\n  bsm_service.name,\n  bsmAlarm.lasteventtime,\n  EXTRACT(DAYS FROM age(now(), bsmAlarm.lasteventtime)) || 'd ' || EXTRACT(HOURS FROM age(now(), bsmAlarm.lasteventtime)) || 'h ' || EXTRACT(MINUTES FROM age(now(), bsmAlarm.lasteventtime)) || 'm ' || ROUND(EXTRACT(SECONDS FROM age(now(), bsmAlarm.lasteventtime))::NUMERIC,0) || 's' AS duration\nFROM\n  bsm_service\nJOIN\n  (SELECT\n    substring(reductionkey from '[0-9]+$')::INTEGER AS bsmId,\n    alarms.lasteventtime\n  FROM\n    alarms\n  WHERE\n    eventuei = 'uei.opennms.org/bsm/serviceProblem') AS bsmAlarm\nON\n   bsmAlarm.bsmId = bsm_service.id\nORDER BY\n  bsmAlarm.lasteventtime DESC",
+              "refId": "A",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "column"
+                  }
+                ]
+              ],
+              "timeColumn": "time",
+              "where": [
+                {
+                  "name": "$__timeFilter",
+                  "params": [],
+                  "type": "macro"
+                }
+              ]
+            }
+          ],
+          "title": "Business Service Alarms",
+          "transform": "table",
+          "transparent": true,
+          "type": "table"
+        }
+      ],
       "title": "Business Service Alarms",
       "type": "row"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": true,
-      "colorValue": false,
-      "colors": [
-        "#299c46",
-        "rgba(237, 129, 40, 0.89)",
-        "#d44a3a"
-      ],
-      "datasource": "${DS_OPENNMS_PSQL}",
-      "description": "Outstanding alarms related to business services.",
-      "format": "none",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
-      },
-      "gridPos": {
-        "h": 5,
-        "w": 4,
-        "x": 0,
-        "y": 1
-      },
-      "id": 30,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
-      },
-      "tableColumn": "count",
-      "targets": [
-        {
-          "alias": "",
-          "format": "table",
-          "group": [],
-          "metricColumn": "none",
-          "rawQuery": true,
-          "rawSql": "SELECT\n  COUNT(*)\nFROM\n  alarms\nWHERE\n  alarms.eventuei = 'uei.opennms.org/bsm/serviceProblem' AND\n  alarms.alarmacktime isnull AND\n  alarms.logmsg not like '%resolved%'",
-          "refId": "A",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "column"
-              }
-            ]
-          ],
-          "timeColumn": "time",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
-        }
-      ],
-      "thresholds": "1,1",
-      "title": "",
-      "type": "singlestat",
-      "valueFontSize": "200%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "avg"
-    },
-    {
-      "columns": [],
-      "datasource": "${DS_OPENNMS_PSQL}",
-      "fontSize": "120%",
-      "gridPos": {
-        "h": 5,
-        "w": 20,
-        "x": 4,
-        "y": 1
-      },
-      "id": 39,
-      "links": [],
-      "pageSize": null,
-      "scroll": true,
-      "showHeader": true,
-      "sort": {
-        "col": 0,
-        "desc": true
-      },
-      "styles": [
-        {
-          "alias": "Time",
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "pattern": "Time",
-          "type": "date"
-        },
-        {
-          "alias": "Affected since last event time",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "pattern": "duration",
-          "preserveFormat": false,
-          "sanitize": false,
-          "thresholds": [],
-          "type": "string",
-          "unit": "short"
-        },
-        {
-          "alias": "Last Event Time",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "pattern": "lasteventtime",
-          "thresholds": [],
-          "type": "date",
-          "unit": "short"
-        },
-        {
-          "alias": "Business Service Name",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "pattern": "name",
-          "sanitize": true,
-          "thresholds": [],
-          "type": "string",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "decimals": 2,
-          "pattern": "/.*/",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        }
-      ],
-      "targets": [
-        {
-          "alias": "",
-          "filter": {
-            "clauses": [
-              {
-                "operator": {
-                  "id": 1,
-                  "label": "AND"
-                },
-                "restriction": {
-                  "attribute": "uei",
-                  "comparator": {
-                    "id": 1,
-                    "label": "EQ"
-                  },
-                  "value": "uei.opennms.org/bsm/serviceProblem"
-                }
-              },
-              {
-                "operator": {
-                  "id": 1,
-                  "label": "AND"
-                },
-                "restriction": {
-                  "attribute": "alarmAckTime",
-                  "comparator": {
-                    "id": 1,
-                    "label": "EQ"
-                  },
-                  "value": "null"
-                }
-              }
-            ],
-            "limit": 0
-          },
-          "format": "table",
-          "group": [],
-          "metricColumn": "none",
-          "rawQuery": true,
-          "rawSql": "SELECT\n  bsm_service.name,\n  bsmAlarm.lasteventtime,\n  EXTRACT(DAYS FROM age(now(), bsmAlarm.lasteventtime)) || 'd ' || EXTRACT(HOURS FROM age(now(), bsmAlarm.lasteventtime)) || 'h ' || EXTRACT(MINUTES FROM age(now(), bsmAlarm.lasteventtime)) || 'm ' || ROUND(EXTRACT(SECONDS FROM age(now(), bsmAlarm.lasteventtime))::NUMERIC,0) || 's' AS duration\nFROM\n  bsm_service\nJOIN\n  (SELECT\n    substring(reductionkey from '[0-9]+$')::INTEGER AS bsmId,\n    alarms.lasteventtime\n  FROM\n    alarms\n  WHERE\n    eventuei = 'uei.opennms.org/bsm/serviceProblem' and\n    alarms.logmsg not like '%resolved%') AS bsmAlarm\nON\n   bsmAlarm.bsmId = bsm_service.id\nORDER BY\n  bsmAlarm.lasteventtime DESC",
-          "refId": "A",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "column"
-              }
-            ]
-          ],
-          "timeColumn": "time",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
-        }
-      ],
-      "title": "Business Service Alarms",
-      "transform": "table",
-      "transparent": true,
-      "type": "table"
     },
     {
       "collapsed": false,
@@ -339,7 +331,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 6
+        "y": 1
       },
       "id": 35,
       "panels": [],
@@ -352,7 +344,7 @@
         "h": 2,
         "w": 8,
         "x": 0,
-        "y": 7
+        "y": 2
       },
       "id": 7,
       "links": [],
@@ -366,7 +358,7 @@
         "h": 2,
         "w": 8,
         "x": 8,
-        "y": 7
+        "y": 2
       },
       "id": 10,
       "links": [],
@@ -381,7 +373,7 @@
         "h": 2,
         "w": 8,
         "x": 16,
-        "y": 7
+        "y": 2
       },
       "id": 12,
       "links": [],
@@ -398,7 +390,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "${DS_OPENNMS_PSQL}",
+      "datasource": "$instance",
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -411,7 +403,7 @@
         "h": 3,
         "w": 8,
         "x": 0,
-        "y": 9
+        "y": 4
       },
       "id": 25,
       "interval": null,
@@ -455,7 +447,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  COUNT(current_node_alarms.nodeid)\nFROM\n  (SELECT\n    node_alarms.location,\n    node_alarms.nodeid,\n    node_alarms.lasteventtime,\n    $__timeTo() - node_alarms.firsteventtime AS duration_raw,\n    EXTRACT(DAYS FROM $__timeTo() - node_alarms.firsteventtime) || 'd ' || EXTRACT(HOURS FROM $__timeTo() - node_alarms.firsteventtime) || 'h ' || EXTRACT(MINUTES FROM $__timeTo() - node_alarms.firsteventtime) || 'm ' || ROUND(EXTRACT(SECONDS FROM $__timeTo() - node_alarms.firsteventtime)::NUMERIC,0) || 's' AS duration\n  FROM\n    node_alarms\n  WHERE\n    node_alarms.acknowledged = FALSE AND\n    node_alarms.eventuei like 'uei.opennms.org/nodes/nodeDown' AND\n    node_alarms.location IN ($location) AND\n    node_alarms.categoryname IN ($category) AND\n    node_alarms.max_alarm_severity_unack = '6'\n  GROUP BY\n    node_alarms.location,\n    node_alarms.nodelabel,\n    node_alarms.nodeid,\n    node_alarms.firsteventtime,\n    node_alarms.lasteventtime) AS current_node_alarms",
+          "rawSql": "SELECT\n  COUNT(current_node_alarms.nodeid)\nFROM\n  (SELECT\n    node_alarms.location,\n    node_alarms.nodeid,\n    node_alarms.lasteventtime,\n    $__timeTo() - node_alarms.firsteventtime AS duration_raw,\n    EXTRACT(DAYS FROM $__timeTo() - node_alarms.firsteventtime) || 'd ' || EXTRACT(HOURS FROM $__timeTo() - node_alarms.firsteventtime) || 'h ' || EXTRACT(MINUTES FROM $__timeTo() - node_alarms.firsteventtime) || 'm ' || ROUND(EXTRACT(SECONDS FROM $__timeTo() - node_alarms.firsteventtime)::NUMERIC,0) || 's' AS duration\n  FROM\n    node_alarms\n  WHERE\n    node_alarms.acknowledged = FALSE AND\n    node_alarms.eventuei like 'uei.opennms.org/nodes/nodeDown' AND\n    node_alarms.location like '$location' AND\n    node_alarms.categoryname like '$category' AND\n    node_alarms.max_alarm_severity_unack = '6'\n  GROUP BY\n    node_alarms.location,\n    node_alarms.nodelabel,\n    node_alarms.nodeid,\n    node_alarms.firsteventtime,\n    node_alarms.lasteventtime) AS current_node_alarms",
           "refId": "A",
           "select": [
             [
@@ -480,7 +472,7 @@
       "thresholds": "1,1",
       "title": "",
       "type": "singlestat",
-      "valueFontSize": "170%",
+      "valueFontSize": "200%",
       "valueMaps": [
         {
           "op": "=",
@@ -499,7 +491,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "${DS_OPENNMS_PSQL}",
+      "datasource": "$instance",
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -512,7 +504,7 @@
         "h": 3,
         "w": 8,
         "x": 8,
-        "y": 9
+        "y": 4
       },
       "id": 26,
       "interval": null,
@@ -556,7 +548,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  COUNT(current_interface_alarms.nodeid)\nFROM\n  (SELECT\n    node_alarms.location,\n    node_alarms.nodelabel,\n    node_alarms.nodeid,\n    node_alarms.ipaddr,\n    node_alarms.lasteventtime,\n    $__timeTo() - node_alarms.firsteventtime AS duration_raw,\n    EXTRACT(DAYS FROM $__timeTo() - node_alarms.firsteventtime) || 'd ' || EXTRACT(HOURS FROM $__timeTo() - node_alarms.firsteventtime) || 'h ' || EXTRACT(MINUTES FROM $__timeTo() - node_alarms.firsteventtime) || 'm ' || ROUND(EXTRACT(SECONDS FROM $__timeTo() - node_alarms.firsteventtime)::NUMERIC,0) || 's' AS duration\n  FROM\n    node_alarms\n  WHERE\n    node_alarms.acknowledged = FALSE AND\n    node_alarms.eventuei like 'uei.opennms.org/nodes/interfaceDown' AND\n    node_alarms.location IN ($location) AND\n    node_alarms.categoryname IN ($category) AND\n    node_alarms.max_alarm_severity_unack = '5'\n  GROUP BY\n    node_alarms.location,\n    node_alarms.nodeid,\n    node_alarms.nodelabel,\n    node_alarms.ipaddr,\n    node_alarms.firsteventtime,\n    node_alarms.lasteventtime) AS current_interface_alarms\n",
+          "rawSql": "SELECT\n  COUNT(current_interface_alarms.nodeid)\nFROM\n  (SELECT\n    node_alarms.location,\n    node_alarms.nodelabel,\n    node_alarms.nodeid,\n    node_alarms.ipaddr,\n    node_alarms.lasteventtime,\n    $__timeTo() - node_alarms.firsteventtime AS duration_raw,\n    EXTRACT(DAYS FROM $__timeTo() - node_alarms.firsteventtime) || 'd ' || EXTRACT(HOURS FROM $__timeTo() - node_alarms.firsteventtime) || 'h ' || EXTRACT(MINUTES FROM $__timeTo() - node_alarms.firsteventtime) || 'm ' || ROUND(EXTRACT(SECONDS FROM $__timeTo() - node_alarms.firsteventtime)::NUMERIC,0) || 's' AS duration\n  FROM\n    node_alarms\n  WHERE\n    node_alarms.acknowledged = FALSE AND\n    node_alarms.eventuei like 'uei.opennms.org/nodes/interfaceDown' AND\n    node_alarms.location like '$location' AND\n    node_alarms.categoryname like '$category' AND\n    node_alarms.max_alarm_severity_unack = '5'\n  GROUP BY\n    node_alarms.location,\n    node_alarms.nodeid,\n    node_alarms.nodelabel,\n    node_alarms.ipaddr,\n    node_alarms.firsteventtime,\n    node_alarms.lasteventtime) AS current_interface_alarms\n",
           "refId": "A",
           "select": [
             [
@@ -582,7 +574,7 @@
       "title": "",
       "transparent": true,
       "type": "singlestat",
-      "valueFontSize": "170%",
+      "valueFontSize": "200%",
       "valueMaps": [
         {
           "op": "=",
@@ -601,7 +593,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "${DS_OPENNMS_PSQL}",
+      "datasource": "$instance",
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -614,7 +606,7 @@
         "h": 3,
         "w": 8,
         "x": 16,
-        "y": 9
+        "y": 4
       },
       "id": 24,
       "interval": null,
@@ -658,7 +650,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  COUNT(current_service_alarms.nodeid)\nFROM\n  (SELECT\n    node_alarms.location,\n    node_alarms.nodelabel,\n    node_alarms.nodeid,\n    node_alarms.ipaddr,\n    node_alarms.servicename,\n    node_alarms.lasteventtime,\n    $__timeTo() - node_alarms.firsteventtime AS duration_raw,\n    EXTRACT(DAYS FROM $__timeTo() - node_alarms.firsteventtime) || 'd ' || EXTRACT(HOURS FROM $__timeTo() - node_alarms.firsteventtime) || 'h ' || EXTRACT(MINUTES FROM $__timeTo() - node_alarms.firsteventtime) || 'm ' || ROUND(EXTRACT(SECONDS FROM $__timeTo() - node_alarms.firsteventtime)::NUMERIC,0) || 's' AS duration\n  FROM\n    node_alarms\n  WHERE\n    node_alarms.acknowledged = FALSE AND\n    node_alarms.eventuei like 'uei.opennms.org/nodes/nodeLostService' AND\n    node_alarms.location IN ($location) AND\n    node_alarms.categoryname IN ($category) AND\n    node_alarms.max_alarm_severity_unack = '5'\n  GROUP BY\n    node_alarms.location,\n    node_alarms.nodeid,\n    node_alarms.nodelabel,\n    node_alarms.ipaddr,\n    node_alarms.servicename,\n    node_alarms.firsteventtime,\n    node_alarms.lasteventtime) AS current_service_alarms",
+          "rawSql": "SELECT\n  COUNT(current_service_alarms.nodeid)\nFROM\n  (SELECT\n    node_alarms.location,\n    node_alarms.nodelabel,\n    node_alarms.nodeid,\n    node_alarms.ipaddr,\n    node_alarms.servicename,\n    node_alarms.lasteventtime,\n    $__timeTo() - node_alarms.firsteventtime AS duration_raw,\n    EXTRACT(DAYS FROM $__timeTo() - node_alarms.firsteventtime) || 'd ' || EXTRACT(HOURS FROM $__timeTo() - node_alarms.firsteventtime) || 'h ' || EXTRACT(MINUTES FROM $__timeTo() - node_alarms.firsteventtime) || 'm ' || ROUND(EXTRACT(SECONDS FROM $__timeTo() - node_alarms.firsteventtime)::NUMERIC,0) || 's' AS duration\n  FROM\n    node_alarms\n  WHERE\n    node_alarms.acknowledged = FALSE AND\n    node_alarms.eventuei like 'uei.opennms.org/nodes/nodeLostService' AND\n    node_alarms.location like '$location' AND\n    node_alarms.categoryname like '$category' AND\n    node_alarms.max_alarm_severity_unack = '5'\n  GROUP BY\n    node_alarms.location,\n    node_alarms.nodeid,\n    node_alarms.nodelabel,\n    node_alarms.ipaddr,\n    node_alarms.servicename,\n    node_alarms.firsteventtime,\n    node_alarms.lasteventtime) AS current_service_alarms",
           "refId": "A",
           "select": [
             [
@@ -683,7 +675,7 @@
       "thresholds": "1,1",
       "title": "",
       "type": "singlestat",
-      "valueFontSize": "170%",
+      "valueFontSize": "200%",
       "valueMaps": [
         {
           "op": "=",
@@ -699,7 +691,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 12
+        "y": 7
       },
       "id": 22,
       "panels": [],
@@ -716,7 +708,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "${DS_OPENNMS_PSQL}",
+      "datasource": "$instance",
       "description": "Current outages affecting nodes in selected categories or locations.",
       "format": "none",
       "gauge": {
@@ -730,7 +722,7 @@
         "h": 6,
         "w": 2,
         "x": 0,
-        "y": 13
+        "y": 8
       },
       "id": 4,
       "interval": null,
@@ -793,7 +785,7 @@
             }
           ],
           "rawQuery": true,
-          "rawSql": "SELECT\n  COUNT(DISTINCT(node_outages.nodeid)) AS amount\nFROM\n  node_outages\nWHERE\n  node_outages.resolved = 'FALSE' AND\n  node_outages.svclosteventuei = 'uei.opennms.org/nodes/nodeDown' AND\n  node_outages.location IN ($location) AND\n  node_outages.categoryname IN ($category)\n",
+          "rawSql": "SELECT\n  COUNT(DISTINCT(node_outages.nodeid)) AS amount\nFROM\n  node_outages\nWHERE\n  node_outages.resolved = 'FALSE' AND\n  node_outages.svclosteventuei = 'uei.opennms.org/nodes/nodeDown' AND\n  node_outages.categoryname like '$category' AND\n  node_outages.location like '$location'\n",
           "refId": "A",
           "select": [
             [
@@ -838,7 +830,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "${DS_OPENNMS_PSQL}",
+      "datasource": "$instance",
       "decimals": 1,
       "description": "Current outages affecting nodes in selected categories or locations in percent from the whole monitored inventory.",
       "format": "percent",
@@ -853,7 +845,7 @@
         "h": 6,
         "w": 4,
         "x": 2,
-        "y": 13
+        "y": 8
       },
       "id": 9,
       "interval": null,
@@ -897,7 +889,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  CASE\n    WHEN\n      nodes_by_category.tally > 0 THEN\n        100.0/nodes_by_category.tally * node_outages_by_category.tally\n      ELSE\n        0.0\n    END AS percentage\nFROM\n  (SELECT\n    'nodes'::TEXT AS type,\n    0.0 AS tally) AS tmp\nLEFT JOIN\n  (SELECT\n    'nodes'::TEXT AS type,\n    COUNT(distinct(nodeid)) AS tally\n  FROM\n    node_outages\n  WHERE\n    node_outages.location IN ($location) AND\n    node_outages.categoryname IN ($category) AND\n    node_outages.resolved = FALSE AND\n    node_outages.svclosteventuei = 'uei.opennms.org/nodes/nodeDown') AS node_outages_by_category\nON\n  node_outages_by_category.type = tmp.type\nLEFT JOIN\n  (SELECT\n    'nodes'::TEXT as type,\n    COUNT(DISTINCT(nodeid)) AS tally\n   FROM\n     node_categories\n   WHERE\n     node_categories.location IN ($location) AND\n     node_categories.categoryname IN ($category)\n  ) AS nodes_by_category\nON\n  nodes_by_category.type = tmp.type\n",
+          "rawSql": "SELECT\n  CASE\n    WHEN\n      nodes_by_category.tally > 0 THEN\n        100.0/nodes_by_category.tally * node_outages_by_category.tally\n      ELSE\n        0.0\n    END AS percentage\nFROM\n  (SELECT\n    'nodes'::TEXT AS type,\n    0.0 AS tally) AS tmp\nLEFT JOIN\n  (SELECT\n    'nodes'::TEXT AS type,\n    COUNT(distinct(nodeid)) AS tally\n  FROM\n    node_outages\n  WHERE\n    node_outages.categoryname like '$category' AND\n    node_outages.location like '$location' AND\n    node_outages.resolved = FALSE AND\n    node_outages.svclosteventuei = 'uei.opennms.org/nodes/nodeDown') AS node_outages_by_category\nON\n  node_outages_by_category.type = tmp.type\nLEFT JOIN\n  (SELECT\n    'nodes'::TEXT as type,\n    COUNT(DISTINCT(nodeid)) AS tally\n   FROM\n     node_categories\n   WHERE\n     node_categories.categoryname like '$category' AND\n     node_categories.location like '$location') AS nodes_by_category\nON\n  nodes_by_category.type = tmp.type\n",
           "refId": "A",
           "select": [
             [
@@ -922,7 +914,7 @@
       "thresholds": "20,70",
       "title": "Percent",
       "type": "singlestat",
-      "valueFontSize": "70%",
+      "valueFontSize": "80%",
       "valueMaps": [
         {
           "op": "=",
@@ -941,7 +933,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "${DS_OPENNMS_PSQL}",
+      "datasource": "$instance",
       "description": "All active monitored nodes in inventory.",
       "format": "none",
       "gauge": {
@@ -955,7 +947,7 @@
         "h": 6,
         "w": 2,
         "x": 6,
-        "y": 13
+        "y": 8
       },
       "id": 5,
       "interval": null,
@@ -1018,7 +1010,7 @@
             }
           ],
           "rawQuery": true,
-          "rawSql": "SELECT\n  COUNT(DISTINCT node_categories.nodeid)\nFROM\n  node_categories\nWHERE\n  node_categories.location IN ($location) AND\n  node_categories.categoryname IN ($category)",
+          "rawSql": "SELECT\n  COUNT(DISTINCT node_categories.nodeid)\nFROM\n  node_categories\nWHERE\n  node_categories.categoryname like '$category' AND\n  node_categories.location like '$location'",
           "refId": "A",
           "select": [
             [
@@ -1063,7 +1055,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "${DS_OPENNMS_PSQL}",
+      "datasource": "$instance",
       "description": "Current outages affecting nodes in selected categories or locations.",
       "format": "none",
       "gauge": {
@@ -1077,7 +1069,7 @@
         "h": 6,
         "w": 2,
         "x": 8,
-        "y": 13
+        "y": 8
       },
       "id": 13,
       "interval": null,
@@ -1140,7 +1132,7 @@
             }
           ],
           "rawQuery": true,
-          "rawSql": "SELECT\n  'ipinterfaces' :: TEXT AS type,\n  COUNT(distinct (node_outages.nodeid)) AS tally\nFROM\n  node_outages\nJOIN\n  node_outage_status\nON\n  node_outages.nodeid = node_outage_status.nodeid\nWHERE\n  node_outages.categoryname IN ($category) AND\n  node_outages.location IN ($location) AND\n  node_outages.resolved = FALSE AND\n  node_outages.nodetype = 'A' AND\n  node_outage_status.max_outage_severity = '5' AND\n  node_outages.svclosteventuei = 'uei.opennms.org/nodes/interfaceDown'",
+          "rawSql": "SELECT\n  'ipinterfaces' :: TEXT AS type,\n  COUNT(distinct (node_outages.nodeid)) AS tally\nFROM\n  node_outages\nJOIN\n  node_outage_status\nON\n  node_outages.nodeid = node_outage_status.nodeid\nWHERE\n  node_outages.categoryname like '$category' AND\n  node_outages.location like '$location' AND\n  node_outages.resolved = FALSE AND\n  node_outages.nodetype = 'A' AND\n  node_outage_status.max_outage_severity = '5' AND\n  node_outages.svclosteventuei = 'uei.opennms.org/nodes/interfaceDown'",
           "refId": "A",
           "select": [
             [
@@ -1186,7 +1178,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "${DS_OPENNMS_PSQL}",
+      "datasource": "$instance",
       "description": "Current outages affecting interfaces in selected categories or locations in percent from the whole monitored inventory.",
       "format": "percent",
       "gauge": {
@@ -1200,7 +1192,7 @@
         "h": 6,
         "w": 4,
         "x": 10,
-        "y": 13
+        "y": 8
       },
       "id": 14,
       "interval": null,
@@ -1244,7 +1236,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  CASE\n    WHEN\n      ipinterfaces_by_category.tally > 0 THEN\n        100.0/ipinterfaces_by_category.tally * ipinterfaces_outages_by_category.tally\n      ELSE\n        0.0\n    END AS percentage\nFROM\n  (SELECT\n    'ipinterfaces'::TEXT AS type,\n    0.0 AS tally) AS tmp\nLEFT JOIN\n  (SELECT\n    'ipinterfaces'::TEXT AS type,\n    COUNT(distinct (node_outages.nodeid)) AS tally\n  FROM\n    node_outages\n  JOIN\n    node_outage_status\n  ON\n    node_outages.nodeid = node_outage_status.nodeid\n  WHERE\n    node_outages.categoryname IN ($category) AND\n    node_outages.location IN ($location) AND\n    node_outages.resolved = FALSE AND\n    node_outages.nodetype = 'A' AND\n    node_outage_status.max_outage_severity = '5' AND\n    node_outages.svclosteventuei = 'uei.opennms.org/nodes/interfaceDown') AS ipinterfaces_outages_by_category\nON\n  ipinterfaces_outages_by_category.type = tmp.type\nLEFT JOIN\n  (SELECT\n    'ipinterfaces'::TEXT AS type,\n    COUNT(DISTINCT(nis.ip_if_id)) AS tally\n  FROM\n    node_ip_services nis\n  WHERE\n    nis.if_svc_status = 'A' AND\n    nis.categoryname IN ($category)) AS ipinterfaces_by_category\nON\n  ipinterfaces_by_category.type = tmp.type\n",
+          "rawSql": "SELECT\n  CASE\n    WHEN\n      ipinterfaces_by_category.tally > 0 THEN\n        100.0/ipinterfaces_by_category.tally * ipinterfaces_outages_by_category.tally\n      ELSE\n        0.0\n    END AS percentage\nFROM\n  (SELECT\n    'ipinterfaces'::TEXT AS type,\n    0.0 AS tally) AS tmp\nLEFT JOIN\n  (SELECT\n    'ipinterfaces'::TEXT AS type,\n    COUNT(distinct (node_outages.nodeid)) AS tally\n  FROM\n    node_outages\n  JOIN\n    node_outage_status\n  ON\n    node_outages.nodeid = node_outage_status.nodeid\n  WHERE\n    node_outages.categoryname like '$category' AND\n    node_outages.location like '$location' AND\n    node_outages.resolved = FALSE AND\n    node_outages.nodetype = 'A' AND\n    node_outage_status.max_outage_severity = '5' AND\n    node_outages.svclosteventuei = 'uei.opennms.org/nodes/interfaceDown') AS ipinterfaces_outages_by_category\nON\n  ipinterfaces_outages_by_category.type = tmp.type\nLEFT JOIN\n  (SELECT\n    'ipinterfaces'::TEXT AS type,\n    COUNT(DISTINCT(nis.ip_if_id)) AS tally\n  FROM\n    node_ip_services nis\n  WHERE\n    nis.if_svc_status = 'A' AND\n    nis.categoryname like '$category') AS ipinterfaces_by_category\nON\n  ipinterfaces_by_category.type = tmp.type\n",
           "refId": "A",
           "select": [
             [
@@ -1270,7 +1262,7 @@
       "title": "Percentage",
       "transparent": true,
       "type": "singlestat",
-      "valueFontSize": "70%",
+      "valueFontSize": "80%",
       "valueMaps": [
         {
           "op": "=",
@@ -1289,7 +1281,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "${DS_OPENNMS_PSQL}",
+      "datasource": "$instance",
       "description": "All active monitored IP interfaces in inventory.",
       "format": "none",
       "gauge": {
@@ -1303,7 +1295,7 @@
         "h": 6,
         "w": 2,
         "x": 14,
-        "y": 13
+        "y": 8
       },
       "id": 15,
       "interval": null,
@@ -1366,7 +1358,7 @@
             }
           ],
           "rawQuery": true,
-          "rawSql": "SELECT\n  COUNT(DISTINCT(nis.ip_if_id)) AS tally\nFROM\n  node_ip_services nis\nWHERE\n  nis.if_svc_status = 'A' AND\n  nis.categoryname IN ($category) AND\n  nis.location IN ($location)",
+          "rawSql": "SELECT\n  COUNT(DISTINCT(nis.ip_if_id)) AS tally\nFROM\n  node_ip_services nis\nWHERE\n  nis.if_svc_status = 'A' AND\n  nis.categoryname like '$category' AND\n  nis.location like '$location'",
           "refId": "A",
           "select": [
             [
@@ -1412,7 +1404,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "${DS_OPENNMS_PSQL}",
+      "datasource": "$instance",
       "description": "Current outages affecting services in selected categories or locations.",
       "format": "none",
       "gauge": {
@@ -1426,7 +1418,7 @@
         "h": 6,
         "w": 2,
         "x": 16,
-        "y": 13
+        "y": 8
       },
       "id": 18,
       "interval": null,
@@ -1489,7 +1481,7 @@
             }
           ],
           "rawQuery": true,
-          "rawSql": "SELECT\n  'services' :: TEXT AS type,\n  COUNT(DISTINCT (servicename)) AS tally\nFROM\n  node_outages\n  JOIN\n  node_outage_status\n    ON\n      node_outages.nodeid = node_outage_status.nodeid\nWHERE\n  node_outages.categoryname IN ($category) AND\n  node_outages.location IN ($location) AND\n  node_outages.resolved = FALSE AND\n  node_outages.nodetype = 'A' AND\n  node_outage_status.max_outage_severity = '5' AND\n  node_outages.svclosteventuei = 'uei.opennms.org/nodes/nodeLostService'\n",
+          "rawSql": "SELECT\n  'services' :: TEXT AS type,\n  COUNT(DISTINCT (servicename)) AS tally\nFROM\n  node_outages\n  JOIN\n  node_outage_status\n    ON\n      node_outages.nodeid = node_outage_status.nodeid\nWHERE\n  node_outages.categoryname like '$category' AND\n  node_outages.location like '$location' AND\n  node_outages.resolved = FALSE AND\n  node_outages.nodetype = 'A' AND\n  node_outage_status.max_outage_severity = '5' AND\n  node_outages.svclosteventuei = 'uei.opennms.org/nodes/nodeLostService'\n",
           "refId": "A",
           "select": [
             [
@@ -1534,7 +1526,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "${DS_OPENNMS_PSQL}",
+      "datasource": "$instance",
       "decimals": 1,
       "description": "Current outages affecting services in selected categories or locations in percent from the whole monitored inventory.",
       "format": "percent",
@@ -1549,7 +1541,7 @@
         "h": 6,
         "w": 4,
         "x": 18,
-        "y": 13
+        "y": 8
       },
       "id": 16,
       "interval": null,
@@ -1593,7 +1585,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  CASE\n    WHEN\n      services_by_category.tally > 0 THEN\n        100.0/services_by_category.tally * service_outages_by_category.tally\n      ELSE\n        0.0\n  END AS percentage\nFROM\n  (SELECT\n    'services'::TEXT AS type,\n    0.0 AS tally) AS tmp\nLEFT JOIN\n  (SELECT\n    'services'::TEXT AS type,\n    COUNT(DISTINCT(node_outages.serviceid)) AS tally\n  FROM\n    node_outages\n  JOIN\n    node_outage_status\n  ON\n    node_outages.nodeid = node_outage_status.nodeid\n  WHERE\n    node_outages.categoryname IN ($category) AND\n    node_outages.categoryname IN ($location) AND\n    node_outages.resolved = FALSE AND\n    node_outages.nodetype = 'A' AND\n    node_outage_status.max_outage_severity = '5' AND\n    node_outages.svclosteventuei = 'uei.opennms.org/nodes/nodeLostService') AS service_outages_by_category\nON\n  service_outages_by_category.type = tmp.type\nLEFT JOIN\n  (SELECT\n    'services'::TEXT as type,\n    COUNT(DISTINCT(node_ip_services.if_svc_id)) AS tally\n   FROM\n     node_ip_services\n   WHERE\n     node_ip_services.categoryname IN ($category) AND\n     node_ip_services.if_svc_status = 'A' ) AS services_by_category\nON\n  services_by_category.type = tmp.type\n",
+          "rawSql": "SELECT\n  CASE\n    WHEN\n      services_by_category.tally > 0 THEN\n        100.0/services_by_category.tally * service_outages_by_category.tally\n      ELSE\n        0.0\n  END AS percentage\nFROM\n  (SELECT\n    'services'::TEXT AS type,\n    0.0 AS tally) AS tmp\nLEFT JOIN\n  (SELECT\n    'services'::TEXT AS type,\n    COUNT(DISTINCT(node_outages.serviceid)) AS tally\n  FROM\n    node_outages\n  JOIN\n    node_outage_status\n  ON\n    node_outages.nodeid = node_outage_status.nodeid\n  WHERE\n    node_outages.categoryname like '$category' AND\n    node_outages.categoryname like '$location' AND\n    node_outages.resolved = FALSE AND\n    node_outages.nodetype = 'A' AND\n    node_outage_status.max_outage_severity = '5' AND\n    node_outages.svclosteventuei = 'uei.opennms.org/nodes/nodeLostService') AS service_outages_by_category\nON\n  service_outages_by_category.type = tmp.type\nLEFT JOIN\n  (SELECT\n    'services'::TEXT as type,\n    COUNT(DISTINCT(node_ip_services.if_svc_id)) AS tally\n   FROM\n     node_ip_services\n   WHERE\n     node_ip_services.categoryname like '$category' AND\n     node_ip_services.if_svc_status = 'A' ) AS services_by_category\nON\n  services_by_category.type = tmp.type\n",
           "refId": "A",
           "select": [
             [
@@ -1618,7 +1610,7 @@
       "thresholds": "20,70",
       "title": "Percentage",
       "type": "singlestat",
-      "valueFontSize": "70%",
+      "valueFontSize": "80%",
       "valueMaps": [
         {
           "op": "=",
@@ -1637,7 +1629,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "${DS_OPENNMS_PSQL}",
+      "datasource": "$instance",
       "description": "All active monitored services in inventory.",
       "format": "none",
       "gauge": {
@@ -1651,7 +1643,7 @@
         "h": 6,
         "w": 2,
         "x": 22,
-        "y": 13
+        "y": 8
       },
       "id": 17,
       "interval": null,
@@ -1714,7 +1706,7 @@
             }
           ],
           "rawQuery": true,
-          "rawSql": "SELECT\n  COUNT(DISTINCT(nis.if_svc_id)) AS tally\nFROM\n  node_ip_services nis\nWHERE\n  nis.if_svc_status = 'A' AND\n  nis.categoryname IN ($category) AND\n  nis.location IN ($location)",
+          "rawSql": "SELECT\n  COUNT(DISTINCT(nis.if_svc_id)) AS tally\nFROM\n  node_ip_services nis\nWHERE\n  nis.if_svc_status = 'A' AND\n  nis.categoryname like '$category' AND\n  nis.location like '$location'",
           "refId": "A",
           "select": [
             [
@@ -1760,16 +1752,31 @@
   "templating": {
     "list": [
       {
+        "current": {
+          "text": "OpenNMS FUL PSQL",
+          "value": "OpenNMS FUL PSQL"
+        },
+        "hide": 0,
+        "label": "OpenNMS Instance",
+        "name": "instance",
+        "options": [],
+        "query": "postgres",
+        "refresh": 1,
+        "regex": "/.*OpenNMS.*/",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
         "allValue": null,
         "current": {},
-        "datasource": "${DS_OPENNMS_PSQL}",
+        "datasource": "$instance",
         "hide": 0,
-        "includeAll": true,
+        "includeAll": false,
         "label": "Monitoring Location",
-        "multi": true,
+        "multi": false,
         "name": "location",
         "options": [],
-        "query": "SELECT DISTINCT(n.location) FROM node n ORDER BY location ASC",
+        "query": "SELECT '%'::TEXT as location UNION SELECT DISTINCT(n.location) FROM node n ORDER BY location ASC",
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
@@ -1783,14 +1790,14 @@
       {
         "allValue": null,
         "current": {},
-        "datasource": "${DS_OPENNMS_PSQL}",
+        "datasource": "$instance",
         "hide": 0,
-        "includeAll": true,
+        "includeAll": false,
         "label": "Surveillance Category",
-        "multi": true,
+        "multi": false,
         "name": "category",
         "options": [],
-        "query": "SELECT 'no category'::TEXT as categoryname UNION SELECT categoryname FROM categories ORDER BY categoryname",
+        "query": "SELECT '%'::TEXT as categoryname UNION SELECT 'no category'::TEXT as categoryname UNION SELECT categoryname FROM categories ORDER BY categoryname",
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
@@ -1835,5 +1842,5 @@
   "timezone": "",
   "title": "OpenNMS Outage Wallboard",
   "uid": "277sSkGmz",
-  "version": 6
+  "version": 11
 }
