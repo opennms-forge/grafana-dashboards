@@ -38,7 +38,7 @@
   "gnetId": null,
   "graphTooltip": 1,
   "id": null,
-  "iteration": 1543868246467,
+  "iteration": 1550605840959,
   "links": [],
   "panels": [
     {
@@ -930,6 +930,7 @@
       "dashes": false,
       "datasource": "$instance",
       "decimals": null,
+      "description": "The number of 'ticks' (typically 1/100s)  spent processing code.",
       "fill": 1,
       "gridPos": {
         "h": 14,
@@ -1245,7 +1246,7 @@
         {
           "decimals": null,
           "format": "none",
-          "label": "",
+          "label": "Ticks",
           "logBase": 1,
           "max": null,
           "min": null,
@@ -1450,7 +1451,7 @@
       "yaxes": [
         {
           "format": "none",
-          "label": "",
+          "label": "Count",
           "logBase": 1,
           "max": null,
           "min": null,
@@ -1598,7 +1599,7 @@
       "yaxes": [
         {
           "format": "none",
-          "label": "",
+          "label": "Count",
           "logBase": 1,
           "max": null,
           "min": null,
@@ -1777,7 +1778,7 @@
       "yaxes": [
         {
           "format": "none",
-          "label": "",
+          "label": "Count",
           "logBase": 1,
           "max": null,
           "min": null,
@@ -1889,7 +1890,7 @@
       "yaxes": [
         {
           "format": "none",
-          "label": "",
+          "label": "Count",
           "logBase": 1,
           "max": null,
           "min": null,
@@ -2368,7 +2369,7 @@
       "yaxes": [
         {
           "format": "none",
-          "label": "",
+          "label": "Bytes",
           "logBase": 1,
           "max": null,
           "min": null,
@@ -2436,8 +2437,8 @@
     ]
   },
   "time": {
-    "from": "now-12h",
-    "to": "now-5m"
+    "from": "now-24h",
+    "to": "now"
   },
   "timepicker": {
     "refresh_intervals": [
@@ -2467,5 +2468,5 @@
   "timezone": "",
   "title": "OpenNMS Linux Node-level Performance Data",
   "uid": "LMGa5b7mk",
-  "version": 29
+  "version": 30
 }
