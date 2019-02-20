@@ -1,20 +1,11 @@
 {
-  "__inputs": [
-    {
-      "name": "DS_OPENNMS_PERFORMANCE",
-      "label": "OpenNMS Performance",
-      "description": "",
-      "type": "datasource",
-      "pluginId": "opennms-helm-performance-datasource",
-      "pluginName": "OpenNMS Performance"
-    }
-  ],
+  "__inputs": [],
   "__requires": [
     {
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "5.1.1"
+      "version": "5.3.4"
     },
     {
       "type": "panel",
@@ -44,10 +35,10 @@
   },
   "description": "Important linux system metrics at a glance",
   "editable": true,
-  "gnetId": 6073,
+  "gnetId": null,
   "graphTooltip": 1,
   "id": null,
-  "iteration": 1526685297533,
+  "iteration": 1543868085979,
   "links": [],
   "panels": [
     {
@@ -69,7 +60,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_OPENNMS_PERFORMANCE}",
+      "datasource": "$instance",
       "decimals": null,
       "fill": 1,
       "gridPos": {
@@ -86,7 +77,7 @@
         "max": true,
         "min": true,
         "rightSide": false,
-        "show": false,
+        "show": true,
         "sideWidth": 250,
         "total": false,
         "values": true
@@ -441,7 +432,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_OPENNMS_PERFORMANCE}",
+      "datasource": "$instance",
       "decimals": null,
       "fill": 1,
       "gridPos": {
@@ -460,7 +451,7 @@
         "max": true,
         "min": true,
         "rightSide": false,
-        "show": false,
+        "show": true,
         "sideWidth": 250,
         "total": false,
         "values": true
@@ -740,7 +731,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_OPENNMS_PERFORMANCE}",
+      "datasource": "$instance",
       "decimals": null,
       "fill": 1,
       "gridPos": {
@@ -751,16 +742,16 @@
       },
       "id": 6,
       "legend": {
-        "alignAsTable": false,
-        "avg": false,
+        "alignAsTable": true,
+        "avg": true,
         "current": false,
-        "max": false,
-        "min": false,
+        "max": true,
+        "min": true,
         "rightSide": false,
-        "show": false,
+        "show": true,
         "sideWidth": 250,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
       "linewidth": 1,
@@ -1044,7 +1035,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_OPENNMS_PERFORMANCE}",
+      "datasource": "$instance",
       "decimals": null,
       "fill": 1,
       "gridPos": {
@@ -1055,13 +1046,13 @@
       },
       "id": 3,
       "legend": {
-        "alignAsTable": false,
+        "alignAsTable": true,
         "avg": true,
         "current": false,
         "max": true,
         "min": true,
         "rightSide": false,
-        "show": false,
+        "show": true,
         "sideWidth": 250,
         "total": false,
         "values": true
@@ -1197,6 +1188,7 @@
         },
         {
           "attribute": "CpuNumCpus",
+          "fallbackAttribute": "cpucores",
           "hide": false,
           "label": "Cores",
           "nodeId": "$netSnmpLinux",
@@ -1246,6 +1238,7 @@
       }
     }
   ],
+  "refresh": "5m",
   "schemaVersion": 16,
   "style": "dark",
   "tags": [
@@ -1254,18 +1247,35 @@
   "templating": {
     "list": [
       {
+        "current": {
+          "tags": [],
+          "text": "ONMS Test System",
+          "value": "ONMS Test System"
+        },
+        "hide": 0,
+        "label": "OpenNMS Instance",
+        "name": "instance",
+        "options": [],
+        "query": "opennms-helm-performance-datasource",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
         "allValue": null,
         "current": {},
-        "datasource": "${DS_OPENNMS_PERFORMANCE}",
+        "datasource": "$instance",
         "hide": 0,
         "includeAll": true,
-        "label": null,
+        "label": "Net-SNMP node",
         "multi": true,
         "name": "netSnmpLinux",
         "options": [],
         "query": "nodeFilter(nodeSysOID LIKE '.1.3.6.1.4.1.8072.3.2.10' & serviceName like 'SNMP')",
         "refresh": 2,
         "regex": "",
+        "skipUrlSync": false,
         "sort": 1,
         "tagValuesQuery": "",
         "tags": [],
@@ -1277,7 +1287,7 @@
   },
   "time": {
     "from": "now-12h",
-    "to": "now"
+    "to": "now-5m"
   },
   "timepicker": {
     "refresh_intervals": [
@@ -1307,5 +1317,5 @@
   "timezone": "",
   "title": "OpenNMS Linux Node Performance (multirow)",
   "uid": "000000063",
-  "version": 17
+  "version": 24
 }
