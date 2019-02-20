@@ -38,7 +38,7 @@
   "gnetId": null,
   "graphTooltip": 1,
   "id": null,
-  "iteration": 1543868085979,
+  "iteration": 1550606445439,
   "links": [],
   "panels": [
     {
@@ -434,6 +434,7 @@
       "dashes": false,
       "datasource": "$instance",
       "decimals": null,
+      "description": "The number of 'ticks' (typically 1/100s) spent\nprocessing code.",
       "fill": 1,
       "gridPos": {
         "h": 9,
@@ -706,7 +707,7 @@
       "yaxes": [
         {
           "format": "none",
-          "label": "",
+          "label": "Ticks",
           "logBase": 1,
           "max": null,
           "min": null,
@@ -1248,9 +1249,8 @@
     "list": [
       {
         "current": {
-          "tags": [],
-          "text": "ONMS Test System",
-          "value": "ONMS Test System"
+          "text": "OpenNMS FRA Performance",
+          "value": "OpenNMS FRA Performance"
         },
         "hide": 0,
         "label": "OpenNMS Instance",
@@ -1267,7 +1267,7 @@
         "current": {},
         "datasource": "$instance",
         "hide": 0,
-        "includeAll": true,
+        "includeAll": false,
         "label": "Net-SNMP node",
         "multi": true,
         "name": "netSnmpLinux",
@@ -1317,5 +1317,5 @@
   "timezone": "",
   "title": "OpenNMS Linux Node Performance (multirow)",
   "uid": "000000063",
-  "version": 24
+  "version": 26
 }
