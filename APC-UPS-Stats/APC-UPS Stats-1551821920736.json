@@ -1547,7 +1547,7 @@
     ]
   },
   "timezone": "browser",
-  "title": "UPS Stats",
+  "title": "APC UPS Stats",
   "uid": "000000016",
   "version": 68
 }
