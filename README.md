@@ -25,7 +25,7 @@ Please create an issue which describes the problem, the board you want to share 
 
 ### Merging
 
-After your PR was reviewed by other community contributors (feel free to add reviewers!), it can and will be merged.
+After your PR was reviewed by other community contributors, it can and will be merged.
 Depending on the used metrics in your board, it will not always be possible to test the board in detail.
 
 ### Referencing to GH
