@@ -324,7 +324,7 @@
         {
           "aggregation": "AVERAGE",
           "attribute": "ifInErrors",
-          "label": "Out on $node $interface",
+          "label": "In on $node $interface",
           "nodeId": "$node",
           "refId": "A",
           "resourceId": "$interface",
@@ -333,7 +333,7 @@
         {
           "aggregation": "AVERAGE",
           "attribute": "ifOutErrors",
-          "label": "In on $node $interface",
+          "label": "Out on $node $interface",
           "nodeId": "$node",
           "refId": "B",
           "resourceId": "$interface",
