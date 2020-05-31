@@ -5,19 +5,19 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "5.3.4"
+      "version": "6.1.5"
     },
     {
       "type": "datasource",
       "id": "postgres",
       "name": "PostgreSQL",
-      "version": "5.0.0"
+      "version": "1.0.0"
     },
     {
       "type": "panel",
       "id": "table",
       "name": "Table",
-      "version": "5.0.0"
+      "version": ""
     }
   ],
   "annotations": {
@@ -38,7 +38,7 @@
   "gnetId": 5921,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1543870179317,
+  "iteration": 1556560774425,
   "links": [],
   "panels": [
     {
@@ -57,10 +57,10 @@
     },
     {
       "columns": [],
-      "datasource": "$onms_pg",
+      "datasource": "$instance",
       "fontSize": "100%",
       "gridPos": {
-        "h": 6,
+        "h": 5,
         "w": 24,
         "x": 0,
         "y": 1
@@ -195,7 +195,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 7
+        "y": 6
       },
       "id": 13,
       "panels": [],
@@ -205,13 +205,13 @@
     },
     {
       "columns": [],
-      "datasource": "$onms_pg",
+      "datasource": "$instance",
       "fontSize": "100%",
       "gridPos": {
-        "h": 9,
+        "h": 6,
         "w": 7,
         "x": 0,
-        "y": 8
+        "y": 7
       },
       "id": 9,
       "links": [],
@@ -326,7 +326,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  node_alarms.location,\n  node_alarms.nodelabel,\n  node_alarms.lasteventtime,\n  to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime AS duration_raw,\n  EXTRACT(DAYS FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime) || 'd ' || EXTRACT(HOURS FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime) || 'h ' || EXTRACT(MINUTES FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime) || 'm ' || ROUND(EXTRACT(SECONDS FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime)::NUMERIC,0) || 's' AS duration\nFROM\n  node_alarms\nWHERE\n  node_alarms.acknowledged = FALSE AND\n  node_alarms.eventuei like 'uei.opennms.org/nodes/nodeDown' AND\n  node_alarms.location like '$location' AND\n  node_alarms.categoryname like '$category' AND\n  node_alarms.max_alarm_severity_unack = '6'\nGROUP BY\n  node_alarms.location,\n  node_alarms.nodelabel,\n  node_alarms.nodeid,\n  node_alarms.firsteventtime,\n  node_alarms.lasteventtime\nORDER BY\n  duration_raw DESC,\n  node_alarms.location ASC,\n  node_alarms.nodelabel ASC",
+          "rawSql": "SELECT\n  node_alarms.location,\n  node_alarms.nodelabel,\n  node_alarms.lasteventtime,\n  to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime AS duration_raw,\n  EXTRACT(DAYS FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime) || 'd ' || EXTRACT(HOURS FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime) || 'h ' || EXTRACT(MINUTES FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime) || 'm ' || ROUND(EXTRACT(SECONDS FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime)::NUMERIC,0) || 's' AS duration\nFROM\n  node_alarms\nWHERE\n  node_alarms.acknowledged = FALSE AND\n  node_alarms.eventuei like 'uei.opennms.org/nodes/nodeDown' AND\n  node_alarms.location IN ($location) AND\n  node_alarms.categoryname IN ($category) AND\n  node_alarms.max_alarm_severity_unack = '6'\nGROUP BY\n  node_alarms.location,\n  node_alarms.nodelabel,\n  node_alarms.nodeid,\n  node_alarms.firsteventtime,\n  node_alarms.lasteventtime\nORDER BY\n  duration_raw DESC,\n  node_alarms.location ASC,\n  node_alarms.nodelabel ASC",
           "refId": "A",
           "select": [
             [
@@ -354,13 +354,13 @@
     },
     {
       "columns": [],
-      "datasource": "$onms_pg",
+      "datasource": "$instance",
       "fontSize": "100%",
       "gridPos": {
-        "h": 9,
+        "h": 6,
         "w": 7,
         "x": 7,
-        "y": 8
+        "y": 7
       },
       "id": 10,
       "links": [],
@@ -505,7 +505,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  node_alarms.location,\n  node_alarms.nodelabel,\n  node_alarms.ipaddr,\n  node_alarms.lasteventtime,\n  to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime AS duration_raw,\n  EXTRACT(DAYS FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime) || 'd ' || EXTRACT(HOURS FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime) || 'h ' || EXTRACT(MINUTES FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime) || 'm ' || ROUND(EXTRACT(SECONDS FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime)::NUMERIC,0) || 's' AS duration\nFROM\n  node_alarms\nWHERE\n  node_alarms.acknowledged = FALSE AND\n  node_alarms.eventuei like 'uei.opennms.org/nodes/interfaceDown' AND\n  node_alarms.location like '$location' AND\n  node_alarms.categoryname like '$category' AND\n  node_alarms.max_alarm_severity_unack = '5'\nGROUP BY\n  node_alarms.location,\n  node_alarms.nodeid,\n  node_alarms.nodelabel,\n  node_alarms.ipaddr,\n  node_alarms.firsteventtime,\n  node_alarms.lasteventtime\nORDER BY\n  duration_raw DESC,\n  node_alarms.location ASC,\n  node_alarms.nodelabel ASC,\n  node_alarms.ipaddr ASC",
+          "rawSql": "SELECT\n  node_alarms.location,\n  node_alarms.nodelabel,\n  node_alarms.ipaddr,\n  node_alarms.lasteventtime,\n  to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime AS duration_raw,\n  EXTRACT(DAYS FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime) || 'd ' || EXTRACT(HOURS FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime) || 'h ' || EXTRACT(MINUTES FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime) || 'm ' || ROUND(EXTRACT(SECONDS FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime)::NUMERIC,0) || 's' AS duration\nFROM\n  node_alarms\nWHERE\n  node_alarms.acknowledged = FALSE AND\n  node_alarms.eventuei like 'uei.opennms.org/nodes/interfaceDown' AND\n  node_alarms.location IN ($location) AND\n  node_alarms.categoryname IN ($category) AND\n  node_alarms.max_alarm_severity_unack = '5'\nGROUP BY\n  node_alarms.location,\n  node_alarms.nodeid,\n  node_alarms.nodelabel,\n  node_alarms.ipaddr,\n  node_alarms.firsteventtime,\n  node_alarms.lasteventtime\nORDER BY\n  duration_raw DESC,\n  node_alarms.location ASC,\n  node_alarms.nodelabel ASC,\n  node_alarms.ipaddr ASC",
           "refId": "A",
           "select": [
             [
@@ -533,13 +533,13 @@
     },
     {
       "columns": [],
-      "datasource": "$onms_pg",
+      "datasource": "$instance",
       "fontSize": "100%",
       "gridPos": {
-        "h": 9,
+        "h": 6,
         "w": 10,
         "x": 14,
-        "y": 8
+        "y": 7
       },
       "id": 11,
       "links": [],
@@ -684,7 +684,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  node_alarms.location,\n  node_alarms.nodelabel,\n  node_alarms.ipaddr,\n  node_alarms.servicename,\n  node_alarms.lasteventtime,\n  to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime AS duration_raw,\n  EXTRACT(DAYS FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime) || 'd ' || EXTRACT(HOURS FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime) || 'h ' || EXTRACT(MINUTES FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime) || 'm ' || ROUND(EXTRACT(SECONDS FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime)::NUMERIC,0) || 's' AS duration\nFROM\n  node_alarms\nWHERE\n  node_alarms.acknowledged = FALSE AND\n  node_alarms.eventuei like 'uei.opennms.org/nodes/nodeLostService' AND\n  node_alarms.location like '$location' AND\n  node_alarms.categoryname like '$category' AND\n  node_alarms.max_alarm_severity_unack = '5'\nGROUP BY\n  node_alarms.location,\n  node_alarms.nodeid,\n  node_alarms.nodelabel,\n  node_alarms.ipaddr,\n  node_alarms.servicename,\n  node_alarms.firsteventtime,\n  node_alarms.lasteventtime\nORDER BY\n  duration_raw DESC,\n  node_alarms.location ASC,\n  node_alarms.nodelabel ASC,\n  node_alarms.ipaddr ASC,\n  node_alarms.servicename ASC",
+          "rawSql": "SELECT\n  node_alarms.location,\n  node_alarms.nodelabel,\n  node_alarms.ipaddr,\n  node_alarms.servicename,\n  node_alarms.lasteventtime,\n  to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime AS duration_raw,\n  EXTRACT(DAYS FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime) || 'd ' || EXTRACT(HOURS FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime) || 'h ' || EXTRACT(MINUTES FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime) || 'm ' || ROUND(EXTRACT(SECONDS FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime)::NUMERIC,0) || 's' AS duration\nFROM\n  node_alarms\nWHERE\n  node_alarms.acknowledged = FALSE AND\n  node_alarms.eventuei like 'uei.opennms.org/nodes/nodeLostService' AND\n  node_alarms.location IN ($location) AND\n  node_alarms.categoryname IN ($category) AND\n  node_alarms.max_alarm_severity_unack = '5'\nGROUP BY\n  node_alarms.location,\n  node_alarms.nodeid,\n  node_alarms.nodelabel,\n  node_alarms.ipaddr,\n  node_alarms.servicename,\n  node_alarms.firsteventtime,\n  node_alarms.lasteventtime\nORDER BY\n  duration_raw DESC,\n  node_alarms.location ASC,\n  node_alarms.nodelabel ASC,\n  node_alarms.ipaddr ASC,\n  node_alarms.servicename ASC",
           "refId": "A",
           "select": [
             [
@@ -716,7 +716,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 17
+        "y": 13
       },
       "id": 2,
       "panels": [],
@@ -726,14 +726,14 @@
     },
     {
       "columns": [],
-      "datasource": "$onms_pg",
+      "datasource": "$instance",
       "description": "Availability for Nodes with outages in a selected Surveillance Category",
       "fontSize": "100%",
       "gridPos": {
-        "h": 11,
+        "h": 6,
         "w": 7,
         "x": 0,
-        "y": 18
+        "y": 14
       },
       "id": 5,
       "links": [],
@@ -790,7 +790,7 @@
             "rgba(50, 172, 45, 0.97)"
           ],
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
+          "decimals": 3,
           "pattern": "availability",
           "thresholds": [
             "70",
@@ -851,7 +851,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  n.location,\n  n.nodelabel,\n  100.0 - 100.0/(EXTRACT(EPOCH FROM to_timestamp($__unixEpochTo())) - EXTRACT(EPOCH FROM to_timestamp($__unixEpochFrom()))) * EXTRACT(EPOCH FROM (to_timestamp($__unixEpochTo()) - GREATEST(n.iflostservice, to_timestamp($__unixEpochFrom())))) AS availability,\n  to_timestamp($__unixEpochTo()) - n.iflostservice AS duration_raw,\n  EXTRACT(DAYS FROM to_timestamp($__unixEpochTo()) - n.iflostservice) || 'd ' || EXTRACT(HOURS FROM to_timestamp($__unixEpochTo()) - n.iflostservice) || 'h ' || EXTRACT(MINUTES FROM to_timestamp($__unixEpochTo()) - n.iflostservice) || 'm ' || ROUND(EXTRACT(SECONDS FROM to_timestamp($__unixEpochTo()) - n.iflostservice)::NUMERIC,0) || 's' AS duration\nFROM\n  node_outages n\nJOIN\n  node_outage_status nos\nON\n  n.nodeid = nos.nodeid\nWHERE\n  n.resolved = FALSE AND\n  n.svclosteventuei = 'uei.opennms.org/nodes/nodeDown' AND\n  nos.max_outage_severity = '6' AND\n  n.categoryname like '$category' AND\n  n.location like '$location'\nGROUP BY\n  n.location,\n  n.nodelabel,\n  n.eventseverity,\n  n.iflostservice\nORDER BY\n  duration_raw DESC,\n  availability ASC,\n  n.location ASC,\n  n.nodelabel ASC",
+          "rawSql": "SELECT\n  n.location,\n  n.nodelabel,\n  100.0 - 100.0/(EXTRACT(EPOCH FROM to_timestamp($__unixEpochTo())) - EXTRACT(EPOCH FROM to_timestamp($__unixEpochFrom()))) * EXTRACT(EPOCH FROM (to_timestamp($__unixEpochTo()) - GREATEST(n.iflostservice, to_timestamp($__unixEpochFrom())))) AS availability,\n  to_timestamp($__unixEpochTo()) - n.iflostservice AS duration_raw,\n  EXTRACT(DAYS FROM to_timestamp($__unixEpochTo()) - n.iflostservice) || 'd ' || EXTRACT(HOURS FROM to_timestamp($__unixEpochTo()) - n.iflostservice) || 'h ' || EXTRACT(MINUTES FROM to_timestamp($__unixEpochTo()) - n.iflostservice) || 'm ' || ROUND(EXTRACT(SECONDS FROM to_timestamp($__unixEpochTo()) - n.iflostservice)::NUMERIC,0) || 's' AS duration\nFROM\n  node_outages n\nJOIN\n  node_outage_status nos\nON\n  n.nodeid = nos.nodeid\nWHERE\n  n.resolved = FALSE AND\n  n.svclosteventuei = 'uei.opennms.org/nodes/nodeDown' AND\n  nos.max_outage_severity = '6' AND\n  n.categoryname IN ($category) AND\n  n.location IN ($location)\nGROUP BY\n  n.location,\n  n.nodelabel,\n  n.eventseverity,\n  n.iflostservice\nORDER BY\n  duration_raw DESC,\n  availability ASC,\n  n.location ASC,\n  n.nodelabel ASC",
           "refId": "A",
           "select": [
             [
@@ -879,14 +879,14 @@
     },
     {
       "columns": [],
-      "datasource": "$onms_pg",
+      "datasource": "$instance",
       "description": "Availability for Interfaces with outages in a selected Surveillance Category",
       "fontSize": "100%",
       "gridPos": {
-        "h": 11,
+        "h": 6,
         "w": 7,
         "x": 7,
-        "y": 18
+        "y": 14
       },
       "id": 6,
       "links": [],
@@ -943,7 +943,7 @@
             "rgba(50, 172, 45, 0.97)"
           ],
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
+          "decimals": 3,
           "pattern": "availability",
           "thresholds": [
             "70",
@@ -1019,7 +1019,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  n.location,\n  n.nodelabel,\n  n.ipaddr,\n  100.0 - 100.0/(EXTRACT(EPOCH FROM to_timestamp($__unixEpochTo())) - EXTRACT(EPOCH FROM to_timestamp($__unixEpochFrom()))) * EXTRACT(EPOCH FROM (to_timestamp($__unixEpochTo()) - GREATEST(n.iflostservice, to_timestamp($__unixEpochFrom())))) AS availability,\n  to_timestamp($__unixEpochTo()) - n.iflostservice AS duration_raw,\n  EXTRACT(DAYS FROM to_timestamp($__unixEpochTo()) - n.iflostservice) || 'd ' || EXTRACT(HOURS FROM to_timestamp($__unixEpochTo()) - n.iflostservice) || 'h ' || EXTRACT(MINUTES FROM to_timestamp($__unixEpochTo()) - n.iflostservice) || 'm ' || ROUND(EXTRACT(SECONDS FROM to_timestamp($__unixEpochTo()) - n.iflostservice)::NUMERIC,0) || 's' AS duration\nFROM\n  node_outages n\nJOIN\n  node_outage_status nos\nON\n  n.nodeid = nos.nodeid\nWHERE\n  n.resolved = FALSE AND\n  n.svclosteventuei = 'uei.opennms.org/nodes/interfaceDown' AND\n  nos.max_outage_severity = '5' AND\n  n.categoryname like '$category' AND\n  n.location like '$location'\nGROUP BY\n  n.location,\n  n.nodelabel,\n  n.iflostservice,\n  n.ipaddr,\n  n.eventseverity,\n  n.svclosteventuei\nORDER BY\n  duration_raw DESC,\n  availability ASC,\n  n.location ASC,\n  n.nodelabel ASC,\n  n.ipaddr ASC\n",
+          "rawSql": "SELECT\n  n.location,\n  n.nodelabel,\n  n.ipaddr,\n  100.0 - 100.0/(EXTRACT(EPOCH FROM to_timestamp($__unixEpochTo())) - EXTRACT(EPOCH FROM to_timestamp($__unixEpochFrom()))) * EXTRACT(EPOCH FROM (to_timestamp($__unixEpochTo()) - GREATEST(n.iflostservice, to_timestamp($__unixEpochFrom())))) AS availability,\n  to_timestamp($__unixEpochTo()) - n.iflostservice AS duration_raw,\n  EXTRACT(DAYS FROM to_timestamp($__unixEpochTo()) - n.iflostservice) || 'd ' || EXTRACT(HOURS FROM to_timestamp($__unixEpochTo()) - n.iflostservice) || 'h ' || EXTRACT(MINUTES FROM to_timestamp($__unixEpochTo()) - n.iflostservice) || 'm ' || ROUND(EXTRACT(SECONDS FROM to_timestamp($__unixEpochTo()) - n.iflostservice)::NUMERIC,0) || 's' AS duration\nFROM\n  node_outages n\nJOIN\n  node_outage_status nos\nON\n  n.nodeid = nos.nodeid\nWHERE\n  n.resolved = FALSE AND\n  n.svclosteventuei = 'uei.opennms.org/nodes/interfaceDown' AND\n  nos.max_outage_severity = '5' AND\n  n.categoryname IN ($category) AND\n  n.location IN ($location)\nGROUP BY\n  n.location,\n  n.nodelabel,\n  n.iflostservice,\n  n.ipaddr,\n  n.eventseverity,\n  n.svclosteventuei\nORDER BY\n  duration_raw DESC,\n  availability ASC,\n  n.location ASC,\n  n.nodelabel ASC,\n  n.ipaddr ASC\n",
           "refId": "A",
           "select": [
             [
@@ -1047,14 +1047,14 @@
     },
     {
       "columns": [],
-      "datasource": "$onms_pg",
+      "datasource": "$instance",
       "description": "Availability for Services with outages in a selected Surveillance Category",
       "fontSize": "100%",
       "gridPos": {
-        "h": 11,
+        "h": 6,
         "w": 10,
         "x": 14,
-        "y": 18
+        "y": 14
       },
       "id": 7,
       "links": [],
@@ -1111,7 +1111,7 @@
             "rgba(50, 172, 45, 0.97)"
           ],
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
+          "decimals": 3,
           "pattern": "availability",
           "thresholds": [
             "70",
@@ -1202,7 +1202,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  n.location,\n  n.nodelabel,\n  n.ipaddr,\n  n.servicename,\n  100.0 - 100.0/(EXTRACT(EPOCH FROM to_timestamp($__unixEpochTo())) - EXTRACT(EPOCH FROM to_timestamp($__unixEpochFrom()))) * EXTRACT(EPOCH FROM (to_timestamp($__unixEpochTo()) - GREATEST(n.iflostservice, to_timestamp($__unixEpochFrom())))) AS availability,\n  to_timestamp($__unixEpochTo()) - n.iflostservice AS duration_raw,\n  EXTRACT(DAYS FROM to_timestamp($__unixEpochTo()) - n.iflostservice) || 'd ' || EXTRACT(HOURS FROM to_timestamp($__unixEpochTo()) - n.iflostservice) || 'h ' || EXTRACT(MINUTES FROM to_timestamp($__unixEpochTo()) - n.iflostservice) || 'm ' || ROUND(EXTRACT(SECONDS FROM to_timestamp($__unixEpochTo()) - n.iflostservice)::NUMERIC,0) || 's' AS duration\nFROM\n  node_outages n\nJOIN\n  node_outage_status nos\nON\n  n.nodeid = nos.nodeid\nWHERE\n  n.resolved = FALSE AND\n  n.svclosteventuei = 'uei.opennms.org/nodes/nodeLostService' AND\n  nos.max_outage_severity = '5' AND\n  n.categoryname like '$category' AND\n  n.location like '$location'\nGROUP BY\n  n.location,\n  n.nodelabel,\n  n.iflostservice,\n  n.ipaddr,\n  n.eventseverity,\n  n.servicename\nORDER BY\n  duration_raw DESC,\n  availability ASC,\n  n.location ASC,\n  n.nodelabel ASC,\n  n.ipaddr ASC,\n  n.servicename ASC",
+          "rawSql": "SELECT\n  n.location,\n  n.nodelabel,\n  n.ipaddr,\n  n.servicename,\n  100.0 - 100.0/(EXTRACT(EPOCH FROM to_timestamp($__unixEpochTo())) - EXTRACT(EPOCH FROM to_timestamp($__unixEpochFrom()))) * EXTRACT(EPOCH FROM (to_timestamp($__unixEpochTo()) - GREATEST(n.iflostservice, to_timestamp($__unixEpochFrom())))) AS availability,\n  to_timestamp($__unixEpochTo()) - n.iflostservice AS duration_raw,\n  EXTRACT(DAYS FROM to_timestamp($__unixEpochTo()) - n.iflostservice) || 'd ' || EXTRACT(HOURS FROM to_timestamp($__unixEpochTo()) - n.iflostservice) || 'h ' || EXTRACT(MINUTES FROM to_timestamp($__unixEpochTo()) - n.iflostservice) || 'm ' || ROUND(EXTRACT(SECONDS FROM to_timestamp($__unixEpochTo()) - n.iflostservice)::NUMERIC,0) || 's' AS duration\nFROM\n  node_outages n\nJOIN\n  node_outage_status nos\nON\n  n.nodeid = nos.nodeid\nWHERE\n  n.resolved = FALSE AND\n  n.svclosteventuei = 'uei.opennms.org/nodes/nodeLostService' AND\n  nos.max_outage_severity = '5' AND\n  n.categoryname IN ($category) AND\n  n.location IN ($location)\nGROUP BY\n  n.location,\n  n.nodelabel,\n  n.iflostservice,\n  n.ipaddr,\n  n.eventseverity,\n  n.servicename\nORDER BY\n  duration_raw DESC,\n  availability ASC,\n  n.location ASC,\n  n.nodelabel ASC,\n  n.ipaddr ASC,\n  n.servicename ASC",
           "refId": "A",
           "select": [
             [
@@ -1230,7 +1230,7 @@
     }
   ],
   "refresh": "10s",
-  "schemaVersion": 16,
+  "schemaVersion": 18,
   "style": "dark",
   "tags": [
     "opennms"
@@ -1240,30 +1240,33 @@
       {
         "current": {
           "tags": [],
-          "text": "OpenNMS FUL PSQL",
-          "value": "OpenNMS FUL PSQL"
+          "text": "OpenNMS PG FRA",
+          "value": "OpenNMS PG FRA"
         },
         "hide": 0,
-        "label": "OpenNMS PostgreSQL",
-        "name": "onms_pg",
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "instance",
         "options": [],
         "query": "postgres",
         "refresh": 1,
-        "regex": "/.*OpenNMS*./",
+        "regex": ".*OpenNMS.*",
         "skipUrlSync": false,
         "type": "datasource"
       },
       {
         "allValue": null,
         "current": {},
-        "datasource": "$onms_pg",
+        "datasource": "$instance",
+        "definition": "SELECT DISTINCT(n.location) FROM node n ORDER BY location ASC",
         "hide": 0,
-        "includeAll": false,
+        "includeAll": true,
         "label": "Monitoring Location",
-        "multi": false,
+        "multi": true,
         "name": "location",
         "options": [],
-        "query": "SELECT '%'::TEXT as location UNION SELECT DISTINCT(n.location) FROM node n ORDER BY location ASC",
+        "query": "SELECT DISTINCT(n.location) FROM node n ORDER BY location ASC",
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
@@ -1277,14 +1280,15 @@
       {
         "allValue": null,
         "current": {},
-        "datasource": "$onms_pg",
+        "datasource": "$instance",
+        "definition": "SELECT 'no category'::TEXT as categoryname UNION SELECT categoryname FROM categories ORDER BY categoryname",
         "hide": 0,
-        "includeAll": false,
+        "includeAll": true,
         "label": "Surveillance Category",
-        "multi": false,
+        "multi": true,
         "name": "category",
         "options": [],
-        "query": "SELECT '%'::TEXT as categoryname UNION SELECT 'no category'::TEXT as categoryname UNION SELECT categoryname FROM categories ORDER BY categoryname",
+        "query": "SELECT 'no category'::TEXT as categoryname UNION SELECT categoryname FROM categories ORDER BY categoryname",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
@@ -1329,5 +1333,5 @@
   "timezone": "",
   "title": "OpenNMS Outage Dashboard",
   "uid": "rEAWRPGmz",
-  "version": 12
+  "version": 3
 }
