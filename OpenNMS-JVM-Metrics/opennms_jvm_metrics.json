@@ -5,13 +5,13 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "5.3.4"
+      "version": "6.1.5"
     },
     {
       "type": "panel",
       "id": "graph",
       "name": "Graph",
-      "version": "5.0.0"
+      "version": ""
     },
     {
       "type": "datasource",
@@ -35,10 +35,10 @@
   },
   "description": "",
   "editable": true,
-  "gnetId": null,
+  "gnetId": 4046,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1543870097360,
+  "iteration": 1556610494903,
   "links": [],
   "panels": [
     {
@@ -46,7 +46,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$onms_instance",
+      "datasource": "$instance",
       "fill": 1,
       "gridPos": {
         "h": 7,
@@ -149,6 +149,7 @@
       ],
       "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
       "title": "Poller Task Completion Ratio",
       "tooltip": {
@@ -192,7 +193,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$onms_instance",
+      "datasource": "$instance",
       "fill": 1,
       "gridPos": {
         "h": 7,
@@ -257,6 +258,7 @@
       ],
       "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
       "title": "Pollerd Threads Active",
       "tooltip": {
@@ -300,7 +302,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$onms_instance",
+      "datasource": "$instance",
       "fill": 1,
       "gridPos": {
         "h": 7,
@@ -365,6 +367,7 @@
       ],
       "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
       "title": "OpenNMS Services Polled",
       "tooltip": {
@@ -408,7 +411,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$onms_instance",
+      "datasource": "$instance",
       "fill": 1,
       "gridPos": {
         "h": 7,
@@ -511,6 +514,7 @@
       ],
       "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
       "title": "Collectd Task Completion Ratio",
       "tooltip": {
@@ -554,7 +558,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$onms_instance",
+      "datasource": "$instance",
       "fill": 1,
       "gridPos": {
         "h": 7,
@@ -682,6 +686,7 @@
       ],
       "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
       "title": "Collectd ThreadPool",
       "tooltip": {
@@ -725,7 +730,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$onms_instance",
+      "datasource": "$instance",
       "description": "",
       "fill": 1,
       "gridPos": {
@@ -792,6 +797,7 @@
       ],
       "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
       "title": "Collectd Collectable Services",
       "tooltip": {
@@ -836,7 +842,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$onms_instance",
+      "datasource": "$instance",
       "fill": 1,
       "gridPos": {
         "h": 7,
@@ -902,6 +908,7 @@
       ],
       "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
       "title": "Collectd Threads Active",
       "tooltip": {
@@ -945,7 +952,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$onms_instance",
+      "datasource": "$instance",
       "fill": 1,
       "gridPos": {
         "h": 6,
@@ -1070,6 +1077,7 @@
       ],
       "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
       "title": "Reports Statistics",
       "tooltip": {
@@ -1113,7 +1121,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$onms_instance",
+      "datasource": "$instance",
       "fill": 1,
       "gridPos": {
         "h": 6,
@@ -1178,6 +1186,7 @@
       ],
       "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
       "title": "Queued Updates",
       "tooltip": {
@@ -1221,7 +1230,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$onms_instance",
+      "datasource": "$instance",
       "fill": 1,
       "gridPos": {
         "h": 6,
@@ -1286,6 +1295,7 @@
       ],
       "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
       "title": "Queued Operations Pending",
       "tooltip": {
@@ -1329,7 +1339,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$onms_instance",
+      "datasource": "$instance",
       "fill": 1,
       "gridPos": {
         "h": 7,
@@ -1454,6 +1464,7 @@
       ],
       "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
       "title": "HTTP Connections",
       "tooltip": {
@@ -1497,7 +1508,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$onms_instance",
+      "datasource": "$instance",
       "fill": 1,
       "gridPos": {
         "h": 7,
@@ -1622,6 +1633,7 @@
       ],
       "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
       "title": "HTTPS Connections",
       "tooltip": {
@@ -1665,7 +1677,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$onms_instance",
+      "datasource": "$instance",
       "fill": 1,
       "gridPos": {
         "h": 7,
@@ -1790,6 +1802,7 @@
       ],
       "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
       "title": "Trap Versions",
       "tooltip": {
@@ -1833,7 +1846,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$onms_instance",
+      "datasource": "$instance",
       "fill": 1,
       "gridPos": {
         "h": 7,
@@ -1928,6 +1941,7 @@
       ],
       "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
       "title": "Trap Statistics",
       "tooltip": {
@@ -1971,7 +1985,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$onms_instance",
+      "datasource": "$instance",
       "fill": 1,
       "gridPos": {
         "h": 7,
@@ -2126,6 +2140,7 @@
       ],
       "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
       "title": "Binary Notices",
       "tooltip": {
@@ -2169,7 +2184,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$onms_instance",
+      "datasource": "$instance",
       "fill": 1,
       "gridPos": {
         "h": 7,
@@ -2324,6 +2339,7 @@
       ],
       "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
       "title": "Java Notices",
       "tooltip": {
@@ -2367,7 +2383,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$onms_instance",
+      "datasource": "$instance",
       "fill": 1,
       "gridPos": {
         "h": 7,
@@ -2462,6 +2478,7 @@
       ],
       "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
       "title": "Notification Statistics",
       "tooltip": {
@@ -2502,7 +2519,7 @@
     }
   ],
   "refresh": false,
-  "schemaVersion": 16,
+  "schemaVersion": 18,
   "style": "dark",
   "tags": [
     "OpenNMS"
@@ -2511,13 +2528,14 @@
     "list": [
       {
         "current": {
-          "tags": [],
-          "text": "OpenNMS FUL Performance",
-          "value": "OpenNMS FUL Performance"
+          "text": "OpenNMS Performance FRA",
+          "value": "OpenNMS Performance FRA"
         },
         "hide": 0,
-        "label": "OpenNMS Instance",
-        "name": "onms_instance",
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "instance",
         "options": [],
         "query": "opennms-helm-performance-datasource",
         "refresh": 1,
@@ -2528,14 +2546,15 @@
       {
         "allValue": null,
         "current": {},
-        "datasource": "$onms_instance",
+        "datasource": "$instance",
+        "definition": "nodeFilter(serviceName like 'OpenNMS-JVM') ",
         "hide": 0,
         "includeAll": false,
         "label": "",
         "multi": false,
         "name": "opennms",
         "options": [],
-        "query": "nodeFilter(serviceName like 'OpenNMS-JVM')",
+        "query": "nodeFilter(serviceName like 'OpenNMS-JVM') ",
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
@@ -2580,5 +2599,5 @@
   "timezone": "",
   "title": "OpenNMS JVM Metrics",
   "uid": "000000048",
-  "version": 26
+  "version": 2
 }
