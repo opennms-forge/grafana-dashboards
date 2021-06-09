@@ -1,0 +1,468 @@
+{
+    "__inputs": [
+      {
+        "name": "DS_OPENNMS_ENTITIES",
+        "label": "OpenNMS Entities",
+        "description": "",
+        "type": "datasource",
+        "pluginId": "opennms-helm-entity-datasource",
+        "pluginName": "OpenNMS Entities"
+      }
+    ],
+    "__requires": [
+      {
+        "type": "grafana",
+        "id": "grafana",
+        "name": "Grafana",
+        "version": "7.5.5"
+      },
+      {
+        "type": "panel",
+        "id": "opennms-helm-alarm-table-panel",
+        "name": "Alarm Table",
+        "version": ""
+      },
+      {
+        "type": "datasource",
+        "id": "opennms-helm-entity-datasource",
+        "name": "OpenNMS Entities",
+        "version": "1.0.0"
+      },
+      {
+        "type": "panel",
+        "id": "opennms-helm-filter-panel",
+        "name": "Filter Panel",
+        "version": ""
+      },
+      {
+        "type": "panel",
+        "id": "text",
+        "name": "Text",
+        "version": ""
+      }
+    ],
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": "-- Grafana --",
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "gnetId": null,
+    "graphTooltip": 0,
+    "id": null,
+    "links": [],
+    "panels": [
+      {
+        "columns": [
+          {
+            "id": "xf7pRl2CelaTB0LvGsWn",
+            "text": "Label",
+            "datasource": "OpenNMS Entities",
+            "resource": "label",
+            "inputType": "multi",
+            "entityType": {
+              "id": "node",
+              "label": "Nodes",
+              "queryFunction": "nodes"
+            },
+            "selected": {
+              "value": [
+                "$__all"
+              ],
+              "text": "All",
+              "resource": "label",
+              "datasource": "OpenNMS Entities",
+              "inputType": "multi",
+              "entityType": {
+                "id": "node",
+                "label": "Nodes",
+                "queryFunction": "nodes"
+              }
+            }
+          },
+          {
+            "id": "IOuTc3e9xDTOFfL7Zly7",
+            "text": "UEI",
+            "datasource": "OpenNMS Entities",
+            "resource": "uei",
+            "inputType": "multi",
+            "entityType": {
+              "id": "alarm",
+              "label": "Alarms",
+              "queryFunction": "alarms"
+            },
+            "selected": {
+              "value": [
+                "$__all"
+              ],
+              "text": "All",
+              "resource": "uei",
+              "datasource": "OpenNMS Entities",
+              "inputType": "multi",
+              "entityType": {
+                "id": "alarm",
+                "label": "Alarms",
+                "queryFunction": "alarms"
+              }
+            }
+          }
+        ],
+        "datasource": "${DS_OPENNMS_ENTITIES}",
+        "fieldConfig": {
+          "defaults": {},
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 8,
+          "x": 0,
+          "y": 0
+        },
+        "id": 2,
+        "pluginVersion": "7.5.7",
+        "targets": [
+          {
+            "entityType": {
+              "id": "alarm",
+              "label": "Alarms",
+              "queryFunction": "alarms"
+            },
+            "filter": {
+              "clauses": [],
+              "limit": 1000,
+              "orderBy": []
+            },
+            "limit": 0,
+            "orderBy": [],
+            "refId": "A"
+          }
+        ],
+        "title": "Filter Alarms",
+        "type": "opennms-helm-filter-panel"
+      },
+      {
+        "datasource": null,
+        "fieldConfig": {
+          "defaults": {},
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 16,
+          "x": 8,
+          "y": 0
+        },
+        "id": 6,
+        "options": {
+          "content": "This dashboard includes two panels, a Filter Panel and an Alarm Table.\nThe Filter Panel has two fields available: Node-Label and Alarm-UEI.\nChanging the value of these fields will apply to all Alarm Tables on this dashboard.\nThis makes limiting records displayed easier than setting up Grafana variables and applying to Alarm panels.\n\nYou can inspect the panels to see how they are configured.",
+          "mode": "markdown"
+        },
+        "pluginVersion": "7.5.5",
+        "targets": [
+          {
+            "format": "time_series",
+            "group": [],
+            "metricColumn": "none",
+            "rawQuery": false,
+            "rawSql": "SELECT\n  lastmodifieddate AS \"time\",\n  longitude\nFROM assets\nWHERE\n  $__timeFilter(lastmodifieddate)\nORDER BY 1",
+            "refId": "A",
+            "select": [
+              [
+                {
+                  "params": [
+                    "longitude"
+                  ],
+                  "type": "column"
+                }
+              ]
+            ],
+            "table": "assets",
+            "timeColumn": "lastmodifieddate",
+            "timeColumnType": "timestamp",
+            "where": [
+              {
+                "name": "$__timeFilter",
+                "params": [],
+                "type": "macro"
+              }
+            ]
+          }
+        ],
+        "title": "How To Use",
+        "type": "text"
+      },
+      {
+        "columns": [
+          {
+            "hidden": false,
+            "sort": false,
+            "style": {
+              "alias": "Ack",
+              "align": "center",
+              "clip": true,
+              "pattern": "Is Acknowledged",
+              "type": "checkbox",
+              "width": "2em"
+            },
+            "text": "Is Acknowledged",
+            "title": "Ack"
+          },
+          {
+            "hidden": false,
+            "sort": false,
+            "style": {
+              "align": "center",
+              "clip": true,
+              "displayAs": "icon",
+              "pattern": "Severity",
+              "type": "severity",
+              "width": "3em"
+            },
+            "text": "Severity",
+            "title": "Severity"
+          },
+          {
+            "hidden": false,
+            "sort": false,
+            "style": {
+              "align": "right",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "decimals": 0,
+              "pattern": "/Count/",
+              "type": "number",
+              "unit": "short",
+              "width": "3em"
+            },
+            "text": "Count",
+            "title": "Count"
+          },
+          {
+            "desc": true,
+            "hidden": false,
+            "sort": true,
+            "style": {
+              "alias": "Last Occurrence",
+              "align": "center",
+              "clip": true,
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "pattern": "/Last Event Time/",
+              "type": "date",
+              "width": "5em"
+            },
+            "text": "Last Event Time",
+            "title": "Last Occurrence"
+          },
+          {
+            "hidden": false,
+            "sort": false,
+            "style": {
+              "align": "left",
+              "clip": true,
+              "pattern": "Location",
+              "type": "string",
+              "width": "5em"
+            },
+            "text": "Location",
+            "title": "Location"
+          },
+          {
+            "hidden": false,
+            "sort": false,
+            "style": {
+              "alias": "Node",
+              "align": "left",
+              "pattern": "Node Label",
+              "type": "string",
+              "width": "12em"
+            },
+            "text": "Node Label",
+            "title": "Node"
+          },
+          {
+            "hidden": false,
+            "sort": false,
+            "style": {
+              "alias": "Message",
+              "align": "left",
+              "clip": true,
+              "pattern": "Log Message",
+              "sanitize": true,
+              "type": "string",
+              "width": "30em"
+            },
+            "text": "Log Message",
+            "title": "Message"
+          },
+          {
+            "featured": true,
+            "hidden": false,
+            "resource": "uei",
+            "sort": false,
+            "style": {
+              "align": "left",
+              "pattern": "/.*/",
+              "type": "string"
+            },
+            "text": "UEI",
+            "title": "UEI"
+          }
+        ],
+        "datasource": "${DS_OPENNMS_ENTITIES}",
+        "fieldConfig": {
+          "defaults": {},
+          "overrides": []
+        },
+        "fontSize": "100%",
+        "gridPos": {
+          "h": 17,
+          "w": 24,
+          "x": 0,
+          "y": 5
+        },
+        "id": 4,
+        "pageSize": 10,
+        "pagingPausesRefresh": false,
+        "pluginVersion": "7.5.7",
+        "scroll": false,
+        "severity": "column",
+        "showHeader": true,
+        "sort": {
+          "col": 3,
+          "desc": true
+        },
+        "styles": [
+          {
+            "align": "center",
+            "clip": true,
+            "displayAs": "icon",
+            "pattern": "Severity",
+            "type": "severity",
+            "width": "3em"
+          },
+          {
+            "alias": "Last Occurrence",
+            "align": "center",
+            "clip": true,
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "pattern": "/Last Event Time/",
+            "type": "date",
+            "width": "5em"
+          },
+          {
+            "align": "center",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "pattern": "/(.*Time|Suppressed Until)/",
+            "type": "date",
+            "width": "6em"
+          },
+          {
+            "pattern": "/.*ID/",
+            "type": "string"
+          },
+          {
+            "pattern": "Description",
+            "sanitize": true,
+            "type": "string"
+          },
+          {
+            "alias": "Message",
+            "align": "left",
+            "clip": true,
+            "pattern": "Log Message",
+            "sanitize": true,
+            "type": "string",
+            "width": "30em"
+          },
+          {
+            "align": "right",
+            "colorMode": null,
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "decimals": 0,
+            "pattern": "/Count/",
+            "type": "number",
+            "unit": "short",
+            "width": "3em"
+          },
+          {
+            "alias": "Node",
+            "align": "left",
+            "pattern": "Node Label",
+            "type": "string",
+            "width": "12em"
+          },
+          {
+            "alias": "Ack",
+            "align": "center",
+            "clip": true,
+            "pattern": "Is Acknowledged",
+            "type": "checkbox",
+            "width": "2em"
+          },
+          {
+            "align": "left",
+            "clip": true,
+            "pattern": "Location",
+            "type": "string",
+            "width": "5em"
+          },
+          {
+            "align": "left",
+            "pattern": "/.*/",
+            "type": "string"
+          }
+        ],
+        "targets": [
+          {
+            "entityType": {
+              "id": "alarm",
+              "label": "Alarms",
+              "queryFunction": "alarms"
+            },
+            "filter": {
+              "clauses": [],
+              "limit": 0,
+              "orderBy": []
+            },
+            "limit": 0,
+            "orderBy": [],
+            "refId": "A"
+          }
+        ],
+        "theme": "helm",
+        "title": "Alarm List",
+        "transform": "table",
+        "type": "opennms-helm-alarm-table-panel"
+      }
+    ],
+    "schemaVersion": 27,
+    "style": "dark",
+    "tags": [],
+    "templating": {
+      "list": []
+    },
+    "time": {
+      "from": "now-6h",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "Alarm Filters | OpenNMS Helm",
+    "version": 5
+  }
