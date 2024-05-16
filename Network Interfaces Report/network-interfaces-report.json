@@ -1,39 +1,43 @@
 {
   "__inputs": [
     {
-      "name": "DS_OPENNMS_HORIZON PM",
-      "label": "OpenNMS Horizon PM",
+      "name": "DS_OPENNMS_PERFORMANCE",
+      "label": "OpenNMS Performance",
       "description": "",
       "type": "datasource",
-      "pluginId": "opennms-helm-performance-datasource",
+      "pluginId": "opennms-performance-datasource",
       "pluginName": "OpenNMS Performance"
     }
   ],
+  "__elements": {},
   "__requires": [
     {
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "5.2.4"
-    },
-    {
-      "type": "panel",
-      "id": "graph",
-      "name": "Graph",
-      "version": "5.0.0"
+      "version": "10.4.2"
     },
     {
       "type": "datasource",
-      "id": "opennms-helm-performance-datasource",
+      "id": "opennms-performance-datasource",
       "name": "OpenNMS Performance",
-      "version": "1.0.0"
+      "version": "9"
+    },
+    {
+      "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
     }
   ],
   "annotations": {
     "list": [
       {
         "builtIn": 1,
-        "datasource": "-- Grafana --",
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -44,20 +48,74 @@
   },
   "description": "OpenNMS statistics about network interfaces with Standard MIB 2 metrics.",
   "editable": true,
+  "fiscalYearStartMonth": 0,
   "gnetId": 5053,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1539768709443,
   "links": [],
   "panels": [
     {
       "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "${DS_OPENNMS_HORIZON PM}",
+      "datasource": {
+        "type": "opennms-performance-datasource",
+        "uid": "${DS_OPENNMS_PERFORMANCE}"
+      },
       "description": "The total number of bits received and transmitted on the interface, including framing characters.",
-      "fill": 1,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "bits/sec",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bps"
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 9,
         "w": 12,
@@ -65,116 +123,210 @@
         "y": 0
       },
       "id": 4,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": true,
-        "min": true,
-        "show": true,
-        "sort": null,
-        "sortDesc": null,
-        "total": false,
-        "values": true
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "min"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
       },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
+      "pluginVersion": "9.4.7",
       "seriesOverrides": [
         {
           "alias": "/^Out.*/i",
           "transform": "negative-Y"
         }
       ],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
       "targets": [
         {
-          "attribute": "ifHCInOctets",
-          "hide": true,
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "ifHCInOctets",
+              "name": "ifHCInOctets"
+            },
+            "fallbackAttribute": {},
+            "label": "$index_in",
+            "node": {
+              "id": "$node",
+              "label": "$node"
+            },
+            "resource": {
+              "id": "$interface",
+              "label": "$interface"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
           "label": "$index_in",
-          "nodeId": "$node",
-          "refId": "A",
-          "resourceId": "$interface",
-          "type": "attribute"
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "A"
         },
         {
+          "attribute": {},
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
           "expression": "$index_in*8",
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
           "label": "In on $node $interface",
-          "refId": "B",
-          "type": "expression"
+          "performanceState": {},
+          "performanceType": {
+            "label": "Expression",
+            "value": 2
+          },
+          "queryType": "",
+          "refId": "B"
         },
         {
-          "attribute": "ifHCOutOctets",
-          "hide": true,
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "ifHCOutOctets",
+              "name": "ifHCOutOctets"
+            },
+            "fallbackAttribute": {},
+            "label": "$index_out",
+            "node": {
+              "id": "$node",
+              "label": "$node"
+            },
+            "resource": {
+              "id": "$interface",
+              "label": "$interface"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
           "label": "$index_out",
-          "nodeId": "$node",
-          "refId": "C",
-          "resourceId": "$interface",
-          "type": "attribute"
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "C"
         },
         {
+          "attribute": {},
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
           "expression": "$index_out*8",
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
           "label": "Out on $node $interface",
-          "refId": "D",
-          "type": "expression"
+          "performanceState": {},
+          "performanceType": {
+            "label": "Expression",
+            "value": 2
+          },
+          "queryType": "",
+          "refId": "D"
         }
       ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Throughput",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": null,
-          "format": "bps",
-          "label": "bits/sec",
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "type": "timeseries"
     },
     {
       "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "${DS_OPENNMS_HORIZON PM}",
+      "datasource": {
+        "type": "opennms-performance-datasource",
+        "uid": "${DS_OPENNMS_PERFORMANCE}"
+      },
       "description": "Network interface utilisation.",
-      "fill": 1,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 9,
         "w": 12,
@@ -182,117 +334,210 @@
         "y": 0
       },
       "id": 5,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": true,
-        "min": true,
-        "show": true,
-        "sort": null,
-        "sortDesc": null,
-        "total": false,
-        "values": true
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "min"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
       },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
+      "pluginVersion": "9.4.7",
       "seriesOverrides": [
         {
           "alias": "/^Out.*/i",
           "transform": "negative-Y"
         }
       ],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
       "targets": [
         {
-          "attribute": "ifHCInOctets",
-          "hide": true,
-          "label": "$index_in",
-          "nodeId": "$node",
-          "refId": "A",
-          "resourceId": "$interface",
-          "type": "attribute"
-        },
-        {
-          "attribute": "ifOutOctets",
-          "hide": true,
-          "label": "$index_out",
-          "nodeId": "$node",
-          "refId": "C",
-          "resourceId": "$interface",
-          "type": "attribute"
-        },
-        {
-          "expression": "$index_in*8*100/1000000000",
-          "label": "In $node on $interface",
-          "refId": "E",
-          "type": "expression"
-        },
-        {
-          "expression": "$index_out*8*100/1000000000",
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "ifHCInOctets",
+              "name": "ifHCInOctets"
+            },
+            "fallbackAttribute": {},
+            "label": "$index_in",
+            "node": {
+              "id": "$node",
+              "label": "$node"
+            },
+            "resource": {
+              "id": "$interface",
+              "label": "$interface"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
           "hide": false,
-          "label": "Out $node on $interface",
-          "refId": "B",
-          "type": "expression"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Bandwidth",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": null,
-          "format": "percent",
-          "label": "",
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
+          "key": "",
+          "label": "$index_in",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "A"
         },
         {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "ifOutOctets",
+              "name": "ifOutOctets"
+            },
+            "fallbackAttribute": {},
+            "label": "$index_out",
+            "node": {
+              "id": "$node",
+              "label": "$node"
+            },
+            "resource": {
+              "id": "$interface",
+              "label": "$interface"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "$index_out",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "C"
+        },
+        {
+          "attribute": {},
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "expression": "$index_in*8*100/1000000000",
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "In $node on $interface",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Expression",
+            "value": 2
+          },
+          "queryType": "",
+          "refId": "E"
+        },
+        {
+          "attribute": {},
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "expression": "$index_out*8*100/1000000000",
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "Out $node on $interface",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Expression",
+            "value": 2
+          },
+          "queryType": "",
+          "refId": "B"
         }
       ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "title": "Bandwidth",
+      "type": "timeseries"
     },
     {
       "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "${DS_OPENNMS_HORIZON PM}",
+      "datasource": {
+        "type": "opennms-performance-datasource",
+        "uid": "${DS_OPENNMS_PERFORMANCE}"
+      },
       "description": "For packet-oriented interfaces, the number of inbound or outbound packets that contained errors preventing them from being deliverable to a higher-layer protocol.  For character-oriented or fixed-length interfaces, the number of inbound transmission units that contained errors preventing them from being deliverable to a higher-layer protocol.",
-      "fill": 1,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "packets/sec",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 9,
         "w": 12,
@@ -300,101 +545,170 @@
         "y": 9
       },
       "id": 1,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": true,
-        "min": true,
-        "show": true,
-        "total": false,
-        "values": true
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "min"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
       },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
+      "pluginVersion": "9.4.7",
       "seriesOverrides": [
         {
           "alias": "/^Out.*/i",
           "transform": "negative-Y"
         }
       ],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
       "targets": [
         {
-          "aggregation": "AVERAGE",
-          "attribute": "ifInErrors",
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "ifInErrors",
+              "name": "ifInErrors"
+            },
+            "fallbackAttribute": {},
+            "label": "Out on $node $interface",
+            "node": {
+              "id": "$node",
+              "label": "$node"
+            },
+            "resource": {
+              "id": "$interface",
+              "label": "$interface"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
           "label": "Out on $node $interface",
-          "nodeId": "$node",
-          "refId": "A",
-          "resourceId": "$interface",
-          "type": "attribute"
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "A"
         },
         {
-          "aggregation": "AVERAGE",
-          "attribute": "ifOutErrors",
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "ifOutErrors",
+              "name": "ifOutErrors"
+            },
+            "fallbackAttribute": {},
+            "label": "In on $node $interface",
+            "node": {
+              "id": "$node",
+              "label": "$node"
+            },
+            "resource": {
+              "id": "$interface",
+              "label": "$interface"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
           "label": "In on $node $interface",
-          "nodeId": "$node",
-          "refId": "B",
-          "resourceId": "$interface",
-          "type": "attribute"
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "B"
         }
       ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Errors",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": "packets/sec",
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": "",
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "type": "timeseries"
     },
     {
       "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "${DS_OPENNMS_HORIZON PM}",
+      "datasource": {
+        "type": "opennms-performance-datasource",
+        "uid": "${DS_OPENNMS_PERFORMANCE}"
+      },
       "description": "The number of outbound and inbound packets which were chosen to be discarded even though no errors had been detected to prevent their being deliverable to a higher-layer protocol. One possible reason for discarding such a packet could be to free up buffer space.",
-      "fill": 1,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "packets/sec",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 9,
         "w": 12,
@@ -402,101 +716,170 @@
         "y": 9
       },
       "id": 3,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": true,
-        "min": true,
-        "show": true,
-        "total": false,
-        "values": true
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "min"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
       },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
+      "pluginVersion": "9.4.7",
       "seriesOverrides": [
         {
           "alias": "/^Out.*/i",
           "transform": "negative-Y"
         }
       ],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
       "targets": [
         {
-          "aggregation": "AVERAGE",
-          "attribute": "ifInDiscards",
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "ifInDiscards",
+              "name": "ifInDiscards"
+            },
+            "fallbackAttribute": {},
+            "label": "Out on $node $interface",
+            "node": {
+              "id": "$node",
+              "label": "$node"
+            },
+            "resource": {
+              "id": "$interface",
+              "label": "$interface"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
           "label": "Out on $node $interface",
-          "nodeId": "$node",
-          "refId": "A",
-          "resourceId": "$interface",
-          "type": "attribute"
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "A"
         },
         {
-          "aggregation": "AVERAGE",
-          "attribute": "ifOutDiscards",
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "ifOutDiscards",
+              "name": "ifOutDiscards"
+            },
+            "fallbackAttribute": {},
+            "label": "In on $node $interface",
+            "node": {
+              "id": "$node",
+              "label": "$node"
+            },
+            "resource": {
+              "id": "$interface",
+              "label": "$interface"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
           "label": "In on $node $interface",
-          "nodeId": "$node",
-          "refId": "B",
-          "resourceId": "$interface",
-          "type": "attribute"
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "B"
         }
       ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Discarded",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": "packets/sec",
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": "",
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "type": "timeseries"
     },
     {
       "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "${DS_OPENNMS_HORIZON PM}",
+      "datasource": {
+        "type": "opennms-performance-datasource",
+        "uid": "${DS_OPENNMS_PERFORMANCE}"
+      },
       "description": "Number of received or transmitted Unicast, Broadcast and Multicast packets.",
-      "fill": 1,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "packets/sec",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 9,
         "w": 24,
@@ -504,173 +887,302 @@
         "y": 18
       },
       "id": 2,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": true,
-        "min": true,
-        "rightSide": false,
-        "show": true,
-        "total": false,
-        "values": true
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "min"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
       },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
+      "pluginVersion": "9.4.7",
       "seriesOverrides": [
         {
           "alias": "/^Out.*/i",
           "transform": "negative-Y"
         }
       ],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
       "targets": [
         {
-          "aggregation": "AVERAGE",
-          "attribute": "ifHCInUcastPkts",
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "ifHCInUcastPkts",
+              "name": "ifHCInUcastPkts"
+            },
+            "fallbackAttribute": {},
+            "label": "In Unicast $node $interface",
+            "node": {
+              "id": "$node",
+              "label": "$node"
+            },
+            "resource": {
+              "id": "$interface",
+              "label": "$interface"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
           "label": "In Unicast $node $interface",
-          "nodeId": "$node",
-          "refId": "A",
-          "resourceId": "$interface",
-          "type": "attribute"
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "A"
         },
         {
-          "aggregation": "AVERAGE",
-          "attribute": "ifHCInMulticastPkts",
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "ifHCInMulticastPkts",
+              "name": "ifHCInMulticastPkts"
+            },
+            "fallbackAttribute": {},
+            "label": "In Multicast on $node $interface",
+            "node": {
+              "id": "$node",
+              "label": "$node"
+            },
+            "resource": {
+              "id": "$interface",
+              "label": "$interface"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
           "label": "In Multicast on $node $interface",
-          "nodeId": "$node",
-          "refId": "B",
-          "resourceId": "$interface",
-          "type": "attribute"
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "B"
         },
         {
-          "aggregation": "AVERAGE",
-          "attribute": "ifHCInBroadcastPkts",
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "ifHCInBroadcastPkts",
+              "name": "ifHCInBroadcastPkts"
+            },
+            "fallbackAttribute": {},
+            "label": "In Broadcast on $node $interface",
+            "node": {
+              "id": "$node",
+              "label": "$node"
+            },
+            "resource": {
+              "id": "$interface",
+              "label": "$interface"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
           "label": "In Broadcast on $node $interface",
-          "nodeId": "$node",
-          "refId": "C",
-          "resourceId": "$interface",
-          "type": "attribute"
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "C"
         },
         {
-          "aggregation": "AVERAGE",
-          "attribute": "ifHCOutUcastPkts",
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "ifHCOutUcastPkts",
+              "name": "ifHCOutUcastPkts"
+            },
+            "fallbackAttribute": {},
+            "label": "Out Unicast $node $interface",
+            "node": {
+              "id": "$node",
+              "label": "$node"
+            },
+            "resource": {
+              "id": "$interface",
+              "label": "$interface"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
           "label": "Out Unicast $node $interface",
-          "nodeId": "$node",
-          "refId": "D",
-          "resourceId": "$interface",
-          "type": "attribute"
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "D"
         },
         {
-          "aggregation": "AVERAGE",
-          "attribute": "ifHCOutMulticastPkt",
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "ifHCOutMulticastPkt",
+              "name": "ifHCOutMulticastPkt"
+            },
+            "fallbackAttribute": {},
+            "label": "Out Multicast on $node $interface",
+            "node": {
+              "id": "$node",
+              "label": "$node"
+            },
+            "resource": {
+              "id": "$interface",
+              "label": "$interface"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
           "label": "Out Multicast on $node $interface",
-          "nodeId": "$node",
-          "refId": "E",
-          "resourceId": "$interface",
-          "type": "attribute"
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "E"
         },
         {
-          "aggregation": "AVERAGE",
-          "attribute": "ifHCOutBroadcastPkt",
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "ifHCOutBroadcastPkt",
+              "name": "ifHCOutBroadcastPkt"
+            },
+            "fallbackAttribute": {},
+            "label": "Out Broadcast on $node $interface",
+            "node": {
+              "id": "$node",
+              "label": "$node"
+            },
+            "resource": {
+              "id": "$interface",
+              "label": "$interface"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
           "label": "Out Broadcast on $node $interface",
-          "nodeId": "$node",
-          "refId": "F",
-          "resourceId": "$interface",
-          "type": "attribute"
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "F"
         }
       ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Packet Statistics",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": "packets/sec",
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": "",
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "type": "timeseries"
     }
   ],
   "refresh": false,
-  "schemaVersion": 16,
-  "style": "dark",
+  "schemaVersion": 39,
   "tags": [],
   "templating": {
     "list": [
       {
-        "allValue": null,
         "current": {},
-        "datasource": "${DS_OPENNMS_HORIZON PM}",
+        "datasource": {
+          "type": "opennms-performance-datasource",
+          "uid": "${DS_OPENNMS_PERFORMANCE}"
+        },
+        "definition": "",
         "hide": 0,
         "includeAll": false,
-        "label": null,
         "multi": false,
         "name": "node",
         "options": [],
         "query": "nodeFilter(nodeSysOid like '.1.3.6.1.4.1.%')",
         "refresh": 1,
         "regex": "",
+        "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
       },
       {
-        "allValue": null,
         "current": {},
-        "datasource": "${DS_OPENNMS_HORIZON PM}",
+        "datasource": {
+          "type": "opennms-performance-datasource",
+          "uid": "${DS_OPENNMS_PERFORMANCE}"
+        },
+        "definition": "",
         "hide": 0,
         "includeAll": false,
-        "label": null,
         "multi": true,
         "name": "interface",
         "options": [],
         "query": "nodeResources($node)",
         "refresh": 1,
         "regex": "^interfaceSnmp\\[.*",
+        "skipUrlSync": false,
         "sort": 1,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
@@ -708,6 +1220,7 @@
   },
   "timezone": "",
   "title": "OpenNMS Network Interfaces Report",
-  "uid": "5A-Imb7mz",
-  "version": 3
+  "uid": "cdlwos8f73xmod",
+  "version": 2,
+  "weekStart": ""
 }

@@ -1,30 +1,12 @@
 {
-  "__inputs": [],
-  "__requires": [
-    {
-      "type": "grafana",
-      "id": "grafana",
-      "name": "Grafana",
-      "version": "5.3.4"
-    },
-    {
-      "type": "datasource",
-      "id": "postgres",
-      "name": "PostgreSQL",
-      "version": "5.0.0"
-    },
-    {
-      "type": "panel",
-      "id": "table",
-      "name": "Table",
-      "version": "5.0.0"
-    }
-  ],
   "annotations": {
     "list": [
       {
         "builtIn": 1,
-        "datasource": "-- Grafana --",
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -35,14 +17,18 @@
   },
   "description": "Dashboard which shows current outages from Nodes, Interfaces and Services in selected Surveillance Categories.",
   "editable": true,
+  "fiscalYearStartMonth": 0,
   "gnetId": 5921,
   "graphTooltip": 0,
-  "id": null,
-  "iteration": 1543870179317,
+  "id": 185,
   "links": [],
   "panels": [
     {
       "collapsed": false,
+      "datasource": {
+        "type": "opennms-performance-datasource",
+        "uid": "PF64BB6D6ECC8F3F8"
+      },
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -51,119 +37,156 @@
       },
       "id": 15,
       "panels": [],
-      "repeat": null,
+      "targets": [
+        {
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "PF64BB6D6ECC8F3F8"
+          },
+          "refId": "A"
+        }
+      ],
       "title": "Outstanding Business Service Alarms",
       "type": "row"
     },
     {
-      "columns": [],
-      "datasource": "$onms_pg",
-      "fontSize": "100%",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "PA942B37CCFAF5A81"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [
+            {
+              "options": {
+                "INDETERMINATE": {
+                  "color": "#999000",
+                  "index": 0,
+                  "text": "Indeterminate"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "CLEARED": {
+                  "color": "#eee000",
+                  "index": 1,
+                  "text": "Cleared"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "NORMAL": {
+                  "color": "#86b15b",
+                  "index": 2,
+                  "text": "Normal"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "WARNING": {
+                  "color": "#fccc3b",
+                  "index": 3,
+                  "text": "Warning"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "MINOR": {
+                  "color": "#ee901c",
+                  "index": 4,
+                  "text": "Minor"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "MAJOR": {
+                  "color": "#e3692f",
+                  "index": 5,
+                  "text": "Major"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "CRITICAL": {
+                  "color": "#db4345",
+                  "index": 6,
+                  "text": "Critical"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
       "gridPos": {
-        "h": 6,
+        "h": 5,
         "w": 24,
         "x": 0,
         "y": 1
       },
       "id": 16,
-      "links": [],
-      "pageSize": null,
-      "scroll": true,
-      "showHeader": true,
-      "sort": {
-        "col": null,
-        "desc": false
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
       },
-      "styles": [
-        {
-          "alias": "Time",
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "pattern": "Time",
-          "type": "date"
-        },
-        {
-          "alias": "Last Event Time",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "pattern": "lasteventtime",
-          "thresholds": [],
-          "type": "date",
-          "unit": "short"
-        },
-        {
-          "alias": "Affected since first event time",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "pattern": "duration",
-          "thresholds": [],
-          "type": "string",
-          "unit": "short"
-        },
-        {
-          "alias": "First Event Time",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "pattern": "firsteventtime",
-          "thresholds": [],
-          "type": "date",
-          "unit": "short"
-        },
-        {
-          "alias": "Business Service Name",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "pattern": "name",
-          "thresholds": [],
-          "type": "string",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "decimals": 2,
-          "pattern": "/.*/",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        }
-      ],
+      "pluginVersion": "10.4.2",
       "targets": [
         {
           "alias": "",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "PA942B37CCFAF5A81"
+          },
+          "editorMode": "code",
           "format": "table",
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  bsm_service.name,\n  bsmAlarm.firsteventtime,\n  bsmAlarm.lasteventtime,\n  EXTRACT(DAYS FROM age(now(), bsmAlarm.firsteventtime)) || 'd ' || EXTRACT(HOURS FROM age(now(), bsmAlarm.firsteventtime)) || 'h ' || EXTRACT(MINUTES FROM age(now(), bsmAlarm.firsteventtime)) || 'm ' || ROUND(EXTRACT(SECONDS FROM age(now(), bsmAlarm.lasteventtime))::NUMERIC,0) || 's' AS duration\nFROM\n  bsm_service\nJOIN\n  (SELECT\n    substring(reductionkey from '[0-9]+$')::INTEGER AS bsmId,\n    alarms.firsteventtime,\n    alarms.lasteventtime\n  FROM\n    alarms\n  WHERE\n    eventuei = 'uei.opennms.org/bsm/serviceProblem') AS bsmAlarm\nON\n   bsmAlarm.bsmId = bsm_service.id\nORDER BY\n  bsmAlarm.lasteventtime DESC,\n  duration DESC,\n  bsm_service.name ASC",
+          "rawSql": "SELECT\n  bsm_service.name,\n  bsmAlarm.firsteventtime,\n  bsmAlarm.lasteventtime,\n  EXTRACT(DAYS FROM age(now(), bsmAlarm.firsteventtime)) || 'd ' || EXTRACT(HOURS FROM age(now(), bsmAlarm.firsteventtime)) || 'h ' || EXTRACT(MINUTES FROM age(now(), bsmAlarm.firsteventtime)) || 'm ' || ROUND(EXTRACT(SECONDS FROM age(now(), bsmAlarm.lasteventtime))::NUMERIC,0) || 's' AS duration\nFROM\n  bsm_service\nJOIN\n  (SELECT\n    substring(reductionkey from '[0-9]+$')::INTEGER AS bsmId,\n    alarms.firsteventtime,\n    alarms.lasteventtime\n  FROM\n    alarms\n  WHERE\n    eventuei = 'uei.opennms.org/bsm/serviceProblem') AS bsmAlarm\nON\n   bsmAlarm.bsmId = bsm_service.id\nORDER BY\n  bsmAlarm.lasteventtime DESC,\n  duration DESC,\n  bsm_service.name ASC  ",
           "refId": "A",
           "select": [
             [
@@ -175,6 +198,23 @@
               }
             ]
           ],
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          },
           "timeColumn": "time",
           "where": [
             {
@@ -186,147 +226,244 @@
         }
       ],
       "title": "Node Alarms in Category: $category",
-      "transform": "table",
       "type": "table"
     },
     {
       "collapsed": false,
+      "datasource": {
+        "type": "opennms-performance-datasource",
+        "uid": "PF64BB6D6ECC8F3F8"
+      },
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 7
+        "y": 6
       },
       "id": 13,
       "panels": [],
-      "repeat": null,
+      "targets": [
+        {
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "PF64BB6D6ECC8F3F8"
+          },
+          "refId": "A"
+        }
+      ],
       "title": "Outstanding Alarms",
       "type": "row"
     },
     {
-      "columns": [],
-      "datasource": "$onms_pg",
-      "fontSize": "100%",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "PA942B37CCFAF5A81"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "decimals": 2,
+          "displayName": "",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Time"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Time"
+              },
+              {
+                "id": "unit",
+                "value": "time: YYYY-MM-DD HH:mm:ss"
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "location"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Location"
+              },
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "nodelabel"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Node Label"
+              },
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "lasteventtime"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Last Event Time"
+              },
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "unit",
+                "value": "time: YYYY-MM-DD HH:mm:ss"
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "duration_raw"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "duration"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Affected since"
+              },
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          }
+        ]
+      },
       "gridPos": {
-        "h": 9,
+        "h": 6,
         "w": 7,
         "x": 0,
-        "y": 8
+        "y": 7
       },
       "id": 9,
-      "links": [],
-      "pageSize": null,
-      "scroll": true,
-      "showHeader": true,
-      "sort": {
-        "col": 0,
-        "desc": true
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "Location"
+          }
+        ]
       },
-      "styles": [
-        {
-          "alias": "Time",
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "pattern": "Time",
-          "type": "date"
-        },
-        {
-          "alias": "Location",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "pattern": "location",
-          "thresholds": [],
-          "type": "string",
-          "unit": "short"
-        },
-        {
-          "alias": "Node Label",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "pattern": "nodelabel",
-          "thresholds": [],
-          "type": "string",
-          "unit": "short"
-        },
-        {
-          "alias": "Last Event Time",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "pattern": "lasteventtime",
-          "thresholds": [],
-          "type": "date",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "pattern": "duration_raw",
-          "thresholds": [],
-          "type": "hidden",
-          "unit": "short"
-        },
-        {
-          "alias": "Affected since",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "pattern": "duration",
-          "thresholds": [],
-          "type": "string",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "decimals": 2,
-          "pattern": "/.*/",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        }
-      ],
+      "pluginVersion": "10.4.2",
       "targets": [
         {
           "alias": "",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "PA942B37CCFAF5A81"
+          },
+          "editorMode": "code",
           "format": "table",
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  node_alarms.location,\n  node_alarms.nodelabel,\n  node_alarms.lasteventtime,\n  to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime AS duration_raw,\n  EXTRACT(DAYS FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime) || 'd ' || EXTRACT(HOURS FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime) || 'h ' || EXTRACT(MINUTES FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime) || 'm ' || ROUND(EXTRACT(SECONDS FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime)::NUMERIC,0) || 's' AS duration\nFROM\n  node_alarms\nWHERE\n  node_alarms.acknowledged = FALSE AND\n  node_alarms.eventuei like 'uei.opennms.org/nodes/nodeDown' AND\n  node_alarms.location like '$location' AND\n  node_alarms.categoryname like '$category' AND\n  node_alarms.max_alarm_severity_unack = '6'\nGROUP BY\n  node_alarms.location,\n  node_alarms.nodelabel,\n  node_alarms.nodeid,\n  node_alarms.firsteventtime,\n  node_alarms.lasteventtime\nORDER BY\n  duration_raw DESC,\n  node_alarms.location ASC,\n  node_alarms.nodelabel ASC",
+          "rawSql": "SELECT\n  node_alarms.location,\n  node_alarms.nodelabel,\n  node_alarms.lasteventtime,\n  to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime AS duration_raw,\n  EXTRACT(DAYS FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime) || 'd ' || EXTRACT(HOURS FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime) || 'h ' || EXTRACT(MINUTES FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime) || 'm ' || ROUND(EXTRACT(SECONDS FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime)::NUMERIC,0) || 's' AS duration\nFROM\n  node_alarms\nWHERE\n  node_alarms.acknowledged = FALSE AND\n  node_alarms.eventuei like 'uei.opennms.org/nodes/nodeDown' AND\n  node_alarms.location IN ($location) AND\n  node_alarms.categoryname IN ($category) AND\n  node_alarms.max_alarm_severity_unack = '6'\nGROUP BY\n  node_alarms.location,\n  node_alarms.nodelabel,\n  node_alarms.nodeid,\n  node_alarms.firsteventtime,\n  node_alarms.lasteventtime\nORDER BY\n  duration_raw DESC,\n  node_alarms.location ASC,\n  node_alarms.nodelabel ASC",
           "refId": "A",
           "select": [
             [
@@ -338,6 +475,23 @@
               }
             ]
           ],
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          },
           "timeColumn": "time",
           "where": [
             {
@@ -349,163 +503,270 @@
         }
       ],
       "title": "Node Alarms in Category: $category",
-      "transform": "table",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {
+            "reducers": []
+          }
+        }
+      ],
       "type": "table"
     },
     {
-      "columns": [],
-      "datasource": "$onms_pg",
-      "fontSize": "100%",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "PA942B37CCFAF5A81"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "decimals": 2,
+          "displayName": "",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Time"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Time"
+              },
+              {
+                "id": "unit",
+                "value": "time: YYYY-MM-DD HH:mm:ss"
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "location"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Location"
+              },
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "nodelabel"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Node Label"
+              },
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "firsteventtime"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "First Event Time"
+              },
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "unit",
+                "value": "time: YYYY-MM-DD HH:mm:ss"
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "lasteventtime"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Last Event Time"
+              },
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "unit",
+                "value": "time: YYYY-MM-DD HH:mm:ss"
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "duration_raw"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "duration"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Affected since"
+              },
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "ipaddr"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "IP Address"
+              },
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          }
+        ]
+      },
       "gridPos": {
-        "h": 9,
+        "h": 6,
         "w": 7,
         "x": 7,
-        "y": 8
+        "y": 7
       },
       "id": 10,
-      "links": [],
-      "pageSize": null,
-      "scroll": true,
-      "showHeader": true,
-      "sort": {
-        "col": 0,
-        "desc": true
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
       },
-      "styles": [
-        {
-          "alias": "Time",
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "pattern": "Time",
-          "type": "date"
-        },
-        {
-          "alias": "Location",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "pattern": "location",
-          "thresholds": [],
-          "type": "string",
-          "unit": "short"
-        },
-        {
-          "alias": "Node Label",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "pattern": "nodelabel",
-          "thresholds": [],
-          "type": "string",
-          "unit": "short"
-        },
-        {
-          "alias": "First Event Time",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "pattern": "firsteventtime",
-          "thresholds": [],
-          "type": "date",
-          "unit": "short"
-        },
-        {
-          "alias": "Last Event Time",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "pattern": "lasteventtime",
-          "thresholds": [],
-          "type": "date",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "pattern": "duration_raw",
-          "thresholds": [],
-          "type": "hidden",
-          "unit": "short"
-        },
-        {
-          "alias": "Affected since",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "pattern": "duration",
-          "thresholds": [],
-          "type": "string",
-          "unit": "short"
-        },
-        {
-          "alias": "IP Address",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "pattern": "ipaddr",
-          "thresholds": [],
-          "type": "string",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "decimals": 2,
-          "pattern": "/.*/",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        }
-      ],
+      "pluginVersion": "10.4.2",
       "targets": [
         {
           "alias": "",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "PA942B37CCFAF5A81"
+          },
+          "editorMode": "code",
           "format": "table",
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  node_alarms.location,\n  node_alarms.nodelabel,\n  node_alarms.ipaddr,\n  node_alarms.lasteventtime,\n  to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime AS duration_raw,\n  EXTRACT(DAYS FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime) || 'd ' || EXTRACT(HOURS FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime) || 'h ' || EXTRACT(MINUTES FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime) || 'm ' || ROUND(EXTRACT(SECONDS FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime)::NUMERIC,0) || 's' AS duration\nFROM\n  node_alarms\nWHERE\n  node_alarms.acknowledged = FALSE AND\n  node_alarms.eventuei like 'uei.opennms.org/nodes/interfaceDown' AND\n  node_alarms.location like '$location' AND\n  node_alarms.categoryname like '$category' AND\n  node_alarms.max_alarm_severity_unack = '5'\nGROUP BY\n  node_alarms.location,\n  node_alarms.nodeid,\n  node_alarms.nodelabel,\n  node_alarms.ipaddr,\n  node_alarms.firsteventtime,\n  node_alarms.lasteventtime\nORDER BY\n  duration_raw DESC,\n  node_alarms.location ASC,\n  node_alarms.nodelabel ASC,\n  node_alarms.ipaddr ASC",
+          "rawSql": "SELECT\n  node_alarms.location,\n  node_alarms.nodelabel,\n  node_alarms.ipaddr,\n  node_alarms.lasteventtime,\n  to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime AS duration_raw,\n  EXTRACT(DAYS FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime) || 'd ' || EXTRACT(HOURS FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime) || 'h ' || EXTRACT(MINUTES FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime) || 'm ' || ROUND(EXTRACT(SECONDS FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime)::NUMERIC,0) || 's' AS duration\nFROM\n  node_alarms\nWHERE\n  node_alarms.acknowledged = FALSE AND\n  node_alarms.eventuei like 'uei.opennms.org/nodes/interfaceDown' AND\n  node_alarms.location IN ($location) AND\n  node_alarms.categoryname IN ($category) AND\n  node_alarms.max_alarm_severity_unack = '5'\nGROUP BY\n  node_alarms.location,\n  node_alarms.nodeid,\n  node_alarms.nodelabel,\n  node_alarms.ipaddr,\n  node_alarms.firsteventtime,\n  node_alarms.lasteventtime\nORDER BY\n  duration_raw DESC,\n  node_alarms.location ASC,\n  node_alarms.nodelabel ASC,\n  node_alarms.ipaddr ASC",
           "refId": "A",
           "select": [
             [
@@ -517,6 +778,23 @@
               }
             ]
           ],
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          },
           "timeColumn": "time",
           "where": [
             {
@@ -528,163 +806,266 @@
         }
       ],
       "title": "Interface Alarms in Category: $category",
-      "transform": "table",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {
+            "reducers": []
+          }
+        }
+      ],
       "type": "table"
     },
     {
-      "columns": [],
-      "datasource": "$onms_pg",
-      "fontSize": "100%",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "PA942B37CCFAF5A81"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "decimals": 2,
+          "displayName": "",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Time"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Time"
+              },
+              {
+                "id": "unit",
+                "value": "time: YYYY-MM-DD HH:mm:ss"
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "location"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Location"
+              },
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "nodelabel"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Node Label"
+              },
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "lasteventtime"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Last Event"
+              },
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "unit",
+                "value": "time: YYYY-MM-DD HH:mm:ss"
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "duration_raw"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "duration"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Affected since"
+              },
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "ipaddr"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "IP Address"
+              },
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "servicename"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Service Name"
+              },
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          }
+        ]
+      },
       "gridPos": {
-        "h": 9,
+        "h": 6,
         "w": 10,
         "x": 14,
-        "y": 8
+        "y": 7
       },
       "id": 11,
-      "links": [],
-      "pageSize": null,
-      "scroll": true,
-      "showHeader": true,
-      "sort": {
-        "col": 0,
-        "desc": true
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
       },
-      "styles": [
-        {
-          "alias": "Time",
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "pattern": "Time",
-          "type": "date"
-        },
-        {
-          "alias": "Location",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "pattern": "location",
-          "thresholds": [],
-          "type": "string",
-          "unit": "short"
-        },
-        {
-          "alias": "Node Label",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "pattern": "nodelabel",
-          "thresholds": [],
-          "type": "string",
-          "unit": "short"
-        },
-        {
-          "alias": "Last Event",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "pattern": "lasteventtime",
-          "thresholds": [],
-          "type": "date",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "pattern": "duration_raw",
-          "thresholds": [],
-          "type": "hidden",
-          "unit": "short"
-        },
-        {
-          "alias": "Affected since",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "pattern": "duration",
-          "thresholds": [],
-          "type": "string",
-          "unit": "short"
-        },
-        {
-          "alias": "IP Address",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "pattern": "ipaddr",
-          "thresholds": [],
-          "type": "string",
-          "unit": "short"
-        },
-        {
-          "alias": "Service Name",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "pattern": "servicename",
-          "thresholds": [],
-          "type": "string",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "decimals": 2,
-          "pattern": "/.*/",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        }
-      ],
+      "pluginVersion": "10.4.2",
       "targets": [
         {
           "alias": "",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "PA942B37CCFAF5A81"
+          },
+          "editorMode": "code",
           "format": "table",
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  node_alarms.location,\n  node_alarms.nodelabel,\n  node_alarms.ipaddr,\n  node_alarms.servicename,\n  node_alarms.lasteventtime,\n  to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime AS duration_raw,\n  EXTRACT(DAYS FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime) || 'd ' || EXTRACT(HOURS FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime) || 'h ' || EXTRACT(MINUTES FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime) || 'm ' || ROUND(EXTRACT(SECONDS FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime)::NUMERIC,0) || 's' AS duration\nFROM\n  node_alarms\nWHERE\n  node_alarms.acknowledged = FALSE AND\n  node_alarms.eventuei like 'uei.opennms.org/nodes/nodeLostService' AND\n  node_alarms.location like '$location' AND\n  node_alarms.categoryname like '$category' AND\n  node_alarms.max_alarm_severity_unack = '5'\nGROUP BY\n  node_alarms.location,\n  node_alarms.nodeid,\n  node_alarms.nodelabel,\n  node_alarms.ipaddr,\n  node_alarms.servicename,\n  node_alarms.firsteventtime,\n  node_alarms.lasteventtime\nORDER BY\n  duration_raw DESC,\n  node_alarms.location ASC,\n  node_alarms.nodelabel ASC,\n  node_alarms.ipaddr ASC,\n  node_alarms.servicename ASC",
+          "rawSql": "SELECT\n  node_alarms.location,\n  node_alarms.nodelabel,\n  node_alarms.ipaddr,\n  node_alarms.servicename,\n  node_alarms.lasteventtime,\n  to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime AS duration_raw,\n  EXTRACT(DAYS FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime) || 'd ' || EXTRACT(HOURS FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime) || 'h ' || EXTRACT(MINUTES FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime) || 'm ' || ROUND(EXTRACT(SECONDS FROM to_timestamp($__unixEpochTo()) - node_alarms.firsteventtime)::NUMERIC,0) || 's' AS duration\nFROM\n  node_alarms\nWHERE\n  node_alarms.acknowledged = FALSE AND\n  node_alarms.eventuei like 'uei.opennms.org/nodes/nodeLostService' AND\n  node_alarms.location IN ($location) AND\n  node_alarms.categoryname IN ($category) AND\n  node_alarms.max_alarm_severity_unack = '5'\nGROUP BY\n  node_alarms.location,\n  node_alarms.nodeid,\n  node_alarms.nodelabel,\n  node_alarms.ipaddr,\n  node_alarms.servicename,\n  node_alarms.firsteventtime,\n  node_alarms.lasteventtime\nORDER BY\n  duration_raw DESC,\n  node_alarms.location ASC,\n  node_alarms.nodelabel ASC,\n  node_alarms.ipaddr ASC,\n  node_alarms.servicename ASC",
           "refId": "A",
           "select": [
             [
@@ -696,6 +1077,23 @@
               }
             ]
           ],
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          },
           "timeColumn": "time",
           "where": [
             {
@@ -707,151 +1105,268 @@
         }
       ],
       "title": "Service Alarms in Category: $category",
-      "transform": "table",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {
+            "reducers": []
+          }
+        }
+      ],
       "type": "table"
     },
     {
       "collapsed": false,
+      "datasource": {
+        "type": "opennms-performance-datasource",
+        "uid": "PF64BB6D6ECC8F3F8"
+      },
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 17
+        "y": 13
       },
       "id": 2,
       "panels": [],
-      "repeat": null,
+      "targets": [
+        {
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "PF64BB6D6ECC8F3F8"
+          },
+          "refId": "A"
+        }
+      ],
       "title": "Current Outages",
       "type": "row"
     },
     {
-      "columns": [],
-      "datasource": "$onms_pg",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "PA942B37CCFAF5A81"
+      },
       "description": "Availability for Nodes with outages in a selected Surveillance Category",
-      "fontSize": "100%",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "decimals": 2,
+          "displayName": "",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Time"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Time"
+              },
+              {
+                "id": "unit",
+                "value": "time: YYYY-MM-DD HH:mm:ss"
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "nodelabel"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Node Label"
+              },
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "duration"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Outage since"
+              },
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "availability"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Availability in %"
+              },
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "decimals",
+                "value": 3
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
+              },
+              {
+                "id": "custom.align"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "rgba(245, 54, 54, 0.9)",
+                      "value": null
+                    },
+                    {
+                      "color": "rgba(237, 129, 40, 0.89)",
+                      "value": 70
+                    },
+                    {
+                      "color": "rgba(50, 172, 45, 0.97)",
+                      "value": 90
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "duration_raw"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "location"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Location"
+              },
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          }
+        ]
+      },
       "gridPos": {
-        "h": 11,
+        "h": 6,
         "w": 7,
         "x": 0,
-        "y": 18
+        "y": 14
       },
       "id": 5,
-      "links": [],
-      "pageSize": 10,
-      "scroll": false,
-      "showHeader": true,
-      "sort": {
-        "col": 4,
-        "desc": false
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
       },
-      "styles": [
-        {
-          "alias": "Time",
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "pattern": "Time",
-          "type": "date"
-        },
-        {
-          "alias": "Node Label",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "pattern": "nodelabel",
-          "thresholds": [],
-          "type": "string",
-          "unit": "short"
-        },
-        {
-          "alias": "Outage since",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "pattern": "duration",
-          "thresholds": [],
-          "type": "string",
-          "unit": "short"
-        },
-        {
-          "alias": "Availability in %",
-          "colorMode": "value",
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "pattern": "availability",
-          "thresholds": [
-            "70",
-            "90"
-          ],
-          "type": "number",
-          "unit": "percent"
-        },
-        {
-          "alias": "",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "pattern": "duration_raw",
-          "thresholds": [],
-          "type": "hidden",
-          "unit": "short"
-        },
-        {
-          "alias": "Location",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "pattern": "location",
-          "thresholds": [],
-          "type": "string",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "decimals": 2,
-          "pattern": "/.*/",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        }
-      ],
+      "pluginVersion": "10.4.2",
       "targets": [
         {
           "alias": "",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "PA942B37CCFAF5A81"
+          },
           "format": "table",
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  n.location,\n  n.nodelabel,\n  100.0 - 100.0/(EXTRACT(EPOCH FROM to_timestamp($__unixEpochTo())) - EXTRACT(EPOCH FROM to_timestamp($__unixEpochFrom()))) * EXTRACT(EPOCH FROM (to_timestamp($__unixEpochTo()) - GREATEST(n.iflostservice, to_timestamp($__unixEpochFrom())))) AS availability,\n  to_timestamp($__unixEpochTo()) - n.iflostservice AS duration_raw,\n  EXTRACT(DAYS FROM to_timestamp($__unixEpochTo()) - n.iflostservice) || 'd ' || EXTRACT(HOURS FROM to_timestamp($__unixEpochTo()) - n.iflostservice) || 'h ' || EXTRACT(MINUTES FROM to_timestamp($__unixEpochTo()) - n.iflostservice) || 'm ' || ROUND(EXTRACT(SECONDS FROM to_timestamp($__unixEpochTo()) - n.iflostservice)::NUMERIC,0) || 's' AS duration\nFROM\n  node_outages n\nJOIN\n  node_outage_status nos\nON\n  n.nodeid = nos.nodeid\nWHERE\n  n.resolved = FALSE AND\n  n.svclosteventuei = 'uei.opennms.org/nodes/nodeDown' AND\n  nos.max_outage_severity = '6' AND\n  n.categoryname like '$category' AND\n  n.location like '$location'\nGROUP BY\n  n.location,\n  n.nodelabel,\n  n.eventseverity,\n  n.iflostservice\nORDER BY\n  duration_raw DESC,\n  availability ASC,\n  n.location ASC,\n  n.nodelabel ASC",
+          "rawSql": "SELECT\n  n.location,\n  n.nodelabel,\n  100.0 - 100.0/(EXTRACT(EPOCH FROM to_timestamp($__unixEpochTo())) - EXTRACT(EPOCH FROM to_timestamp($__unixEpochFrom()))) * EXTRACT(EPOCH FROM (to_timestamp($__unixEpochTo()) - GREATEST(n.iflostservice, to_timestamp($__unixEpochFrom())))) AS availability,\n  to_timestamp($__unixEpochTo()) - n.iflostservice AS duration_raw,\n  EXTRACT(DAYS FROM to_timestamp($__unixEpochTo()) - n.iflostservice) || 'd ' || EXTRACT(HOURS FROM to_timestamp($__unixEpochTo()) - n.iflostservice) || 'h ' || EXTRACT(MINUTES FROM to_timestamp($__unixEpochTo()) - n.iflostservice) || 'm ' || ROUND(EXTRACT(SECONDS FROM to_timestamp($__unixEpochTo()) - n.iflostservice)::NUMERIC,0) || 's' AS duration\nFROM\n  node_outages n\nJOIN\n  node_outage_status nos\nON\n  n.nodeid = nos.nodeid\nWHERE\n  n.resolved = FALSE AND\n  n.svclosteventuei = 'uei.opennms.org/nodes/nodeDown' AND\n  nos.max_outage_severity = '6' AND\n  n.categoryname IN ($category) AND\n  n.location IN ($location)\nGROUP BY\n  n.location,\n  n.nodelabel,\n  n.eventseverity,\n  n.iflostservice\nORDER BY\n  duration_raw DESC,\n  availability ASC,\n  n.location ASC,\n  n.nodelabel ASC",
           "refId": "A",
           "select": [
             [
@@ -874,152 +1389,265 @@
         }
       ],
       "title": "Nodes in Category: $category",
-      "transform": "table",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {
+            "reducers": []
+          }
+        }
+      ],
       "type": "table"
     },
     {
-      "columns": [],
-      "datasource": "$onms_pg",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "PA942B37CCFAF5A81"
+      },
       "description": "Availability for Interfaces with outages in a selected Surveillance Category",
-      "fontSize": "100%",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "decimals": 2,
+          "displayName": "",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Time"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Time"
+              },
+              {
+                "id": "unit",
+                "value": "time: YYYY-MM-DD HH:mm:ss"
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "nodelabel"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Node Label"
+              },
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "duration"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Outage since"
+              },
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "availability"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Availability in %"
+              },
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "decimals",
+                "value": 3
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
+              },
+              {
+                "id": "custom.align"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "rgba(245, 54, 54, 0.9)",
+                      "value": null
+                    },
+                    {
+                      "color": "rgba(237, 129, 40, 0.89)",
+                      "value": 70
+                    },
+                    {
+                      "color": "rgba(50, 172, 45, 0.97)",
+                      "value": 90
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "ipaddr"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "IP Address"
+              },
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "duration_raw"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "location"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Location"
+              },
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          }
+        ]
+      },
       "gridPos": {
-        "h": 11,
+        "h": 6,
         "w": 7,
         "x": 7,
-        "y": 18
+        "y": 14
       },
       "id": 6,
-      "links": [],
-      "pageSize": 10,
-      "scroll": false,
-      "showHeader": true,
-      "sort": {
-        "col": 4,
-        "desc": true
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
       },
-      "styles": [
-        {
-          "alias": "Time",
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "pattern": "Time",
-          "type": "date"
-        },
-        {
-          "alias": "Node Label",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "pattern": "nodelabel",
-          "thresholds": [],
-          "type": "string",
-          "unit": "short"
-        },
-        {
-          "alias": "Outage since",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "pattern": "duration",
-          "thresholds": [],
-          "type": "string",
-          "unit": "short"
-        },
-        {
-          "alias": "Availability in %",
-          "colorMode": "value",
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "pattern": "availability",
-          "thresholds": [
-            "70",
-            "90"
-          ],
-          "type": "number",
-          "unit": "percent"
-        },
-        {
-          "alias": "IP Address",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "pattern": "ipaddr",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "pattern": "duration_raw",
-          "thresholds": [],
-          "type": "hidden",
-          "unit": "short"
-        },
-        {
-          "alias": "Location",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "pattern": "location",
-          "thresholds": [],
-          "type": "string",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "decimals": 2,
-          "pattern": "/.*/",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        }
-      ],
+      "pluginVersion": "10.4.2",
       "targets": [
         {
           "alias": "",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "PA942B37CCFAF5A81"
+          },
           "format": "table",
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  n.location,\n  n.nodelabel,\n  n.ipaddr,\n  100.0 - 100.0/(EXTRACT(EPOCH FROM to_timestamp($__unixEpochTo())) - EXTRACT(EPOCH FROM to_timestamp($__unixEpochFrom()))) * EXTRACT(EPOCH FROM (to_timestamp($__unixEpochTo()) - GREATEST(n.iflostservice, to_timestamp($__unixEpochFrom())))) AS availability,\n  to_timestamp($__unixEpochTo()) - n.iflostservice AS duration_raw,\n  EXTRACT(DAYS FROM to_timestamp($__unixEpochTo()) - n.iflostservice) || 'd ' || EXTRACT(HOURS FROM to_timestamp($__unixEpochTo()) - n.iflostservice) || 'h ' || EXTRACT(MINUTES FROM to_timestamp($__unixEpochTo()) - n.iflostservice) || 'm ' || ROUND(EXTRACT(SECONDS FROM to_timestamp($__unixEpochTo()) - n.iflostservice)::NUMERIC,0) || 's' AS duration\nFROM\n  node_outages n\nJOIN\n  node_outage_status nos\nON\n  n.nodeid = nos.nodeid\nWHERE\n  n.resolved = FALSE AND\n  n.svclosteventuei = 'uei.opennms.org/nodes/interfaceDown' AND\n  nos.max_outage_severity = '5' AND\n  n.categoryname like '$category' AND\n  n.location like '$location'\nGROUP BY\n  n.location,\n  n.nodelabel,\n  n.iflostservice,\n  n.ipaddr,\n  n.eventseverity,\n  n.svclosteventuei\nORDER BY\n  duration_raw DESC,\n  availability ASC,\n  n.location ASC,\n  n.nodelabel ASC,\n  n.ipaddr ASC\n",
+          "rawSql": "SELECT\n  n.location,\n  n.nodelabel,\n  n.ipaddr,\n  100.0 - 100.0/(EXTRACT(EPOCH FROM to_timestamp($__unixEpochTo())) - EXTRACT(EPOCH FROM to_timestamp($__unixEpochFrom()))) * EXTRACT(EPOCH FROM (to_timestamp($__unixEpochTo()) - GREATEST(n.iflostservice, to_timestamp($__unixEpochFrom())))) AS availability,\n  to_timestamp($__unixEpochTo()) - n.iflostservice AS duration_raw,\n  EXTRACT(DAYS FROM to_timestamp($__unixEpochTo()) - n.iflostservice) || 'd ' || EXTRACT(HOURS FROM to_timestamp($__unixEpochTo()) - n.iflostservice) || 'h ' || EXTRACT(MINUTES FROM to_timestamp($__unixEpochTo()) - n.iflostservice) || 'm ' || ROUND(EXTRACT(SECONDS FROM to_timestamp($__unixEpochTo()) - n.iflostservice)::NUMERIC,0) || 's' AS duration\nFROM\n  node_outages n\nJOIN\n  node_outage_status nos\nON\n  n.nodeid = nos.nodeid\nWHERE\n  n.resolved = FALSE AND\n  n.svclosteventuei = 'uei.opennms.org/nodes/interfaceDown' AND\n  nos.max_outage_severity = '5' AND\n  n.categoryname IN ($category) AND\n  n.location IN ($location)\nGROUP BY\n  n.location,\n  n.nodelabel,\n  n.iflostservice,\n  n.ipaddr,\n  n.eventseverity,\n  n.svclosteventuei\nORDER BY\n  duration_raw DESC,\n  availability ASC,\n  n.location ASC,\n  n.nodelabel ASC,\n  n.ipaddr ASC\n",
           "refId": "A",
           "select": [
             [
@@ -1042,167 +1670,288 @@
         }
       ],
       "title": "Node Interfaces in Category: $category",
-      "transform": "table",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {
+            "reducers": []
+          }
+        }
+      ],
       "type": "table"
     },
     {
-      "columns": [],
-      "datasource": "$onms_pg",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "PA942B37CCFAF5A81"
+      },
       "description": "Availability for Services with outages in a selected Surveillance Category",
-      "fontSize": "100%",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "decimals": 2,
+          "displayName": "",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Time"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Time"
+              },
+              {
+                "id": "unit",
+                "value": "time: YYYY-MM-DD HH:mm:ss"
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "nodelabel"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Node Label"
+              },
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "duration"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Outage since"
+              },
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "availability"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Availability in %"
+              },
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "decimals",
+                "value": 3
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
+              },
+              {
+                "id": "custom.align"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "rgba(245, 54, 54, 0.9)",
+                      "value": null
+                    },
+                    {
+                      "color": "rgba(237, 129, 40, 0.89)",
+                      "value": 70
+                    },
+                    {
+                      "color": "rgba(50, 172, 45, 0.97)",
+                      "value": 90
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "ipaddr"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "IP Address"
+              },
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "servicename"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Service Name"
+              },
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "duration_raw"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "location"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Location"
+              },
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          }
+        ]
+      },
       "gridPos": {
-        "h": 11,
+        "h": 6,
         "w": 10,
         "x": 14,
-        "y": 18
+        "y": 14
       },
       "id": 7,
-      "links": [],
-      "pageSize": 10,
-      "scroll": false,
-      "showHeader": true,
-      "sort": {
-        "col": 4,
-        "desc": true
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
       },
-      "styles": [
-        {
-          "alias": "Time",
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "pattern": "Time",
-          "type": "date"
-        },
-        {
-          "alias": "Node Label",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "pattern": "nodelabel",
-          "thresholds": [],
-          "type": "string",
-          "unit": "short"
-        },
-        {
-          "alias": "Outage since",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "pattern": "duration",
-          "thresholds": [],
-          "type": "string",
-          "unit": "short"
-        },
-        {
-          "alias": "Availability in %",
-          "colorMode": "value",
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "pattern": "availability",
-          "thresholds": [
-            "70",
-            "90"
-          ],
-          "type": "number",
-          "unit": "percent"
-        },
-        {
-          "alias": "IP Address",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "pattern": "ipaddr",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        },
-        {
-          "alias": "Service Name",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "pattern": "servicename",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "pattern": "duration_raw",
-          "thresholds": [],
-          "type": "hidden",
-          "unit": "short"
-        },
-        {
-          "alias": "Location",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "pattern": "location",
-          "thresholds": [],
-          "type": "string",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "decimals": 2,
-          "pattern": "/.*/",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        }
-      ],
+      "pluginVersion": "10.4.2",
       "targets": [
         {
           "alias": "",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "PA942B37CCFAF5A81"
+          },
           "format": "table",
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  n.location,\n  n.nodelabel,\n  n.ipaddr,\n  n.servicename,\n  100.0 - 100.0/(EXTRACT(EPOCH FROM to_timestamp($__unixEpochTo())) - EXTRACT(EPOCH FROM to_timestamp($__unixEpochFrom()))) * EXTRACT(EPOCH FROM (to_timestamp($__unixEpochTo()) - GREATEST(n.iflostservice, to_timestamp($__unixEpochFrom())))) AS availability,\n  to_timestamp($__unixEpochTo()) - n.iflostservice AS duration_raw,\n  EXTRACT(DAYS FROM to_timestamp($__unixEpochTo()) - n.iflostservice) || 'd ' || EXTRACT(HOURS FROM to_timestamp($__unixEpochTo()) - n.iflostservice) || 'h ' || EXTRACT(MINUTES FROM to_timestamp($__unixEpochTo()) - n.iflostservice) || 'm ' || ROUND(EXTRACT(SECONDS FROM to_timestamp($__unixEpochTo()) - n.iflostservice)::NUMERIC,0) || 's' AS duration\nFROM\n  node_outages n\nJOIN\n  node_outage_status nos\nON\n  n.nodeid = nos.nodeid\nWHERE\n  n.resolved = FALSE AND\n  n.svclosteventuei = 'uei.opennms.org/nodes/nodeLostService' AND\n  nos.max_outage_severity = '5' AND\n  n.categoryname like '$category' AND\n  n.location like '$location'\nGROUP BY\n  n.location,\n  n.nodelabel,\n  n.iflostservice,\n  n.ipaddr,\n  n.eventseverity,\n  n.servicename\nORDER BY\n  duration_raw DESC,\n  availability ASC,\n  n.location ASC,\n  n.nodelabel ASC,\n  n.ipaddr ASC,\n  n.servicename ASC",
+          "rawSql": "SELECT\n  n.location,\n  n.nodelabel,\n  n.ipaddr,\n  n.servicename,\n  100.0 - 100.0/(EXTRACT(EPOCH FROM to_timestamp($__unixEpochTo())) - EXTRACT(EPOCH FROM to_timestamp($__unixEpochFrom()))) * EXTRACT(EPOCH FROM (to_timestamp($__unixEpochTo()) - GREATEST(n.iflostservice, to_timestamp($__unixEpochFrom())))) AS availability,\n  to_timestamp($__unixEpochTo()) - n.iflostservice AS duration_raw,\n  EXTRACT(DAYS FROM to_timestamp($__unixEpochTo()) - n.iflostservice) || 'd ' || EXTRACT(HOURS FROM to_timestamp($__unixEpochTo()) - n.iflostservice) || 'h ' || EXTRACT(MINUTES FROM to_timestamp($__unixEpochTo()) - n.iflostservice) || 'm ' || ROUND(EXTRACT(SECONDS FROM to_timestamp($__unixEpochTo()) - n.iflostservice)::NUMERIC,0) || 's' AS duration\nFROM\n  node_outages n\nJOIN\n  node_outage_status nos\nON\n  n.nodeid = nos.nodeid\nWHERE\n  n.resolved = FALSE AND\n  n.svclosteventuei = 'uei.opennms.org/nodes/nodeLostService' AND\n  nos.max_outage_severity = '5' AND\n  n.categoryname IN ($category) AND\n  n.location IN ($location)\nGROUP BY\n  n.location,\n  n.nodelabel,\n  n.iflostservice,\n  n.ipaddr,\n  n.eventseverity,\n  n.servicename\nORDER BY\n  duration_raw DESC,\n  availability ASC,\n  n.location ASC,\n  n.nodelabel ASC,\n  n.ipaddr ASC,\n  n.servicename ASC",
           "refId": "A",
           "select": [
             [
@@ -1225,13 +1974,19 @@
         }
       ],
       "title": "Node Services in Category: $category",
-      "transform": "table",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {
+            "reducers": []
+          }
+        }
+      ],
       "type": "table"
     }
   ],
   "refresh": "10s",
-  "schemaVersion": 16,
-  "style": "dark",
+  "schemaVersion": 39,
   "tags": [
     "opennms"
   ],
@@ -1239,58 +1994,62 @@
     "list": [
       {
         "current": {
-          "tags": [],
-          "text": "OpenNMS FUL PSQL",
-          "value": "OpenNMS FUL PSQL"
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
         },
+        "datasource": {
+          "type": "grafana-postgresql-datasource",
+          "uid": "PA942B37CCFAF5A81"
+        },
+        "definition": "",
         "hide": 0,
-        "label": "OpenNMS PostgreSQL",
-        "name": "onms_pg",
-        "options": [],
-        "query": "postgres",
-        "refresh": 1,
-        "regex": "/.*OpenNMS*./",
-        "skipUrlSync": false,
-        "type": "datasource"
-      },
-      {
-        "allValue": null,
-        "current": {},
-        "datasource": "$onms_pg",
-        "hide": 0,
-        "includeAll": false,
+        "includeAll": true,
         "label": "Monitoring Location",
-        "multi": false,
+        "multi": true,
         "name": "location",
         "options": [],
-        "query": "SELECT '%'::TEXT as location UNION SELECT DISTINCT(n.location) FROM node n ORDER BY location ASC",
+        "query": "SELECT DISTINCT(n.location) FROM node n ORDER BY location ASC",
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
       },
       {
-        "allValue": null,
-        "current": {},
-        "datasource": "$onms_pg",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "grafana-postgresql-datasource",
+          "uid": "PA942B37CCFAF5A81"
+        },
+        "definition": "",
         "hide": 0,
-        "includeAll": false,
+        "includeAll": true,
         "label": "Surveillance Category",
-        "multi": false,
+        "multi": true,
         "name": "category",
         "options": [],
-        "query": "SELECT '%'::TEXT as categoryname UNION SELECT 'no category'::TEXT as categoryname UNION SELECT categoryname FROM categories ORDER BY categoryname",
+        "query": "SELECT 'no category'::TEXT as categoryname UNION SELECT categoryname FROM categories ORDER BY categoryname",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
         "sort": 1,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
@@ -1328,6 +2087,7 @@
   },
   "timezone": "",
   "title": "OpenNMS Outage Dashboard",
-  "uid": "rEAWRPGmz",
-  "version": 12
+  "uid": "ddlnrdx8fmayoe",
+  "version": 2,
+  "weekStart": ""
 }
