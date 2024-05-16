@@ -1,1593 +1,2724 @@
 {
-    "__inputs": [],
-    "__requires": [
+  "__inputs": [
+    {
+      "name": "DS_OPENNMS_PERFORMANCE",
+      "label": "OpenNMS Performance",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "opennms-performance-datasource",
+      "pluginName": "OpenNMS Performance"
+    }
+  ],
+  "__elements": {},
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "10.4.2"
+    },
+    {
+      "type": "datasource",
+      "id": "opennms-performance-datasource",
+      "name": "OpenNMS Performance",
+      "version": "9"
+    },
+    {
+      "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
+    }
+  ],
+  "annotations": {
+    "list": [
       {
-        "type": "grafana",
-        "id": "grafana",
-        "name": "Grafana",
-        "version": "5.3.4"
-      },
-      {
-        "type": "panel",
-        "id": "graph",
-        "name": "Graph",
-        "version": "5.0.0"
-      },
-      {
-        "type": "datasource",
-        "id": "opennms-helm-performance-datasource",
-        "name": "OpenNMS Performance",
-        "version": "1.0.0"
+        "builtIn": 1,
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
       }
-    ],
-    "annotations": {
-      "list": [
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "gnetId": 4036,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "opennms-performance-datasource",
+        "uid": "${DS_OPENNMS_PERFORMANCE}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 0,
+        "y": 0
+      },
+      "id": 5,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "min"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.4.2",
+      "targets": [
         {
-          "builtIn": 1,
-          "datasource": "-- Grafana --",
-          "enable": true,
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "TotPhysicalMemSize",
+              "name": "TotPhysicalMemSize"
+            },
+            "fallbackAttribute": {},
+            "label": "Total",
+            "node": {
+              "id": "$java8Node",
+              "label": "$java8Node"
+            },
+            "resource": {
+              "id": "interfaceSnmp[java8-jvm]",
+              "label": "interfaceSnmp[java8-jvm]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "Total",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "A"
+        },
+        {
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "FreePhysicalMemSize",
+              "name": "FreePhysicalMemSize"
+            },
+            "fallbackAttribute": {},
+            "label": "Free",
+            "node": {
+              "id": "$java8Node",
+              "label": "$java8Node"
+            },
+            "resource": {
+              "id": "interfaceSnmp[java8-jvm]",
+              "label": "interfaceSnmp[java8-jvm]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
           "hide": true,
-          "iconColor": "rgba(0, 211, 255, 1)",
-          "name": "Annotations & Alerts",
-          "type": "dashboard"
-        }
-      ]
-    },
-    "editable": true,
-    "gnetId": 4036,
-    "graphTooltip": 0,
-    "id": null,
-    "iteration": 1543868836688,
-    "links": [],
-    "panels": [
-      {
-        "aliasColors": {},
-        "bars": false,
-        "dashLength": 10,
-        "dashes": false,
-        "datasource": "$onms_instance",
-        "fill": 1,
-        "gridPos": {
-          "h": 7,
-          "w": 8,
-          "x": 0,
-          "y": 0
-        },
-        "id": 5,
-        "legend": {
-          "alignAsTable": true,
-          "avg": true,
-          "current": false,
-          "max": true,
-          "min": true,
-          "show": true,
-          "total": false,
-          "values": true
-        },
-        "lines": true,
-        "linewidth": 1,
-        "links": [],
-        "nullPointMode": "null",
-        "percentage": false,
-        "pointradius": 5,
-        "points": false,
-        "renderer": "flot",
-        "seriesOverrides": [],
-        "spaceLength": 10,
-        "stack": false,
-        "steppedLine": false,
-        "targets": [
-          {
-            "attribute": "TotPhysicalMemSize",
-            "filter": {
-              "clauses": [],
-              "limit": 1000
-            },
-            "hide": false,
-            "label": "Total",
-            "nodeId": "$java8Node",
-            "refId": "A",
-            "resourceId": "interfaceSnmp[java8-jvm]",
-            "type": "attribute"
+          "key": "",
+          "label": "Free",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          {
-            "aggregation": "AVERAGE",
-            "attribute": "FreePhysicalMemSize",
-            "filter": {
-              "clauses": [],
-              "limit": 1000
-            },
-            "hide": true,
-            "label": "Free",
-            "nodeId": "$java8Node",
-            "refId": "B",
-            "resourceId": "interfaceSnmp[java8-jvm]",
-            "type": "attribute"
-          },
-          {
-            "expression": "Total-Free",
-            "label": "Used",
-            "refId": "C",
-            "type": "expression"
-          }
-        ],
-        "thresholds": [],
-        "timeFrom": null,
-        "timeShift": null,
-        "title": "Operating System Physical Memory",
-        "tooltip": {
-          "shared": true,
-          "sort": 0,
-          "value_type": "individual"
-        },
-        "type": "graph",
-        "xaxis": {
-          "buckets": null,
-          "mode": "time",
-          "name": null,
-          "show": true,
-          "values": []
-        },
-        "yaxes": [
-          {
-            "format": "bytes",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          },
-          {
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          }
-        ],
-        "yaxis": {
-          "align": false,
-          "alignLevel": null
-        }
-      },
-      {
-        "aliasColors": {},
-        "bars": false,
-        "dashLength": 10,
-        "dashes": false,
-        "datasource": "$onms_instance",
-        "fill": 1,
-        "gridPos": {
-          "h": 7,
-          "w": 8,
-          "x": 8,
-          "y": 0
-        },
-        "id": 6,
-        "legend": {
-          "alignAsTable": true,
-          "avg": true,
-          "current": false,
-          "max": true,
-          "min": true,
-          "show": true,
-          "total": false,
-          "values": true
-        },
-        "lines": true,
-        "linewidth": 1,
-        "links": [],
-        "nullPointMode": "null",
-        "percentage": false,
-        "pointradius": 5,
-        "points": false,
-        "renderer": "flot",
-        "seriesOverrides": [],
-        "spaceLength": 10,
-        "stack": false,
-        "steppedLine": false,
-        "targets": [
-          {
-            "attribute": "TotalSwapSpaceSize",
-            "filter": {
-              "clauses": [],
-              "limit": 1000
-            },
-            "hide": false,
-            "label": "Total",
-            "nodeId": "$java8Node",
-            "refId": "A",
-            "resourceId": "interfaceSnmp[java8-jvm]",
-            "type": "attribute"
-          },
-          {
-            "aggregation": "AVERAGE",
-            "attribute": "FreeSwapSpaceSize",
-            "filter": {
-              "clauses": [],
-              "limit": 1000
-            },
-            "hide": true,
-            "label": "Free",
-            "nodeId": "$java8Node",
-            "refId": "B",
-            "resourceId": "interfaceSnmp[java8-jvm]",
-            "type": "attribute"
-          },
-          {
-            "expression": "Total-Free",
-            "label": "Used",
-            "refId": "C",
-            "type": "expression"
-          }
-        ],
-        "thresholds": [],
-        "timeFrom": null,
-        "timeShift": null,
-        "title": "Operating System Swap Memory",
-        "tooltip": {
-          "shared": true,
-          "sort": 0,
-          "value_type": "individual"
-        },
-        "type": "graph",
-        "xaxis": {
-          "buckets": null,
-          "mode": "time",
-          "name": null,
-          "show": true,
-          "values": []
-        },
-        "yaxes": [
-          {
-            "format": "bytes",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          },
-          {
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          }
-        ],
-        "yaxis": {
-          "align": false,
-          "alignLevel": null
-        }
-      },
-      {
-        "aliasColors": {},
-        "bars": false,
-        "dashLength": 10,
-        "dashes": false,
-        "datasource": "$onms_instance",
-        "fill": 1,
-        "gridPos": {
-          "h": 7,
-          "w": 8,
-          "x": 16,
-          "y": 0
-        },
-        "id": 1,
-        "legend": {
-          "avg": false,
-          "current": false,
-          "max": false,
-          "min": false,
-          "show": true,
-          "total": false,
-          "values": false
-        },
-        "lines": true,
-        "linewidth": 1,
-        "links": [],
-        "nullPointMode": "null",
-        "percentage": false,
-        "pointradius": 5,
-        "points": false,
-        "renderer": "flot",
-        "seriesOverrides": [],
-        "spaceLength": 10,
-        "stack": false,
-        "steppedLine": false,
-        "targets": [
-          {
-            "aggregation": "AVERAGE",
-            "attribute": "CommittedVirMemSize",
-            "filter": {
-              "clauses": [],
-              "limit": 1000
-            },
-            "label": "Committed",
-            "nodeId": "$java8Node",
-            "refId": "A",
-            "resourceId": "interfaceSnmp[java8-jvm]",
-            "type": "attribute"
-          }
-        ],
-        "thresholds": [],
-        "timeFrom": null,
-        "timeShift": null,
-        "title": "Operating System Virtual Memory",
-        "tooltip": {
-          "shared": true,
-          "sort": 0,
-          "value_type": "individual"
-        },
-        "type": "graph",
-        "xaxis": {
-          "buckets": null,
-          "mode": "time",
-          "name": null,
-          "show": true,
-          "values": []
-        },
-        "yaxes": [
-          {
-            "format": "bytes",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          },
-          {
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          }
-        ],
-        "yaxis": {
-          "align": false,
-          "alignLevel": null
-        }
-      },
-      {
-        "aliasColors": {},
-        "bars": false,
-        "dashLength": 10,
-        "dashes": false,
-        "datasource": "$onms_instance",
-        "fill": 1,
-        "gridPos": {
-          "h": 7,
-          "w": 8,
-          "x": 0,
-          "y": 7
-        },
-        "id": 2,
-        "legend": {
-          "alignAsTable": true,
-          "avg": true,
-          "current": false,
-          "max": true,
-          "min": true,
-          "show": true,
-          "total": false,
-          "values": true
-        },
-        "lines": true,
-        "linewidth": 1,
-        "links": [],
-        "nullPointMode": "null",
-        "percentage": false,
-        "pointradius": 5,
-        "points": false,
-        "renderer": "flot",
-        "seriesOverrides": [],
-        "spaceLength": 10,
-        "stack": false,
-        "steppedLine": false,
-        "targets": [
-          {
-            "aggregation": "AVERAGE",
-            "attribute": "HeapCommitted",
-            "filter": {
-              "clauses": [],
-              "limit": 1000
-            },
-            "label": "Committed",
-            "nodeId": "$java8Node",
-            "refId": "A",
-            "resourceId": "interfaceSnmp[java8-jvm]",
-            "type": "attribute"
-          },
-          {
-            "aggregation": "AVERAGE",
-            "attribute": "HeapInit",
-            "filter": {
-              "clauses": [],
-              "limit": 1000
-            },
-            "label": "Init",
-            "nodeId": "$java8Node",
-            "refId": "B",
-            "resourceId": "interfaceSnmp[java8-jvm]",
-            "type": "attribute"
-          },
-          {
-            "aggregation": "AVERAGE",
-            "attribute": "HeapMax",
-            "filter": {
-              "clauses": [],
-              "limit": 1000
-            },
-            "label": "Max",
-            "nodeId": "$java8Node",
-            "refId": "C",
-            "resourceId": "interfaceSnmp[java8-jvm]",
-            "type": "attribute"
-          },
-          {
-            "aggregation": "AVERAGE",
-            "attribute": "HeapUsed",
-            "filter": {
-              "clauses": [],
-              "limit": 1000
-            },
-            "label": "Used",
-            "nodeId": "$java8Node",
-            "refId": "D",
-            "resourceId": "interfaceSnmp[java8-jvm]",
-            "type": "attribute"
-          }
-        ],
-        "thresholds": [],
-        "timeFrom": null,
-        "timeShift": null,
-        "title": "Memory Heap Statistics",
-        "tooltip": {
-          "shared": true,
-          "sort": 0,
-          "value_type": "individual"
-        },
-        "type": "graph",
-        "xaxis": {
-          "buckets": null,
-          "mode": "time",
-          "name": null,
-          "show": true,
-          "values": []
-        },
-        "yaxes": [
-          {
-            "format": "bytes",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          },
-          {
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          }
-        ],
-        "yaxis": {
-          "align": false,
-          "alignLevel": null
-        }
-      },
-      {
-        "aliasColors": {},
-        "bars": false,
-        "dashLength": 10,
-        "dashes": false,
-        "datasource": "$onms_instance",
-        "fill": 1,
-        "gridPos": {
-          "h": 7,
-          "w": 8,
-          "x": 8,
-          "y": 7
-        },
-        "id": 3,
-        "legend": {
-          "alignAsTable": true,
-          "avg": true,
-          "current": false,
-          "max": true,
-          "min": true,
-          "show": true,
-          "total": false,
-          "values": true
-        },
-        "lines": true,
-        "linewidth": 1,
-        "links": [],
-        "nullPointMode": "null",
-        "percentage": false,
-        "pointradius": 5,
-        "points": false,
-        "renderer": "flot",
-        "seriesOverrides": [],
-        "spaceLength": 10,
-        "stack": false,
-        "steppedLine": false,
-        "targets": [
-          {
-            "aggregation": "AVERAGE",
-            "attribute": "NonHeapCommitted",
-            "filter": {
-              "clauses": [],
-              "limit": 1000
-            },
-            "label": "Committed",
-            "nodeId": "$java8Node",
-            "refId": "A",
-            "resourceId": "interfaceSnmp[java8-jvm]",
-            "type": "attribute"
-          },
-          {
-            "aggregation": "AVERAGE",
-            "attribute": "NonHeapInit",
-            "filter": {
-              "clauses": [],
-              "limit": 1000
-            },
-            "label": "Init",
-            "nodeId": "$java8Node",
-            "refId": "B",
-            "resourceId": "interfaceSnmp[java8-jvm]",
-            "type": "attribute"
-          },
-          {
-            "aggregation": "AVERAGE",
-            "attribute": "NonHeapMax",
-            "filter": {
-              "clauses": [],
-              "limit": 1000
-            },
-            "label": "Max",
-            "nodeId": "$java8Node",
-            "refId": "C",
-            "resourceId": "interfaceSnmp[java8-jvm]",
-            "type": "attribute"
-          },
-          {
-            "aggregation": "AVERAGE",
-            "attribute": "NonHeapUsed",
-            "filter": {
-              "clauses": [],
-              "limit": 1000
-            },
-            "label": "Used",
-            "nodeId": "$java8Node",
-            "refId": "D",
-            "resourceId": "interfaceSnmp[java8-jvm]",
-            "type": "attribute"
-          }
-        ],
-        "thresholds": [],
-        "timeFrom": null,
-        "timeShift": null,
-        "title": "Memory Non-Heap Statistics",
-        "tooltip": {
-          "shared": true,
-          "sort": 0,
-          "value_type": "individual"
-        },
-        "type": "graph",
-        "xaxis": {
-          "buckets": null,
-          "mode": "time",
-          "name": null,
-          "show": true,
-          "values": []
-        },
-        "yaxes": [
-          {
-            "format": "bytes",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          },
-          {
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          }
-        ],
-        "yaxis": {
-          "align": false,
-          "alignLevel": null
-        }
-      },
-      {
-        "aliasColors": {},
-        "bars": false,
-        "dashLength": 10,
-        "dashes": false,
-        "datasource": "$onms_instance",
-        "fill": 0,
-        "gridPos": {
-          "h": 7,
-          "w": 8,
-          "x": 16,
-          "y": 7
-        },
-        "id": 4,
-        "legend": {
-          "alignAsTable": true,
-          "avg": true,
-          "current": false,
-          "max": true,
-          "min": true,
-          "show": true,
-          "total": false,
-          "values": true
-        },
-        "lines": true,
-        "linewidth": 1,
-        "links": [],
-        "nullPointMode": "null",
-        "percentage": false,
-        "pointradius": 5,
-        "points": false,
-        "renderer": "flot",
-        "seriesOverrides": [],
-        "spaceLength": 10,
-        "stack": false,
-        "steppedLine": false,
-        "targets": [
-          {
-            "aggregation": "AVERAGE",
-            "attribute": "TotLoadedClasses",
-            "filter": {
-              "clauses": [],
-              "limit": 1000
-            },
-            "label": "Total",
-            "nodeId": "$java8Node",
-            "refId": "A",
-            "resourceId": "interfaceSnmp[java8-jvm]",
-            "type": "attribute"
-          },
-          {
-            "aggregation": "AVERAGE",
-            "attribute": "LoadedClasses",
-            "filter": {
-              "clauses": [],
-              "limit": 1000
-            },
-            "label": "Loaded",
-            "nodeId": "$java8Node",
-            "refId": "B",
-            "resourceId": "interfaceSnmp[java8-jvm]",
-            "type": "attribute"
-          },
-          {
-            "aggregation": "AVERAGE",
-            "attribute": "UnloadedClass",
-            "filter": {
-              "clauses": [],
-              "limit": 1000
-            },
-            "label": "Unloaded",
-            "nodeId": "$java8Node",
-            "refId": "C",
-            "resourceId": "interfaceSnmp[java8-jvm]",
-            "type": "attribute"
-          }
-        ],
-        "thresholds": [],
-        "timeFrom": null,
-        "timeShift": null,
-        "title": "Class Loading Statistics",
-        "tooltip": {
-          "shared": true,
-          "sort": 0,
-          "value_type": "individual"
-        },
-        "type": "graph",
-        "xaxis": {
-          "buckets": null,
-          "mode": "time",
-          "name": null,
-          "show": true,
-          "values": []
-        },
-        "yaxes": [
-          {
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          },
-          {
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          }
-        ],
-        "yaxis": {
-          "align": false,
-          "alignLevel": null
-        }
-      },
-      {
-        "aliasColors": {},
-        "bars": false,
-        "dashLength": 10,
-        "dashes": false,
-        "datasource": "$onms_instance",
-        "fill": 1,
-        "gridPos": {
-          "h": 7,
-          "w": 8,
-          "x": 0,
-          "y": 14
-        },
-        "id": 7,
-        "legend": {
-          "alignAsTable": true,
-          "avg": true,
-          "current": false,
-          "max": true,
-          "min": true,
-          "show": true,
-          "total": false,
-          "values": true
-        },
-        "lines": true,
-        "linewidth": 1,
-        "links": [],
-        "nullPointMode": "null",
-        "percentage": false,
-        "pointradius": 5,
-        "points": false,
-        "renderer": "flot",
-        "seriesOverrides": [],
-        "spaceLength": 10,
-        "stack": false,
-        "steppedLine": false,
-        "targets": [
-          {
-            "aggregation": "AVERAGE",
-            "attribute": "CodeCacheUsageInit",
-            "filter": {
-              "clauses": [],
-              "limit": 1000
-            },
-            "label": "Init",
-            "nodeId": "$java8Node",
-            "refId": "A",
-            "resourceId": "interfaceSnmp[java8-jvm]",
-            "type": "attribute"
-          },
-          {
-            "aggregation": "AVERAGE",
-            "attribute": "CodeCacheUsageMax",
-            "filter": {
-              "clauses": [],
-              "limit": 1000
-            },
-            "label": "Max",
-            "nodeId": "$java8Node",
-            "refId": "B",
-            "resourceId": "interfaceSnmp[java8-jvm]",
-            "type": "attribute"
-          },
-          {
-            "aggregation": "AVERAGE",
-            "attribute": "CodeCacheUsageUsed",
-            "filter": {
-              "clauses": [],
-              "limit": 1000
-            },
-            "label": "Used",
-            "nodeId": "$java8Node",
-            "refId": "C",
-            "resourceId": "interfaceSnmp[java8-jvm]",
-            "type": "attribute"
-          },
-          {
-            "aggregation": "AVERAGE",
-            "attribute": "CodeCacheUsgCmmttd",
-            "filter": {
-              "clauses": [],
-              "limit": 1000
-            },
-            "label": "Committed",
-            "nodeId": "$java8Node",
-            "refId": "D",
-            "resourceId": "interfaceSnmp[java8-jvm]",
-            "type": "attribute"
-          }
-        ],
-        "thresholds": [],
-        "timeFrom": null,
-        "timeShift": null,
-        "title": "Memory Pool Code Cache",
-        "tooltip": {
-          "shared": true,
-          "sort": 0,
-          "value_type": "individual"
-        },
-        "type": "graph",
-        "xaxis": {
-          "buckets": null,
-          "mode": "time",
-          "name": null,
-          "show": true,
-          "values": []
-        },
-        "yaxes": [
-          {
-            "format": "bytes",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          },
-          {
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          }
-        ],
-        "yaxis": {
-          "align": false,
-          "alignLevel": null
-        }
-      },
-      {
-        "aliasColors": {},
-        "bars": false,
-        "dashLength": 10,
-        "dashes": false,
-        "datasource": "$onms_instance",
-        "fill": 1,
-        "gridPos": {
-          "h": 7,
-          "w": 8,
-          "x": 8,
-          "y": 14
-        },
-        "id": 8,
-        "legend": {
-          "alignAsTable": true,
-          "avg": true,
-          "current": false,
-          "max": true,
-          "min": true,
-          "show": true,
-          "total": false,
-          "values": true
-        },
-        "lines": true,
-        "linewidth": 1,
-        "links": [],
-        "nullPointMode": "null",
-        "percentage": false,
-        "pointradius": 5,
-        "points": false,
-        "renderer": "flot",
-        "seriesOverrides": [],
-        "spaceLength": 10,
-        "stack": false,
-        "steppedLine": false,
-        "targets": [
-          {
-            "aggregation": "AVERAGE",
-            "attribute": "CmpClSpcPkUsageInit",
-            "filter": {
-              "clauses": [],
-              "limit": 1000
-            },
-            "label": "Init",
-            "nodeId": "$java8Node",
-            "refId": "A",
-            "resourceId": "interfaceSnmp[java8-jvm]",
-            "type": "attribute"
-          },
-          {
-            "aggregation": "AVERAGE",
-            "attribute": "CmpClSpcPkUsageMax",
-            "filter": {
-              "clauses": [],
-              "limit": 1000
-            },
-            "label": "Max",
-            "nodeId": "$java8Node",
-            "refId": "B",
-            "resourceId": "interfaceSnmp[java8-jvm]",
-            "type": "attribute"
-          },
-          {
-            "aggregation": "AVERAGE",
-            "attribute": "CmpClSpcPkUsageUsed",
-            "filter": {
-              "clauses": [],
-              "limit": 1000
-            },
-            "label": "Used",
-            "nodeId": "$java8Node",
-            "refId": "C",
-            "resourceId": "interfaceSnmp[java8-jvm]",
-            "type": "attribute"
-          },
-          {
-            "aggregation": "AVERAGE",
-            "attribute": "CmpClSpcUsgCmmttd",
-            "filter": {
-              "clauses": [],
-              "limit": 1000
-            },
-            "label": "Committed",
-            "nodeId": "$java8Node",
-            "refId": "D",
-            "resourceId": "interfaceSnmp[java8-jvm]",
-            "type": "attribute"
-          }
-        ],
-        "thresholds": [],
-        "timeFrom": null,
-        "timeShift": null,
-        "title": "Memory Pool Compressed Class Space",
-        "tooltip": {
-          "shared": true,
-          "sort": 0,
-          "value_type": "individual"
-        },
-        "type": "graph",
-        "xaxis": {
-          "buckets": null,
-          "mode": "time",
-          "name": null,
-          "show": true,
-          "values": []
-        },
-        "yaxes": [
-          {
-            "format": "bytes",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          },
-          {
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          }
-        ],
-        "yaxis": {
-          "align": false,
-          "alignLevel": null
-        }
-      },
-      {
-        "aliasColors": {},
-        "bars": false,
-        "dashLength": 10,
-        "dashes": false,
-        "datasource": "$onms_instance",
-        "fill": 1,
-        "gridPos": {
-          "h": 7,
-          "w": 8,
-          "x": 16,
-          "y": 14
-        },
-        "id": 9,
-        "legend": {
-          "alignAsTable": true,
-          "avg": true,
-          "current": false,
-          "max": true,
-          "min": true,
-          "show": true,
-          "total": false,
-          "values": true
-        },
-        "lines": true,
-        "linewidth": 1,
-        "links": [],
-        "nullPointMode": "null",
-        "percentage": false,
-        "pointradius": 5,
-        "points": false,
-        "renderer": "flot",
-        "seriesOverrides": [],
-        "spaceLength": 10,
-        "stack": false,
-        "steppedLine": false,
-        "targets": [
-          {
-            "aggregation": "AVERAGE",
-            "attribute": "MetaSpcUsageInit",
-            "filter": {
-              "clauses": [],
-              "limit": 1000
-            },
-            "label": "Init",
-            "nodeId": "$java8Node",
-            "refId": "A",
-            "resourceId": "interfaceSnmp[java8-jvm]",
-            "type": "attribute"
-          },
-          {
-            "aggregation": "AVERAGE",
-            "attribute": "MetaSpcUsageMax",
-            "filter": {
-              "clauses": [],
-              "limit": 1000
-            },
-            "label": "Max",
-            "nodeId": "$java8Node",
-            "refId": "B",
-            "resourceId": "interfaceSnmp[java8-jvm]",
-            "type": "attribute"
-          },
-          {
-            "aggregation": "AVERAGE",
-            "attribute": "MetaSpcUsageUsed",
-            "filter": {
-              "clauses": [],
-              "limit": 1000
-            },
-            "label": "Used",
-            "nodeId": "$java8Node",
-            "refId": "C",
-            "resourceId": "interfaceSnmp[java8-jvm]",
-            "type": "attribute"
-          },
-          {
-            "aggregation": "AVERAGE",
-            "attribute": "MetaSpcUsgCmmttd",
-            "filter": {
-              "clauses": [],
-              "limit": 1000
-            },
-            "label": "Committed",
-            "nodeId": "$java8Node",
-            "refId": "D",
-            "resourceId": "interfaceSnmp[java8-jvm]",
-            "type": "attribute"
-          }
-        ],
-        "thresholds": [],
-        "timeFrom": null,
-        "timeShift": null,
-        "title": "Memory Pool Metaspace",
-        "tooltip": {
-          "shared": true,
-          "sort": 0,
-          "value_type": "individual"
-        },
-        "type": "graph",
-        "xaxis": {
-          "buckets": null,
-          "mode": "time",
-          "name": null,
-          "show": true,
-          "values": []
-        },
-        "yaxes": [
-          {
-            "format": "bytes",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          },
-          {
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          }
-        ],
-        "yaxis": {
-          "align": false,
-          "alignLevel": null
-        }
-      },
-      {
-        "aliasColors": {},
-        "bars": false,
-        "dashLength": 10,
-        "dashes": false,
-        "datasource": "$onms_instance",
-        "fill": 1,
-        "gridPos": {
-          "h": 7,
-          "w": 8,
-          "x": 0,
-          "y": 21
-        },
-        "id": 10,
-        "legend": {
-          "alignAsTable": true,
-          "avg": true,
-          "current": false,
-          "max": true,
-          "min": true,
-          "show": true,
-          "total": false,
-          "values": true
-        },
-        "lines": true,
-        "linewidth": 1,
-        "links": [],
-        "nullPointMode": "null",
-        "percentage": false,
-        "pointradius": 5,
-        "points": false,
-        "renderer": "flot",
-        "seriesOverrides": [],
-        "spaceLength": 10,
-        "stack": false,
-        "steppedLine": false,
-        "targets": [
-          {
-            "aggregation": "AVERAGE",
-            "attribute": "EdenUsageInit",
-            "filter": {
-              "clauses": [],
-              "limit": 1000
-            },
-            "label": "Init",
-            "nodeId": "$java8Node",
-            "refId": "A",
-            "resourceId": "interfaceSnmp[java8-jvm]",
-            "type": "attribute"
-          },
-          {
-            "aggregation": "AVERAGE",
-            "attribute": "EdenUsageMax",
-            "filter": {
-              "clauses": [],
-              "limit": 1000
-            },
-            "label": "Max",
-            "nodeId": "$java8Node",
-            "refId": "B",
-            "resourceId": "interfaceSnmp[java8-jvm]",
-            "type": "attribute"
-          },
-          {
-            "aggregation": "AVERAGE",
-            "attribute": "EdenUsageUsed",
-            "filter": {
-              "clauses": [],
-              "limit": 1000
-            },
-            "label": "Used",
-            "nodeId": "$java8Node",
-            "refId": "C",
-            "resourceId": "interfaceSnmp[java8-jvm]",
-            "type": "attribute"
-          },
-          {
-            "aggregation": "AVERAGE",
-            "attribute": "EdenUsgCmmttd",
-            "filter": {
-              "clauses": [],
-              "limit": 1000
-            },
-            "label": "Committed",
-            "nodeId": "$java8Node",
-            "refId": "D",
-            "resourceId": "interfaceSnmp[java8-jvm]",
-            "type": "attribute"
-          }
-        ],
-        "thresholds": [],
-        "timeFrom": null,
-        "timeShift": null,
-        "title": "Memory Pool Eden Space",
-        "tooltip": {
-          "shared": true,
-          "sort": 0,
-          "value_type": "individual"
-        },
-        "type": "graph",
-        "xaxis": {
-          "buckets": null,
-          "mode": "time",
-          "name": null,
-          "show": true,
-          "values": []
-        },
-        "yaxes": [
-          {
-            "format": "bytes",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          },
-          {
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          }
-        ],
-        "yaxis": {
-          "align": false,
-          "alignLevel": null
-        }
-      },
-      {
-        "aliasColors": {},
-        "bars": false,
-        "dashLength": 10,
-        "dashes": false,
-        "datasource": "$onms_instance",
-        "fill": 1,
-        "gridPos": {
-          "h": 7,
-          "w": 8,
-          "x": 8,
-          "y": 21
-        },
-        "id": 11,
-        "legend": {
-          "alignAsTable": true,
-          "avg": true,
-          "current": false,
-          "max": true,
-          "min": true,
-          "show": true,
-          "total": false,
-          "values": true
-        },
-        "lines": true,
-        "linewidth": 1,
-        "links": [],
-        "nullPointMode": "null",
-        "percentage": false,
-        "pointradius": 5,
-        "points": false,
-        "renderer": "flot",
-        "seriesOverrides": [],
-        "spaceLength": 10,
-        "stack": false,
-        "steppedLine": false,
-        "targets": [
-          {
-            "aggregation": "AVERAGE",
-            "attribute": "OGenUsageInit",
-            "filter": {
-              "clauses": [],
-              "limit": 1000
-            },
-            "label": "Init",
-            "nodeId": "$java8Node",
-            "refId": "A",
-            "resourceId": "interfaceSnmp[java8-jvm]",
-            "type": "attribute"
-          },
-          {
-            "aggregation": "AVERAGE",
-            "attribute": "OGenUsageMax",
-            "filter": {
-              "clauses": [],
-              "limit": 1000
-            },
-            "label": "Max",
-            "nodeId": "$java8Node",
-            "refId": "B",
-            "resourceId": "interfaceSnmp[java8-jvm]",
-            "type": "attribute"
-          },
-          {
-            "aggregation": "AVERAGE",
-            "attribute": "OGenUsageUsed",
-            "filter": {
-              "clauses": [],
-              "limit": 1000
-            },
-            "label": "Used",
-            "nodeId": "$java8Node",
-            "refId": "C",
-            "resourceId": "interfaceSnmp[java8-jvm]",
-            "type": "attribute"
-          },
-          {
-            "aggregation": "AVERAGE",
-            "attribute": "OGenUsgCmmttd",
-            "filter": {
-              "clauses": [],
-              "limit": 1000
-            },
-            "label": "Committed",
-            "nodeId": "$java8Node",
-            "refId": "D",
-            "resourceId": "interfaceSnmp[java8-jvm]",
-            "type": "attribute"
-          }
-        ],
-        "thresholds": [],
-        "timeFrom": null,
-        "timeShift": null,
-        "title": "Memory Pool Old Generation Space",
-        "tooltip": {
-          "shared": true,
-          "sort": 0,
-          "value_type": "individual"
-        },
-        "type": "graph",
-        "xaxis": {
-          "buckets": null,
-          "mode": "time",
-          "name": null,
-          "show": true,
-          "values": []
-        },
-        "yaxes": [
-          {
-            "format": "bytes",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          },
-          {
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          }
-        ],
-        "yaxis": {
-          "align": false,
-          "alignLevel": null
-        }
-      },
-      {
-        "aliasColors": {},
-        "bars": false,
-        "dashLength": 10,
-        "dashes": false,
-        "datasource": "$onms_instance",
-        "fill": 1,
-        "gridPos": {
-          "h": 7,
-          "w": 8,
-          "x": 16,
-          "y": 21
-        },
-        "id": 12,
-        "legend": {
-          "alignAsTable": true,
-          "avg": true,
-          "current": false,
-          "max": true,
-          "min": true,
-          "show": true,
-          "total": false,
-          "values": true
-        },
-        "lines": true,
-        "linewidth": 1,
-        "links": [],
-        "nullPointMode": "null",
-        "percentage": false,
-        "pointradius": 5,
-        "points": false,
-        "renderer": "flot",
-        "seriesOverrides": [],
-        "spaceLength": 10,
-        "stack": false,
-        "steppedLine": false,
-        "targets": [
-          {
-            "aggregation": "AVERAGE",
-            "attribute": "SurvUsageInit",
-            "filter": {
-              "clauses": [],
-              "limit": 1000
-            },
-            "label": "Init",
-            "nodeId": "$java8Node",
-            "refId": "A",
-            "resourceId": "interfaceSnmp[java8-jvm]",
-            "type": "attribute"
-          },
-          {
-            "aggregation": "AVERAGE",
-            "attribute": "SurvUsageMax",
-            "filter": {
-              "clauses": [],
-              "limit": 1000
-            },
-            "label": "Max",
-            "nodeId": "$java8Node",
-            "refId": "B",
-            "resourceId": "interfaceSnmp[java8-jvm]",
-            "type": "attribute"
-          },
-          {
-            "aggregation": "AVERAGE",
-            "attribute": "SurvUsageUsed",
-            "filter": {
-              "clauses": [],
-              "limit": 1000
-            },
-            "label": "Used",
-            "nodeId": "$java8Node",
-            "refId": "C",
-            "resourceId": "interfaceSnmp[java8-jvm]",
-            "type": "attribute"
-          },
-          {
-            "aggregation": "AVERAGE",
-            "attribute": "SurvUsgCmmttd",
-            "filter": {
-              "clauses": [],
-              "limit": 1000
-            },
-            "label": "Committed",
-            "nodeId": "$java8Node",
-            "refId": "D",
-            "resourceId": "interfaceSnmp[java8-jvm]",
-            "type": "attribute"
-          }
-        ],
-        "thresholds": [],
-        "timeFrom": null,
-        "timeShift": null,
-        "title": "Memory Pool Survivor Space",
-        "tooltip": {
-          "shared": true,
-          "sort": 0,
-          "value_type": "individual"
-        },
-        "type": "graph",
-        "xaxis": {
-          "buckets": null,
-          "mode": "time",
-          "name": null,
-          "show": true,
-          "values": []
-        },
-        "yaxes": [
-          {
-            "format": "bytes",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          },
-          {
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          }
-        ],
-        "yaxis": {
-          "align": false,
-          "alignLevel": null
-        }
-      }
-    ],
-    "refresh": "1m",
-    "schemaVersion": 16,
-    "style": "dark",
-    "tags": [
-      "OpenNMS"
-    ],
-    "templating": {
-      "list": [
-        {
-          "current": {
-            "tags": [],
-            "text": "OpenNMS FRA Performance",
-            "value": "OpenNMS FRA Performance"
-          },
-          "hide": 0,
-          "label": "OpenNMS Instance",
-          "name": "onms_instance",
-          "options": [],
-          "query": "opennms-helm-performance-datasource",
-          "refresh": 1,
-          "regex": "",
-          "skipUrlSync": false,
-          "type": "datasource"
+          "queryType": "",
+          "refId": "B"
         },
         {
-          "allValue": null,
-          "current": {},
-          "datasource": "$onms_instance",
-          "hide": 0,
-          "includeAll": false,
-          "label": null,
-          "multi": false,
-          "name": "java8Node",
-          "options": [],
-          "query": "nodeFilter(serviceName like 'JMX-Java8-JVM%')",
-          "refresh": 2,
-          "regex": "",
-          "skipUrlSync": false,
-          "sort": 1,
-          "tagValuesQuery": "",
-          "tags": [],
-          "tagsQuery": "",
-          "type": "query",
-          "useTags": false
+          "attribute": {},
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "expression": "Total-Free",
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "Used",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Expression",
+            "value": 2
+          },
+          "queryType": "",
+          "refId": "C"
         }
-      ]
-    },
-    "time": {
-      "from": "now-24h",
-      "to": "now"
-    },
-    "timepicker": {
-      "refresh_intervals": [
-        "5s",
-        "10s",
-        "30s",
-        "1m",
-        "5m",
-        "15m",
-        "30m",
-        "1h",
-        "2h",
-        "1d"
       ],
-      "time_options": [
-        "5m",
-        "15m",
-        "1h",
-        "6h",
-        "12h",
-        "24h",
-        "2d",
-        "7d",
-        "30d"
-      ]
+      "title": "Operating System Physical Memory",
+      "type": "timeseries"
     },
-    "timezone": "",
-    "title": "Java 8 Memory Dashboard",
-    "uid": "000000055",
-    "version": 5
-  }
+    {
+      "datasource": {
+        "type": "opennms-performance-datasource",
+        "uid": "${DS_OPENNMS_PERFORMANCE}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 8,
+        "y": 0
+      },
+      "id": 6,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "min"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.4.2",
+      "targets": [
+        {
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "TotalSwapSpaceSize",
+              "name": "TotalSwapSpaceSize"
+            },
+            "fallbackAttribute": {},
+            "label": "Total",
+            "node": {
+              "id": "$java8Node",
+              "label": "$java8Node"
+            },
+            "resource": {
+              "id": "interfaceSnmp[java8-jvm]",
+              "label": "interfaceSnmp[java8-jvm]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "Total",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "A"
+        },
+        {
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "FreeSwapSpaceSize",
+              "name": "FreeSwapSpaceSize"
+            },
+            "fallbackAttribute": {},
+            "label": "Free",
+            "node": {
+              "id": "$java8Node",
+              "label": "$java8Node"
+            },
+            "resource": {
+              "id": "interfaceSnmp[java8-jvm]",
+              "label": "interfaceSnmp[java8-jvm]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": true,
+          "key": "",
+          "label": "Free",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "B"
+        },
+        {
+          "attribute": {},
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "expression": "Total-Free",
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "Used",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Expression",
+            "value": 2
+          },
+          "queryType": "",
+          "refId": "C"
+        }
+      ],
+      "title": "Operating System Swap Memory",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "opennms-performance-datasource",
+        "uid": "${DS_OPENNMS_PERFORMANCE}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 16,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.4.2",
+      "targets": [
+        {
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "CommittedVirMemSize",
+              "name": "CommittedVirMemSize"
+            },
+            "fallbackAttribute": {},
+            "label": "Committed",
+            "node": {
+              "id": "$java8Node",
+              "label": "$java8Node"
+            },
+            "resource": {
+              "id": "interfaceSnmp[java8-jvm]",
+              "label": "interfaceSnmp[java8-jvm]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "Committed",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "A"
+        }
+      ],
+      "title": "Operating System Virtual Memory",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "opennms-performance-datasource",
+        "uid": "${DS_OPENNMS_PERFORMANCE}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 0,
+        "y": 7
+      },
+      "id": 2,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "min"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.4.2",
+      "targets": [
+        {
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "HeapCommitted",
+              "name": "HeapCommitted"
+            },
+            "fallbackAttribute": {},
+            "label": "Committed",
+            "node": {
+              "id": "$java8Node",
+              "label": "$java8Node"
+            },
+            "resource": {
+              "id": "interfaceSnmp[java8-jvm]",
+              "label": "interfaceSnmp[java8-jvm]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "Committed",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "A"
+        },
+        {
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "HeapInit",
+              "name": "HeapInit"
+            },
+            "fallbackAttribute": {},
+            "label": "Init",
+            "node": {
+              "id": "$java8Node",
+              "label": "$java8Node"
+            },
+            "resource": {
+              "id": "interfaceSnmp[java8-jvm]",
+              "label": "interfaceSnmp[java8-jvm]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "Init",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "B"
+        },
+        {
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "HeapMax",
+              "name": "HeapMax"
+            },
+            "fallbackAttribute": {},
+            "label": "Max",
+            "node": {
+              "id": "$java8Node",
+              "label": "$java8Node"
+            },
+            "resource": {
+              "id": "interfaceSnmp[java8-jvm]",
+              "label": "interfaceSnmp[java8-jvm]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "Max",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "C"
+        },
+        {
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "HeapUsed",
+              "name": "HeapUsed"
+            },
+            "fallbackAttribute": {},
+            "label": "Used",
+            "node": {
+              "id": "$java8Node",
+              "label": "$java8Node"
+            },
+            "resource": {
+              "id": "interfaceSnmp[java8-jvm]",
+              "label": "interfaceSnmp[java8-jvm]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "Used",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "D"
+        }
+      ],
+      "title": "Memory Heap Statistics",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "opennms-performance-datasource",
+        "uid": "${DS_OPENNMS_PERFORMANCE}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 8,
+        "y": 7
+      },
+      "id": 3,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "min"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.4.2",
+      "targets": [
+        {
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "NonHeapCommitted",
+              "name": "NonHeapCommitted"
+            },
+            "fallbackAttribute": {},
+            "label": "Committed",
+            "node": {
+              "id": "$java8Node",
+              "label": "$java8Node"
+            },
+            "resource": {
+              "id": "interfaceSnmp[java8-jvm]",
+              "label": "interfaceSnmp[java8-jvm]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "Committed",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "A"
+        },
+        {
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "NonHeapInit",
+              "name": "NonHeapInit"
+            },
+            "fallbackAttribute": {},
+            "label": "Init",
+            "node": {
+              "id": "$java8Node",
+              "label": "$java8Node"
+            },
+            "resource": {
+              "id": "interfaceSnmp[java8-jvm]",
+              "label": "interfaceSnmp[java8-jvm]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "Init",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "B"
+        },
+        {
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "NonHeapMax",
+              "name": "NonHeapMax"
+            },
+            "fallbackAttribute": {},
+            "label": "Max",
+            "node": {
+              "id": "$java8Node",
+              "label": "$java8Node"
+            },
+            "resource": {
+              "id": "interfaceSnmp[java8-jvm]",
+              "label": "interfaceSnmp[java8-jvm]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "Max",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "C"
+        },
+        {
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "NonHeapUsed",
+              "name": "NonHeapUsed"
+            },
+            "fallbackAttribute": {},
+            "label": "Used",
+            "node": {
+              "id": "$java8Node",
+              "label": "$java8Node"
+            },
+            "resource": {
+              "id": "interfaceSnmp[java8-jvm]",
+              "label": "interfaceSnmp[java8-jvm]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "Used",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "D"
+        }
+      ],
+      "title": "Memory Non-Heap Statistics",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "opennms-performance-datasource",
+        "uid": "${DS_OPENNMS_PERFORMANCE}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 16,
+        "y": 7
+      },
+      "id": 4,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "min"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.4.2",
+      "targets": [
+        {
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "TotLoadedClasses",
+              "name": "TotLoadedClasses"
+            },
+            "fallbackAttribute": {},
+            "label": "Total",
+            "node": {
+              "id": "$java8Node",
+              "label": "$java8Node"
+            },
+            "resource": {
+              "id": "interfaceSnmp[java8-jvm]",
+              "label": "interfaceSnmp[java8-jvm]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "Total",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "A"
+        },
+        {
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "LoadedClasses",
+              "name": "LoadedClasses"
+            },
+            "fallbackAttribute": {},
+            "label": "Loaded",
+            "node": {
+              "id": "$java8Node",
+              "label": "$java8Node"
+            },
+            "resource": {
+              "id": "interfaceSnmp[java8-jvm]",
+              "label": "interfaceSnmp[java8-jvm]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "Loaded",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "B"
+        },
+        {
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "UnloadedClass",
+              "name": "UnloadedClass"
+            },
+            "fallbackAttribute": {},
+            "label": "Unloaded",
+            "node": {
+              "id": "$java8Node",
+              "label": "$java8Node"
+            },
+            "resource": {
+              "id": "interfaceSnmp[java8-jvm]",
+              "label": "interfaceSnmp[java8-jvm]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "Unloaded",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "C"
+        }
+      ],
+      "title": "Class Loading Statistics",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "opennms-performance-datasource",
+        "uid": "${DS_OPENNMS_PERFORMANCE}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 0,
+        "y": 14
+      },
+      "id": 7,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "min"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.4.2",
+      "targets": [
+        {
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "CodeCacheUsageInit",
+              "name": "CodeCacheUsageInit"
+            },
+            "fallbackAttribute": {},
+            "label": "Init",
+            "node": {
+              "id": "$java8Node",
+              "label": "$java8Node"
+            },
+            "resource": {
+              "id": "interfaceSnmp[java8-jvm]",
+              "label": "interfaceSnmp[java8-jvm]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "Init",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "A"
+        },
+        {
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "CodeCacheUsageMax",
+              "name": "CodeCacheUsageMax"
+            },
+            "fallbackAttribute": {},
+            "label": "Max",
+            "node": {
+              "id": "$java8Node",
+              "label": "$java8Node"
+            },
+            "resource": {
+              "id": "interfaceSnmp[java8-jvm]",
+              "label": "interfaceSnmp[java8-jvm]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "Max",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "B"
+        },
+        {
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "CodeCacheUsageUsed",
+              "name": "CodeCacheUsageUsed"
+            },
+            "fallbackAttribute": {},
+            "label": "Used",
+            "node": {
+              "id": "$java8Node",
+              "label": "$java8Node"
+            },
+            "resource": {
+              "id": "interfaceSnmp[java8-jvm]",
+              "label": "interfaceSnmp[java8-jvm]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "Used",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "C"
+        },
+        {
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "CodeCacheUsgCmmttd",
+              "name": "CodeCacheUsgCmmttd"
+            },
+            "fallbackAttribute": {},
+            "label": "Committed",
+            "node": {
+              "id": "$java8Node",
+              "label": "$java8Node"
+            },
+            "resource": {
+              "id": "interfaceSnmp[java8-jvm]",
+              "label": "interfaceSnmp[java8-jvm]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "Committed",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "D"
+        }
+      ],
+      "title": "Memory Pool Code Cache",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "opennms-performance-datasource",
+        "uid": "${DS_OPENNMS_PERFORMANCE}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 8,
+        "y": 14
+      },
+      "id": 8,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "min"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.4.2",
+      "targets": [
+        {
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "CmpClSpcPkUsageInit",
+              "name": "CmpClSpcPkUsageInit"
+            },
+            "fallbackAttribute": {},
+            "label": "Init",
+            "node": {
+              "id": "$java8Node",
+              "label": "$java8Node"
+            },
+            "resource": {
+              "id": "interfaceSnmp[java8-jvm]",
+              "label": "interfaceSnmp[java8-jvm]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "Init",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "A"
+        },
+        {
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "CmpClSpcPkUsageMax",
+              "name": "CmpClSpcPkUsageMax"
+            },
+            "fallbackAttribute": {},
+            "label": "Max",
+            "node": {
+              "id": "$java8Node",
+              "label": "$java8Node"
+            },
+            "resource": {
+              "id": "interfaceSnmp[java8-jvm]",
+              "label": "interfaceSnmp[java8-jvm]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "Max",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "B"
+        },
+        {
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "CmpClSpcPkUsageUsed",
+              "name": "CmpClSpcPkUsageUsed"
+            },
+            "fallbackAttribute": {},
+            "label": "Used",
+            "node": {
+              "id": "$java8Node",
+              "label": "$java8Node"
+            },
+            "resource": {
+              "id": "interfaceSnmp[java8-jvm]",
+              "label": "interfaceSnmp[java8-jvm]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "Used",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "C"
+        },
+        {
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "CmpClSpcUsgCmmttd",
+              "name": "CmpClSpcUsgCmmttd"
+            },
+            "fallbackAttribute": {},
+            "label": "Committed",
+            "node": {
+              "id": "$java8Node",
+              "label": "$java8Node"
+            },
+            "resource": {
+              "id": "interfaceSnmp[java8-jvm]",
+              "label": "interfaceSnmp[java8-jvm]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "Committed",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "D"
+        }
+      ],
+      "title": "Memory Pool Compressed Class Space",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "opennms-performance-datasource",
+        "uid": "${DS_OPENNMS_PERFORMANCE}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 16,
+        "y": 14
+      },
+      "id": 9,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "min"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.4.2",
+      "targets": [
+        {
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "MetaSpcUsageInit",
+              "name": "MetaSpcUsageInit"
+            },
+            "fallbackAttribute": {},
+            "label": "Init",
+            "node": {
+              "id": "$java8Node",
+              "label": "$java8Node"
+            },
+            "resource": {
+              "id": "interfaceSnmp[java8-jvm]",
+              "label": "interfaceSnmp[java8-jvm]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "Init",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "A"
+        },
+        {
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "MetaSpcUsageMax",
+              "name": "MetaSpcUsageMax"
+            },
+            "fallbackAttribute": {},
+            "label": "Max",
+            "node": {
+              "id": "$java8Node",
+              "label": "$java8Node"
+            },
+            "resource": {
+              "id": "interfaceSnmp[java8-jvm]",
+              "label": "interfaceSnmp[java8-jvm]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "Max",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "B"
+        },
+        {
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "MetaSpcUsageUsed",
+              "name": "MetaSpcUsageUsed"
+            },
+            "fallbackAttribute": {},
+            "label": "Used",
+            "node": {
+              "id": "$java8Node",
+              "label": "$java8Node"
+            },
+            "resource": {
+              "id": "interfaceSnmp[java8-jvm]",
+              "label": "interfaceSnmp[java8-jvm]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "Used",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "C"
+        },
+        {
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "MetaSpcUsgCmmttd",
+              "name": "MetaSpcUsgCmmttd"
+            },
+            "fallbackAttribute": {},
+            "label": "Committed",
+            "node": {
+              "id": "$java8Node",
+              "label": "$java8Node"
+            },
+            "resource": {
+              "id": "interfaceSnmp[java8-jvm]",
+              "label": "interfaceSnmp[java8-jvm]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "Committed",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "D"
+        }
+      ],
+      "title": "Memory Pool Metaspace",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "opennms-performance-datasource",
+        "uid": "${DS_OPENNMS_PERFORMANCE}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 0,
+        "y": 21
+      },
+      "id": 10,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "min"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.4.2",
+      "targets": [
+        {
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "EdenUsageInit",
+              "name": "EdenUsageInit"
+            },
+            "fallbackAttribute": {},
+            "label": "Init",
+            "node": {
+              "id": "$java8Node",
+              "label": "$java8Node"
+            },
+            "resource": {
+              "id": "interfaceSnmp[java8-jvm]",
+              "label": "interfaceSnmp[java8-jvm]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "Init",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "A"
+        },
+        {
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "EdenUsageMax",
+              "name": "EdenUsageMax"
+            },
+            "fallbackAttribute": {},
+            "label": "Max",
+            "node": {
+              "id": "$java8Node",
+              "label": "$java8Node"
+            },
+            "resource": {
+              "id": "interfaceSnmp[java8-jvm]",
+              "label": "interfaceSnmp[java8-jvm]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "Max",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "B"
+        },
+        {
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "EdenUsageUsed",
+              "name": "EdenUsageUsed"
+            },
+            "fallbackAttribute": {},
+            "label": "Used",
+            "node": {
+              "id": "$java8Node",
+              "label": "$java8Node"
+            },
+            "resource": {
+              "id": "interfaceSnmp[java8-jvm]",
+              "label": "interfaceSnmp[java8-jvm]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "Used",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "C"
+        },
+        {
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "EdenUsgCmmttd",
+              "name": "EdenUsgCmmttd"
+            },
+            "fallbackAttribute": {},
+            "label": "Committed",
+            "node": {
+              "id": "$java8Node",
+              "label": "$java8Node"
+            },
+            "resource": {
+              "id": "interfaceSnmp[java8-jvm]",
+              "label": "interfaceSnmp[java8-jvm]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "Committed",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "D"
+        }
+      ],
+      "title": "Memory Pool Eden Space",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "opennms-performance-datasource",
+        "uid": "${DS_OPENNMS_PERFORMANCE}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 8,
+        "y": 21
+      },
+      "id": 11,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "min"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.4.2",
+      "targets": [
+        {
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "OGenUsageInit",
+              "name": "OGenUsageInit"
+            },
+            "fallbackAttribute": {},
+            "label": "Init",
+            "node": {
+              "id": "$java8Node",
+              "label": "$java8Node"
+            },
+            "resource": {
+              "id": "interfaceSnmp[java8-jvm]",
+              "label": "interfaceSnmp[java8-jvm]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "Init",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "A"
+        },
+        {
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "OGenUsageMax",
+              "name": "OGenUsageMax"
+            },
+            "fallbackAttribute": {},
+            "label": "Max",
+            "node": {
+              "id": "$java8Node",
+              "label": "$java8Node"
+            },
+            "resource": {
+              "id": "interfaceSnmp[java8-jvm]",
+              "label": "interfaceSnmp[java8-jvm]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "Max",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "B"
+        },
+        {
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "OGenUsageUsed",
+              "name": "OGenUsageUsed"
+            },
+            "fallbackAttribute": {},
+            "label": "Used",
+            "node": {
+              "id": "$java8Node",
+              "label": "$java8Node"
+            },
+            "resource": {
+              "id": "interfaceSnmp[java8-jvm]",
+              "label": "interfaceSnmp[java8-jvm]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "Used",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "C"
+        },
+        {
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "OGenUsgCmmttd",
+              "name": "OGenUsgCmmttd"
+            },
+            "fallbackAttribute": {},
+            "label": "Committed",
+            "node": {
+              "id": "$java8Node",
+              "label": "$java8Node"
+            },
+            "resource": {
+              "id": "interfaceSnmp[java8-jvm]",
+              "label": "interfaceSnmp[java8-jvm]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "Committed",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "D"
+        }
+      ],
+      "title": "Memory Pool Old Generation Space",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "opennms-performance-datasource",
+        "uid": "${DS_OPENNMS_PERFORMANCE}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 16,
+        "y": 21
+      },
+      "id": 12,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "min"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.4.2",
+      "targets": [
+        {
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "SurvUsageInit",
+              "name": "SurvUsageInit"
+            },
+            "fallbackAttribute": {},
+            "label": "Init",
+            "node": {
+              "id": "$java8Node",
+              "label": "$java8Node"
+            },
+            "resource": {
+              "id": "interfaceSnmp[java8-jvm]",
+              "label": "interfaceSnmp[java8-jvm]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "Init",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "A"
+        },
+        {
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "SurvUsageMax",
+              "name": "SurvUsageMax"
+            },
+            "fallbackAttribute": {},
+            "label": "Max",
+            "node": {
+              "id": "$java8Node",
+              "label": "$java8Node"
+            },
+            "resource": {
+              "id": "interfaceSnmp[java8-jvm]",
+              "label": "interfaceSnmp[java8-jvm]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "Max",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "B"
+        },
+        {
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "SurvUsageUsed",
+              "name": "SurvUsageUsed"
+            },
+            "fallbackAttribute": {},
+            "label": "Used",
+            "node": {
+              "id": "$java8Node",
+              "label": "$java8Node"
+            },
+            "resource": {
+              "id": "interfaceSnmp[java8-jvm]",
+              "label": "interfaceSnmp[java8-jvm]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "Used",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "C"
+        },
+        {
+          "attribute": {
+            "aggregation": {
+              "label": "AVERAGE"
+            },
+            "attribute": {
+              "label": "SurvUsgCmmttd",
+              "name": "SurvUsgCmmttd"
+            },
+            "fallbackAttribute": {},
+            "label": "Committed",
+            "node": {
+              "id": "$java8Node",
+              "label": "$java8Node"
+            },
+            "resource": {
+              "id": "interfaceSnmp[java8-jvm]",
+              "label": "interfaceSnmp[java8-jvm]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "Committed",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "D"
+        }
+      ],
+      "title": "Memory Pool Survivor Space",
+      "type": "timeseries"
+    }
+  ],
+  "refresh": "1m",
+  "schemaVersion": 39,
+  "tags": [
+    "OpenNMS"
+  ],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": "OpenNMS Performance",
+          "value": "PF64BB6D6ECC8F3F8"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "OpenNMS Instance",
+        "multi": false,
+        "name": "onms_instance",
+        "options": [],
+        "query": "opennms-performance-datasource",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "opennms-performance-datasource",
+          "uid": "${DS_OPENNMS_PERFORMANCE}"
+        },
+        "definition": "",
+        "hide": 0,
+        "includeAll": false,
+        "multi": false,
+        "name": "java8Node",
+        "options": [],
+        "query": "nodeFilter(serviceName like 'JMX-Java8-JVM%')",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
+  },
+  "time": {
+    "from": "now-24h",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ],
+    "time_options": [
+      "5m",
+      "15m",
+      "1h",
+      "6h",
+      "12h",
+      "24h",
+      "2d",
+      "7d",
+      "30d"
+    ]
+  },
+  "timezone": "",
+  "title": "Java 8 Memory Dashboard",
+  "uid": "ddlwnz77w4xs0c",
+  "version": 2,
+  "weekStart": ""
+}

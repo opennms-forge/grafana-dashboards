@@ -1,30 +1,43 @@
 {
-  "__inputs": [],
+  "__inputs": [
+    {
+      "name": "DS_OPENNMS_PERFORMANCE",
+      "label": "OpenNMS Performance",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "opennms-performance-datasource",
+      "pluginName": "OpenNMS Performance"
+    }
+  ],
+  "__elements": {},
   "__requires": [
     {
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "5.3.4"
-    },
-    {
-      "type": "panel",
-      "id": "graph",
-      "name": "Graph",
-      "version": "5.0.0"
+      "version": "10.4.2"
     },
     {
       "type": "datasource",
-      "id": "opennms-helm-performance-datasource",
+      "id": "opennms-performance-datasource",
       "name": "OpenNMS Performance",
-      "version": "1.0.0"
+      "version": "9"
+    },
+    {
+      "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
     }
   ],
   "annotations": {
     "list": [
       {
         "builtIn": 1,
-        "datasource": "-- Grafana --",
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -35,20 +48,72 @@
   },
   "description": "Grafana pendant for Node-Level Performance Data KSC graphs",
   "editable": true,
-  "gnetId": null,
+  "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
   "id": null,
-  "iteration": 1550605840959,
   "links": [],
   "panels": [
     {
       "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "$instance",
-      "decimals": null,
-      "fill": 1,
+      "datasource": {
+        "type": "opennms-performance-datasource",
+        "uid": "${DS_OPENNMS_PERFORMANCE}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "Percent",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 10,
         "w": 12,
@@ -56,371 +121,463 @@
         "y": 0
       },
       "id": 18,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": true,
-        "min": true,
-        "rightSide": false,
-        "show": true,
-        "sideWidth": 250,
-        "total": false,
-        "values": true
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "min"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
       },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
+      "pluginVersion": "9.4.7",
       "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
       "targets": [
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "memTotalReal",
+              "name": "memTotalReal"
+            },
+            "fallbackAttribute": {},
+            "label": "memTotalReal",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "memTotalReal",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
-          "hide": true,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
           "label": "memTotalReal",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "A",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "A"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "memAvailReal",
+              "name": "memAvailReal"
+            },
+            "fallbackAttribute": {},
+            "label": "memAvailReal",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "memAvailReal",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
-          "hide": true,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
           "label": "memAvailReal",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "B",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "B"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "memBuffer",
+              "name": "memBuffer"
+            },
+            "fallbackAttribute": {},
+            "label": "memBuffer",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "memBuffer",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
-          "hide": true,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
           "label": "memBuffer",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "C",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "C"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "memCached",
+              "name": "memCached"
+            },
+            "fallbackAttribute": {},
+            "label": "memCached",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "memCached",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
-          "hide": true,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
           "label": "memCached",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "D",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "D"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "hrMemorySize",
+              "name": "hrMemorySize"
+            },
+            "fallbackAttribute": {},
+            "label": "hrMemorySize",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "hrMemorySize",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
-          "hide": true,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
           "label": "hrMemorySize",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "F",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "F"
         },
         {
+          "attribute": {},
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
           "expression": "(memTotalReal-memAvailReal-memBuffer-memCached)/hrMemorySize*100",
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
           "label": "Memory",
-          "refId": "E",
-          "type": "expression"
+          "performanceState": {},
+          "performanceType": {
+            "label": "Expression",
+            "value": 2
+          },
+          "queryType": "",
+          "refId": "E"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "CpuRawUser",
+              "name": "CpuRawUser"
+            },
+            "fallbackAttribute": {},
+            "label": "CpuRawUser",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "CpuRawUser",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
-          "hide": true,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
           "label": "CpuRawUser",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "H",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "H"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "CpuRawNice",
+              "name": "CpuRawNice"
+            },
+            "fallbackAttribute": {},
+            "label": "CpuRawNice",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "CpuRawNice",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
-          "hide": true,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
           "label": "CpuRawNice",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "G",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "G"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "CpuRawSystem",
+              "name": "CpuRawSystem"
+            },
+            "fallbackAttribute": {},
+            "label": "CpuRawSystem",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "CpuRawSystem",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
-          "hide": true,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
           "label": "CpuRawSystem",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "I",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "I"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "CpuRawIdle",
+              "name": "CpuRawIdle"
+            },
+            "fallbackAttribute": {},
+            "label": "CpuRawIdle",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "CpuRawIdle",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
-          "hide": true,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
           "label": "CpuRawIdle",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "J",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "J"
         },
         {
+          "attribute": {},
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
           "expression": "(( CpuRawUser + CpuRawNice + CpuRawSystem )   / ( CpuRawUser + CpuRawNice  + CpuRawSystem + CpuRawIdle ) * 100.0)",
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
           "label": "CPU",
-          "refId": "K",
-          "type": "expression"
+          "performanceState": {},
+          "performanceType": {
+            "label": "Expression",
+            "value": 2
+          },
+          "queryType": "",
+          "refId": "K"
         }
       ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "CPU & Mem Usage (%)",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "percent",
-          "label": "Percent",
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "type": "timeseries"
     },
     {
       "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "$instance",
-      "decimals": null,
-      "fill": 1,
+      "datasource": {
+        "type": "opennms-performance-datasource",
+        "uid": "${DS_OPENNMS_PERFORMANCE}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "Load",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 10,
         "w": 12,
@@ -428,205 +585,394 @@
         "y": 0
       },
       "id": 3,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": true,
-        "min": true,
-        "rightSide": false,
-        "show": true,
-        "sideWidth": 250,
-        "total": false,
-        "values": true
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "min"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
       },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null as zero",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
+      "pluginVersion": "9.4.7",
       "seriesOverrides": [
         {
           "alias": "Cores",
           "fill": 0
         }
       ],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
       "targets": [
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "loadavg1",
+              "name": "loadavg1"
+            },
+            "fallbackAttribute": {},
+            "label": "avg1",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "loadavg1",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
-          "hide": true,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
-          "label": "avg1",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
-          },
-          "refId": "A",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
-        },
-        {
-          "application": {
-            "filter": ""
-          },
-          "attribute": "loadavg5",
-          "functions": [],
-          "group": {
-            "filter": ""
-          },
-          "hide": true,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
-          "label": "avg5",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
-          },
-          "refId": "B",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
-        },
-        {
-          "application": {
-            "filter": ""
-          },
-          "attribute": "loadavg15",
-          "functions": [],
-          "group": {
-            "filter": ""
-          },
-          "hide": true,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
-          "label": "avg15",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
-          },
-          "refId": "C",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
-        },
-        {
-          "expression": "avg1/100",
-          "label": "1 Minute",
-          "refId": "E",
-          "type": "expression"
-        },
-        {
-          "expression": "avg5/100",
-          "label": "5 Minutes",
-          "refId": "D",
-          "type": "expression"
-        },
-        {
-          "expression": "avg15/100",
-          "label": "15 Minutes",
-          "refId": "F",
-          "type": "expression"
-        },
-        {
-          "attribute": "CpuNumCpus",
+          "filter": {},
+          "filterState": {},
           "hide": false,
-          "label": "Cores",
-          "nodeId": "$netSnmpLinux",
-          "refId": "G",
-          "resourceId": "nodeSnmp[]",
-          "type": "attribute"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "System Load",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "none",
-          "label": "Load",
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
+          "key": "",
+          "label": "avg1",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "A"
         },
         {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "loadavg5",
+              "name": "loadavg5"
+            },
+            "fallbackAttribute": {},
+            "label": "avg5",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "avg5",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "B"
+        },
+        {
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "loadavg15",
+              "name": "loadavg15"
+            },
+            "fallbackAttribute": {},
+            "label": "avg15",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "avg15",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "C"
+        },
+        {
+          "attribute": {},
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "expression": "avg1/100",
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "1 Minute",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Expression",
+            "value": 2
+          },
+          "queryType": "",
+          "refId": "E"
+        },
+        {
+          "attribute": {},
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "expression": "avg5/100",
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "5 Minutes",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Expression",
+            "value": 2
+          },
+          "queryType": "",
+          "refId": "D"
+        },
+        {
+          "attribute": {},
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "expression": "avg15/100",
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "15 Minutes",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Expression",
+            "value": 2
+          },
+          "queryType": "",
+          "refId": "F"
+        },
+        {
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "CpuNumCpus",
+              "name": "CpuNumCpus"
+            },
+            "fallbackAttribute": {},
+            "label": "Cores",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "Cores",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "G"
         }
       ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "title": "System Load",
+      "type": "timeseries"
     },
     {
       "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "$instance",
-      "decimals": null,
-      "fill": 1,
+      "datasource": {
+        "type": "opennms-performance-datasource",
+        "uid": "${DS_OPENNMS_PERFORMANCE}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "kbytes"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "memCached"
+            },
+            "properties": [
+              {
+                "id": "custom.stacking",
+                "value": {
+                  "group": true,
+                  "mode": "normal"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "memBuffer"
+            },
+            "properties": [
+              {
+                "id": "custom.stacking",
+                "value": {
+                  "group": true,
+                  "mode": "normal"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "memAvailSwap"
+            },
+            "properties": [
+              {
+                "id": "custom.stacking",
+                "value": {
+                  "group": true,
+                  "mode": "normal"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "memShared"
+            },
+            "properties": [
+              {
+                "id": "custom.stacking",
+                "value": {
+                  "group": true,
+                  "mode": "normal"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "memUsed"
+            },
+            "properties": [
+              {
+                "id": "custom.stacking",
+                "value": {
+                  "group": true,
+                  "mode": "normal"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "memAvailReal"
+            },
+            "properties": [
+              {
+                "id": "custom.stacking",
+                "value": {
+                  "group": true,
+                  "mode": "normal"
+                }
+              }
+            ]
+          }
+        ]
+      },
       "gridPos": {
         "h": 14,
         "w": 12,
@@ -634,26 +980,23 @@
         "y": 10
       },
       "id": 1,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": true,
-        "min": true,
-        "rightSide": false,
-        "show": true,
-        "sideWidth": 250,
-        "total": false,
-        "values": true
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "min"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
       },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "connected",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
+      "pluginVersion": "9.4.7",
       "seriesOverrides": [
         {
           "alias": "memCached",
@@ -685,253 +1028,315 @@
           "zindex": 3
         }
       ],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
       "targets": [
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "memAvailSwap",
+              "name": "memAvailSwap"
+            },
+            "fallbackAttribute": {},
+            "label": "memAvailSwap",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "memAvailSwap",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
+          "filter": {},
+          "filterState": {},
           "hide": false,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "key": "",
           "label": "memAvailSwap",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "A",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "A"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "memAvailReal",
+              "name": "memAvailReal"
+            },
+            "fallbackAttribute": {},
+            "label": "memAvailReal",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "memAvailReal",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
+          "filter": {},
+          "filterState": {},
           "hide": false,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "key": "",
           "label": "memAvailReal",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "C",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "C"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "memBuffer",
+              "name": "memBuffer"
+            },
+            "fallbackAttribute": {},
+            "label": "memBuffer",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "memBuffer",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
+          "filter": {},
+          "filterState": {},
           "hide": false,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "key": "",
           "label": "memBuffer",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "D",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "D"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "memCached",
+              "name": "memCached"
+            },
+            "fallbackAttribute": {},
+            "label": "memCached",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "memCached",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
+          "filter": {},
+          "filterState": {},
           "hide": false,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "key": "",
           "label": "memCached",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "E",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "E"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "memShared",
+              "name": "memShared"
+            },
+            "fallbackAttribute": {},
+            "label": "memShared",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "memShared",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
+          "filter": {},
+          "filterState": {},
           "hide": false,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "key": "",
           "label": "memShared",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "F",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "F"
         },
         {
+          "attribute": {},
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
           "expression": "memTotalReal - memBuffer - memCached - memShared - memAvailReal",
+          "filter": {},
+          "filterState": {},
           "hide": false,
+          "key": "",
           "label": "memUsed",
-          "refId": "G",
-          "type": "expression"
+          "performanceState": {},
+          "performanceType": {
+            "label": "Expression",
+            "value": 2
+          },
+          "queryType": "",
+          "refId": "G"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "memTotalReal",
+              "name": "memTotalReal"
+            },
+            "fallbackAttribute": {},
+            "label": "memTotalReal",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "memTotalReal",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
+          "filter": {},
+          "filterState": {},
           "hide": false,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "key": "",
           "label": "memTotalReal",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "B",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "B"
         }
       ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Memory Statistics",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "kbytes",
-          "label": "",
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "type": "timeseries"
     },
     {
       "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "$instance",
-      "decimals": null,
+      "datasource": {
+        "type": "opennms-performance-datasource",
+        "uid": "${DS_OPENNMS_PERFORMANCE}"
+      },
       "description": "The number of 'ticks' (typically 1/100s)  spent processing code.",
-      "fill": 1,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "Ticks",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 14,
         "w": 12,
@@ -939,26 +1344,23 @@
         "y": 10
       },
       "id": 12,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": true,
-        "min": true,
-        "rightSide": false,
-        "show": true,
-        "sideWidth": 250,
-        "total": false,
-        "values": true
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "min"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
       },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "connected",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
+      "pluginVersion": "9.4.7",
       "seriesOverrides": [
         {
           "alias": "/.+CpuRawUser/"
@@ -973,307 +1375,431 @@
           "alias": "/.+CpuRawIdle/"
         }
       ],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
       "targets": [
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "CpuRawInterrupt",
+              "name": "CpuRawInterrupt"
+            },
+            "fallbackAttribute": {},
+            "label": "CpuRawInterrupt",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "CpuRawInterrupt",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
-          "hide": true,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
           "label": "CpuRawInterrupt",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "A",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "A"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "CpuRawUser",
+              "name": "CpuRawUser"
+            },
+            "fallbackAttribute": {},
+            "label": "CpuRawUser",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "CpuRawUser",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
-          "hide": true,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
           "label": "CpuRawUser",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "E",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "E"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "CpuRawWait",
+              "name": "CpuRawWait"
+            },
+            "fallbackAttribute": {},
+            "label": "CpuRawWait",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "CpuRawWait",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
-          "hide": true,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
           "label": "CpuRawWait",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "B",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "B"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "CpuRawNice",
+              "name": "CpuRawNice"
+            },
+            "fallbackAttribute": {},
+            "label": "CpuRawNice",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "CpuRawNice",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
-          "hide": true,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
           "label": "CpuRawNice",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "F",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "F"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "CpuRawSystem",
+              "name": "CpuRawSystem"
+            },
+            "fallbackAttribute": {},
+            "label": "CpuRawSystem",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "CpuRawSystem",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
-          "hide": true,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
           "label": "CpuRawSystem",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "C",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "C"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "CpuRawKernel",
+              "name": "CpuRawKernel"
+            },
+            "fallbackAttribute": {},
+            "label": "CpuRawKernel",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "CpuRawKernel",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
-          "hide": true,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
           "label": "CpuRawKernel",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "D",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "D"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "CpuRawSoftIRQ",
+              "name": "CpuRawSoftIRQ"
+            },
+            "fallbackAttribute": {},
+            "label": "CpuRawSoftIRQ",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "CpuRawSoftIRQ",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
-          "hide": true,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
           "label": "CpuRawSoftIRQ",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "G",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "G"
         },
         {
+          "attribute": {},
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
           "expression": "CpuRawSystem + CpuRawInterrupt",
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
           "label": "System",
-          "refId": "I",
-          "type": "expression"
+          "performanceState": {},
+          "performanceType": {
+            "label": "Expression",
+            "value": 2
+          },
+          "queryType": "",
+          "refId": "I"
         },
         {
+          "attribute": {},
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
           "expression": "CpuRawWait + System",
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
           "label": "Wait",
-          "refId": "J",
-          "type": "expression"
+          "performanceState": {},
+          "performanceType": {
+            "label": "Expression",
+            "value": 2
+          },
+          "queryType": "",
+          "refId": "J"
         },
         {
+          "attribute": {},
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
           "expression": "CpuRawNice + Wait",
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
           "label": "Nice",
-          "refId": "K",
-          "type": "expression"
+          "performanceState": {},
+          "performanceType": {
+            "label": "Expression",
+            "value": 2
+          },
+          "queryType": "",
+          "refId": "K"
         },
         {
+          "attribute": {},
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
           "expression": "CpuRawUser + Nice",
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
           "label": "User",
-          "refId": "L",
-          "type": "expression"
+          "performanceState": {},
+          "performanceType": {
+            "label": "Expression",
+            "value": 2
+          },
+          "queryType": "",
+          "refId": "L"
         },
         {
+          "attribute": {},
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
           "expression": "CpuRawInterrupt",
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
           "label": "Interrupts",
-          "refId": "H",
-          "type": "expression"
+          "performanceState": {},
+          "performanceType": {
+            "label": "Expression",
+            "value": 2
+          },
+          "queryType": "",
+          "refId": "H"
         }
       ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "CPU Usage",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": null,
-          "format": "none",
-          "label": "Ticks",
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "type": "timeseries"
     },
     {
       "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "$instance",
-      "decimals": null,
-      "fill": 1,
+      "datasource": {
+        "type": "opennms-performance-datasource",
+        "uid": "${DS_OPENNMS_PERFORMANCE}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "Count",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 10,
         "w": 12,
@@ -1281,204 +1807,238 @@
         "y": 24
       },
       "id": 15,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": true,
-        "min": true,
-        "rightSide": false,
-        "show": true,
-        "sideWidth": 250,
-        "total": false,
-        "values": true
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "min"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
       },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null as zero",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
+      "pluginVersion": "9.4.7",
       "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
       "targets": [
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "tcpInErrors",
+              "name": "tcpInErrors"
+            },
+            "fallbackAttribute": {},
+            "label": "Errored Segments",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "tcpInErrors",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
+          "filter": {},
+          "filterState": {},
           "hide": false,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "key": "",
           "label": "Errored Segments",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "A",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "A"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "tcpAttemptFails",
+              "name": "tcpAttemptFails"
+            },
+            "fallbackAttribute": {},
+            "label": "Failed Connections",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "tcpAttemptFails",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
+          "filter": {},
+          "filterState": {},
           "hide": false,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "key": "",
           "label": "Failed Connections",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "B",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "B"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "tcpEstabResets",
+              "name": "tcpEstabResets"
+            },
+            "fallbackAttribute": {},
+            "label": "Established resets",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "tcpEstabResets",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
+          "filter": {},
+          "filterState": {},
           "hide": false,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "key": "",
           "label": "Established resets",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "D",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "D"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "tcpOutRsts",
+              "name": "tcpOutRsts"
+            },
+            "fallbackAttribute": {},
+            "label": "Reset Sent",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "tcpOutRsts",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
+          "filter": {},
+          "filterState": {},
           "hide": false,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "key": "",
           "label": "Reset Sent",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "C",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "C"
         }
       ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "TCP Errors and Failures",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "none",
-          "label": "Count",
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "type": "timeseries"
     },
     {
       "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "$instance",
-      "decimals": null,
-      "fill": 1,
+      "datasource": {
+        "type": "opennms-performance-datasource",
+        "uid": "${DS_OPENNMS_PERFORMANCE}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "Count",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 10,
         "w": 12,
@@ -1486,147 +2046,169 @@
         "y": 24
       },
       "id": 13,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": true,
-        "min": true,
-        "rightSide": false,
-        "show": true,
-        "sideWidth": 250,
-        "total": false,
-        "values": true
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "min"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
       },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null as zero",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
+      "pluginVersion": "9.4.7",
       "seriesOverrides": [
         {
           "alias": "Out",
           "transform": "negative-Y"
         }
       ],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
       "targets": [
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "tcpActiveOpens",
+              "name": "tcpActiveOpens"
+            },
+            "fallbackAttribute": {},
+            "label": "Out",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "tcpActiveOpens",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
+          "filter": {},
+          "filterState": {},
           "hide": false,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "key": "",
           "label": "Out",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "A",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "A"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "tcpPassiveOpens",
+              "name": "tcpPassiveOpens"
+            },
+            "fallbackAttribute": {},
+            "label": "In",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "tcpPassiveOpens",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
+          "filter": {},
+          "filterState": {},
           "hide": false,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "key": "",
           "label": "In",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "B",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "B"
         }
       ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "TCP Open Connections",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "none",
-          "label": "Count",
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "type": "timeseries"
     },
     {
       "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "$instance",
-      "decimals": null,
-      "fill": 1,
+      "datasource": {
+        "type": "opennms-performance-datasource",
+        "uid": "${DS_OPENNMS_PERFORMANCE}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "Count",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 9,
         "w": 12,
@@ -1634,178 +2216,206 @@
         "y": 34
       },
       "id": 16,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": true,
-        "min": true,
-        "rightSide": false,
-        "show": true,
-        "sideWidth": 250,
-        "total": false,
-        "values": true
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "min"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
       },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null as zero",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
+      "pluginVersion": "9.4.7",
       "seriesOverrides": [
         {
           "alias": "Out",
           "transform": "negative-Y"
         }
       ],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
       "targets": [
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "tcpInSegs",
+              "name": "tcpInSegs"
+            },
+            "fallbackAttribute": {},
+            "label": "In",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "tcpInSegs",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
+          "filter": {},
+          "filterState": {},
           "hide": false,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "key": "",
           "label": "In",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "A",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "A"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "tcpOutSegs",
+              "name": "tcpOutSegs"
+            },
+            "fallbackAttribute": {},
+            "label": "Out",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "tcpOutSegs",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
+          "filter": {},
+          "filterState": {},
           "hide": false,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "key": "",
           "label": "Out",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "B",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "B"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "tcpRetransSegs",
+              "name": "tcpRetransSegs"
+            },
+            "fallbackAttribute": {},
+            "label": "Retransmissions",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "tcpRetransSegs",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
+          "filter": {},
+          "filterState": {},
           "hide": false,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "key": "",
           "label": "Retransmissions",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "D",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "D"
         }
       ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "TCP Segments",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "none",
-          "label": "Count",
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "type": "timeseries"
     },
     {
       "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "$instance",
-      "decimals": null,
-      "fill": 1,
+      "datasource": {
+        "type": "opennms-performance-datasource",
+        "uid": "${DS_OPENNMS_PERFORMANCE}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "Count",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 9,
         "w": 12,
@@ -1813,111 +2423,127 @@
         "y": 34
       },
       "id": 14,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": true,
-        "min": true,
-        "rightSide": false,
-        "show": true,
-        "sideWidth": 250,
-        "total": false,
-        "values": true
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "min"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
       },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null as zero",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
+      "pluginVersion": "9.4.7",
       "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
       "targets": [
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "tcpCurrEstab",
+              "name": "tcpCurrEstab"
+            },
+            "fallbackAttribute": {},
+            "label": "Current",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "tcpCurrEstab",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
+          "filter": {},
+          "filterState": {},
           "hide": false,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "key": "",
           "label": "Current",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "A",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "A"
         }
       ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Current TCP Connections",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "none",
-          "label": "Count",
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "type": "timeseries"
     },
     {
       "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "$instance",
-      "decimals": null,
-      "fill": 1,
+      "datasource": {
+        "type": "opennms-performance-datasource",
+        "uid": "${DS_OPENNMS_PERFORMANCE}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "Count",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 10,
         "w": 12,
@@ -1925,204 +2551,238 @@
         "y": 43
       },
       "id": 19,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": true,
-        "min": true,
-        "rightSide": false,
-        "show": true,
-        "sideWidth": 250,
-        "total": false,
-        "values": true
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "min"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
       },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
+      "pluginVersion": "9.4.7",
       "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
       "targets": [
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "hrSystemNumUsers",
+              "name": "hrSystemNumUsers"
+            },
+            "fallbackAttribute": {},
+            "label": "Users",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "hrSystemNumUsers",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
+          "filter": {},
+          "filterState": {},
           "hide": false,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "key": "",
           "label": "Users",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "A",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "A"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "SysContext",
+              "name": "SysContext"
+            },
+            "fallbackAttribute": {},
+            "label": "Context",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "SysContext",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
+          "filter": {},
+          "filterState": {},
           "hide": false,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "key": "",
           "label": "Context",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "B",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "B"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "SysInterrupts",
+              "name": "SysInterrupts"
+            },
+            "fallbackAttribute": {},
+            "label": "Interrupts",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "SysInterrupts",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
+          "filter": {},
+          "filterState": {},
           "hide": false,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "key": "",
           "label": "Interrupts",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "C",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "C"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "hrSystemProcesses",
+              "name": "hrSystemProcesses"
+            },
+            "fallbackAttribute": {},
+            "label": "Processes",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "hrSystemProcesses",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
+          "filter": {},
+          "filterState": {},
           "hide": false,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "key": "",
           "label": "Processes",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "D",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "D"
         }
       ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "System Counts",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "none",
-          "label": "Count",
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "type": "timeseries"
     },
     {
       "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "$instance",
-      "decimals": null,
-      "fill": 1,
+      "datasource": {
+        "type": "opennms-performance-datasource",
+        "uid": "${DS_OPENNMS_PERFORMANCE}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "Days",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 5,
         "w": 12,
@@ -2130,118 +2790,146 @@
         "y": 43
       },
       "id": 2,
-      "legend": {
-        "alignAsTable": true,
-        "avg": false,
-        "current": false,
-        "max": true,
-        "min": true,
-        "rightSide": false,
-        "show": true,
-        "sideWidth": 250,
-        "total": false,
-        "values": true
+      "options": {
+        "legend": {
+          "calcs": [
+            "max",
+            "min"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
       },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
+      "pluginVersion": "9.4.7",
       "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
       "targets": [
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "hrSystemUptime",
+              "name": "hrSystemUptime"
+            },
+            "fallbackAttribute": {},
+            "label": "hrSystemUptimeRaw",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "hrSystemUptime",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
-          "hide": true,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
           "label": "hrSystemUptimeRaw",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "A",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "A"
         },
         {
+          "attribute": {},
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
           "expression": "hrSystemUptimeRaw / 8640000",
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
           "label": "Days",
-          "refId": "B",
-          "type": "expression"
+          "performanceState": {},
+          "performanceType": {
+            "label": "Expression",
+            "value": 2
+          },
+          "queryType": "",
+          "refId": "B"
         }
       ],
-      "thresholds": [],
-      "timeFrom": "4w",
-      "timeShift": null,
       "title": "System Uptime",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": 0,
-          "format": "none",
-          "label": "Days",
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "type": "timeseries"
     },
     {
       "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "$instance",
-      "decimals": null,
-      "fill": 1,
+      "datasource": {
+        "type": "opennms-performance-datasource",
+        "uid": "${DS_OPENNMS_PERFORMANCE}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "Bytes",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 5,
         "w": 12,
@@ -2249,150 +2937,146 @@
         "y": 48
       },
       "id": 10,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": true,
-        "min": true,
-        "rightSide": false,
-        "show": true,
-        "sideWidth": 250,
-        "total": false,
-        "values": true
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "min"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
       },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
+      "pluginVersion": "9.4.7",
       "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
       "targets": [
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "SwapIn",
+              "name": "SwapIn"
+            },
+            "fallbackAttribute": {},
+            "label": "SwapInRaw",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "SwapIn",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
-          "hide": true,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
           "label": "SwapInRaw",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "A",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "A"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "SwapOut",
+              "name": "SwapOut"
+            },
+            "fallbackAttribute": {},
+            "label": "SwapOutRaw",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "SwapOut",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
-          "hide": true,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
           "label": "SwapOutRaw",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "B",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "B"
         },
         {
+          "attribute": {},
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
           "expression": "SwapInRaw / 100",
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
           "label": "SwapIn",
-          "refId": "C",
-          "type": "expression"
+          "performanceState": {},
+          "performanceType": {
+            "label": "Expression",
+            "value": 2
+          },
+          "queryType": "",
+          "refId": "C"
         },
         {
+          "attribute": {},
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
           "expression": "SwapOutRaw / 100",
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
           "label": "SwapOut",
-          "refId": "D",
-          "type": "expression"
+          "performanceState": {},
+          "performanceType": {
+            "label": "Expression",
+            "value": 2
+          },
+          "queryType": "",
+          "refId": "D"
         }
       ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Swap",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "none",
-          "label": "Bytes",
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "type": "timeseries"
     }
   ],
   "refresh": "5m",
-  "schemaVersion": 16,
-  "style": "dark",
+  "schemaVersion": 39,
   "tags": [
     "OpenNMS"
   ],
@@ -2400,23 +3084,29 @@
     "list": [
       {
         "current": {
-          "text": "OpenNMS FUL Performance",
-          "value": "OpenNMS FUL Performance"
+          "selected": false,
+          "text": "OpenNMS Performance",
+          "value": "PF64BB6D6ECC8F3F8"
         },
         "hide": 0,
+        "includeAll": false,
         "label": "OpenNMS Instance",
+        "multi": false,
         "name": "instance",
         "options": [],
-        "query": "opennms-helm-performance-datasource",
+        "query": "opennms-performance-datasource",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
         "type": "datasource"
       },
       {
-        "allValue": null,
         "current": {},
-        "datasource": "$instance",
+        "datasource": {
+          "type": "opennms-performance-datasource",
+          "uid": "${DS_OPENNMS_PERFORMANCE}"
+        },
+        "definition": "",
         "hide": 0,
         "includeAll": false,
         "label": "Nodes",
@@ -2429,7 +3119,6 @@
         "skipUrlSync": false,
         "sort": 1,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
@@ -2467,6 +3156,7 @@
   },
   "timezone": "",
   "title": "OpenNMS Linux Node-level Performance Data",
-  "uid": "LMGa5b7mk",
-  "version": 30
+  "uid": "fdlwqcx61845cc",
+  "version": 1,
+  "weekStart": ""
 }

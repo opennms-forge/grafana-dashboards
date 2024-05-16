@@ -1,30 +1,43 @@
 {
-  "__inputs": [],
+  "__inputs": [
+    {
+      "name": "DS_OPENNMS_PERFORMANCE",
+      "label": "OpenNMS Performance",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "opennms-performance-datasource",
+      "pluginName": "OpenNMS Performance"
+    }
+  ],
+  "__elements": {},
   "__requires": [
     {
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "5.3.4"
-    },
-    {
-      "type": "panel",
-      "id": "graph",
-      "name": "Graph",
-      "version": "5.0.0"
+      "version": "10.4.2"
     },
     {
       "type": "datasource",
-      "id": "opennms-helm-performance-datasource",
+      "id": "opennms-performance-datasource",
       "name": "OpenNMS Performance",
-      "version": "1.0.0"
+      "version": "9"
+    },
+    {
+      "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
     }
   ],
   "annotations": {
     "list": [
       {
         "builtIn": 1,
-        "datasource": "-- Grafana --",
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -35,14 +48,17 @@
   },
   "description": "Important linux system metrics at a glance",
   "editable": true,
-  "gnetId": null,
+  "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
   "id": null,
-  "iteration": 1550606445439,
   "links": [],
   "panels": [
     {
       "collapsed": false,
+      "datasource": {
+        "type": "opennms-performance-datasource",
+        "uid": "PF64BB6D6ECC8F3F8"
+      },
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -52,17 +68,79 @@
       "id": 7,
       "panels": [],
       "repeat": "netSnmpLinux",
+      "targets": [
+        {
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "PF64BB6D6ECC8F3F8"
+          },
+          "refId": "A"
+        }
+      ],
       "title": "$netSnmpLinux",
       "type": "row"
     },
     {
       "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "$instance",
-      "decimals": null,
-      "fill": 1,
+      "datasource": {
+        "type": "opennms-performance-datasource",
+        "uid": "${DS_OPENNMS_PERFORMANCE}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "Percent",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 9,
         "w": 6,
@@ -70,372 +148,464 @@
         "y": 1
       },
       "id": 4,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": true,
-        "min": true,
-        "rightSide": false,
-        "show": true,
-        "sideWidth": 250,
-        "total": false,
-        "values": true
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "min"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
       },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
+      "pluginVersion": "9.4.7",
       "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
       "targets": [
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "memTotalReal",
+              "name": "memTotalReal"
+            },
+            "fallbackAttribute": {},
+            "label": "memTotalReal",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "memTotalReal",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
+          "filter": {},
+          "filterState": {},
           "hide": true,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "key": "",
           "label": "memTotalReal",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "A",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "A"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "memAvailReal",
+              "name": "memAvailReal"
+            },
+            "fallbackAttribute": {},
+            "label": "memAvailReal",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "memAvailReal",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
+          "filter": {},
+          "filterState": {},
           "hide": true,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "key": "",
           "label": "memAvailReal",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "B",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "B"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "memBuffer",
+              "name": "memBuffer"
+            },
+            "fallbackAttribute": {},
+            "label": "memBuffer",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "memBuffer",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
+          "filter": {},
+          "filterState": {},
           "hide": true,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "key": "",
           "label": "memBuffer",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "C",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "C"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "memCached",
+              "name": "memCached"
+            },
+            "fallbackAttribute": {},
+            "label": "memCached",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "memCached",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
+          "filter": {},
+          "filterState": {},
           "hide": true,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "key": "",
           "label": "memCached",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "D",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "D"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "hrMemorySize",
+              "name": "hrMemorySize"
+            },
+            "fallbackAttribute": {},
+            "label": "hrMemorySize",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "hrMemorySize",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
+          "filter": {},
+          "filterState": {},
           "hide": true,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "key": "",
           "label": "hrMemorySize",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "F",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "F"
         },
         {
+          "attribute": {},
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
           "expression": "(memTotalReal-memAvailReal-memBuffer-memCached)/hrMemorySize*100",
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
           "label": "Memory",
-          "refId": "E",
-          "type": "expression"
+          "performanceState": {},
+          "performanceType": {
+            "label": "Expression",
+            "value": 2
+          },
+          "queryType": "",
+          "refId": "E"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "CpuRawUser",
+              "name": "CpuRawUser"
+            },
+            "fallbackAttribute": {},
+            "label": "CpuRawUser",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "CpuRawUser",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
+          "filter": {},
+          "filterState": {},
           "hide": true,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "key": "",
           "label": "CpuRawUser",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "H",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "H"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "CpuRawNice",
+              "name": "CpuRawNice"
+            },
+            "fallbackAttribute": {},
+            "label": "CpuRawNice",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "CpuRawNice",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
+          "filter": {},
+          "filterState": {},
           "hide": true,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "key": "",
           "label": "CpuRawNice",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "G",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "G"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "CpuRawSystem",
+              "name": "CpuRawSystem"
+            },
+            "fallbackAttribute": {},
+            "label": "CpuRawSystem",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "CpuRawSystem",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
+          "filter": {},
+          "filterState": {},
           "hide": true,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "key": "",
           "label": "CpuRawSystem",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "I",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "I"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "CpuRawIdle",
+              "name": "CpuRawIdle"
+            },
+            "fallbackAttribute": {},
+            "label": "CpuRawIdle",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "CpuRawIdle",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
+          "filter": {},
+          "filterState": {},
           "hide": true,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "key": "",
           "label": "CpuRawIdle",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "J",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "J"
         },
         {
+          "attribute": {},
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
           "expression": "(( CpuRawUser + CpuRawNice + CpuRawSystem )   / ( CpuRawUser + CpuRawNice  + CpuRawSystem + CpuRawIdle ) * 100.0)",
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
           "label": "CPU",
-          "refId": "K",
-          "type": "expression"
+          "performanceState": {},
+          "performanceType": {
+            "label": "Expression",
+            "value": 2
+          },
+          "queryType": "",
+          "refId": "K"
         }
       ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "CPU & Mem Usage",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "percent",
-          "label": "Percent",
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "type": "timeseries"
     },
     {
       "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "$instance",
-      "decimals": null,
+      "datasource": {
+        "type": "opennms-performance-datasource",
+        "uid": "${DS_OPENNMS_PERFORMANCE}"
+      },
       "description": "The number of 'ticks' (typically 1/100s) spent\nprocessing code.",
-      "fill": 1,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "Ticks",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 9,
         "w": 6,
@@ -443,298 +613,3090 @@
         "y": 1
       },
       "id": 5,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "hideEmpty": false,
-        "hideZero": false,
-        "max": true,
-        "min": true,
-        "rightSide": false,
-        "show": true,
-        "sideWidth": 250,
-        "total": false,
-        "values": true
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "min"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
       },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
+      "pluginVersion": "9.4.7",
       "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
       "targets": [
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": "Average"
+            },
+            "attribute": {
+              "label": "CpuRawInterrupt",
+              "name": "CpuRawInterrupt"
+            },
+            "fallbackAttribute": {},
+            "label": "CpuRawInterrupt",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "children": {
+                "offset": 0,
+                "resource": []
+              },
+              "externalValueAttributes": {},
+              "id": "nodeSnmp[]",
+              "label": "Node-level Performance Data",
+              "name": "",
+              "parentId": "node[linde-devpro-merge:fraliha057-n0.ad1.proemion.com]",
+              "rrdGraphAttributes": {
+                "CpuNumCpus": {
+                  "name": "CpuNumCpus",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuNumCpus.rrd"
+                },
+                "CpuRawGuest": {
+                  "name": "CpuRawGuest",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawGuest.rrd"
+                },
+                "CpuRawGuestNice": {
+                  "name": "CpuRawGuestNice",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawGuestNice.rrd"
+                },
+                "CpuRawIdle": {
+                  "name": "CpuRawIdle",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawIdle.rrd"
+                },
+                "CpuRawInterrupt": {
+                  "name": "CpuRawInterrupt",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawInterrupt.rrd"
+                },
+                "CpuRawKernel": {
+                  "name": "CpuRawKernel",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawKernel.rrd"
+                },
+                "CpuRawNice": {
+                  "name": "CpuRawNice",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawNice.rrd"
+                },
+                "CpuRawSoftIRQ": {
+                  "name": "CpuRawSoftIRQ",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawSoftIRQ.rrd"
+                },
+                "CpuRawSteal": {
+                  "name": "CpuRawSteal",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawSteal.rrd"
+                },
+                "CpuRawSystem": {
+                  "name": "CpuRawSystem",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawSystem.rrd"
+                },
+                "CpuRawUser": {
+                  "name": "CpuRawUser",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawUser.rrd"
+                },
+                "CpuRawWait": {
+                  "name": "CpuRawWait",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawWait.rrd"
+                },
+                "IORawReceived": {
+                  "name": "IORawReceived",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "IORawReceived.rrd"
+                },
+                "IORawSent": {
+                  "name": "IORawSent",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "IORawSent.rrd"
+                },
+                "RawBlksSwapIn": {
+                  "name": "RawBlksSwapIn",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "RawBlksSwapIn.rrd"
+                },
+                "RawBlksSwapOut": {
+                  "name": "RawBlksSwapOut",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "RawBlksSwapOut.rrd"
+                },
+                "SwapIn": {
+                  "name": "SwapIn",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "SwapIn.rrd"
+                },
+                "SwapOut": {
+                  "name": "SwapOut",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "SwapOut.rrd"
+                },
+                "SysContext": {
+                  "name": "SysContext",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "SysContext.rrd"
+                },
+                "SysInterrupts": {
+                  "name": "SysInterrupts",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "SysInterrupts.rrd"
+                },
+                "SysRawContext": {
+                  "name": "SysRawContext",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "SysRawContext.rrd"
+                },
+                "SysRawInterrupts": {
+                  "name": "SysRawInterrupts",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "SysRawInterrupts.rrd"
+                },
+                "cpucores": {
+                  "name": "cpucores",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "cpucores.rrd"
+                },
+                "foremanStatus": {
+                  "name": "foremanStatus",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "foremanStatus.rrd"
+                },
+                "hrMemorySize": {
+                  "name": "hrMemorySize",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "hrMemorySize.rrd"
+                },
+                "hrSystemNumUsers": {
+                  "name": "hrSystemNumUsers",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "hrSystemNumUsers.rrd"
+                },
+                "hrSystemProcesses": {
+                  "name": "hrSystemProcesses",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "hrSystemProcesses.rrd"
+                },
+                "hrSystemUptime": {
+                  "name": "hrSystemUptime",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "hrSystemUptime.rrd"
+                },
+                "icmpInAddrMaskReps": {
+                  "name": "icmpInAddrMaskReps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInAddrMaskReps.rrd"
+                },
+                "icmpInAddrMasks": {
+                  "name": "icmpInAddrMasks",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInAddrMasks.rrd"
+                },
+                "icmpInDestUnreachs": {
+                  "name": "icmpInDestUnreachs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInDestUnreachs.rrd"
+                },
+                "icmpInEchoReps": {
+                  "name": "icmpInEchoReps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInEchoReps.rrd"
+                },
+                "icmpInEchos": {
+                  "name": "icmpInEchos",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInEchos.rrd"
+                },
+                "icmpInErrors": {
+                  "name": "icmpInErrors",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInErrors.rrd"
+                },
+                "icmpInMsgs": {
+                  "name": "icmpInMsgs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInMsgs.rrd"
+                },
+                "icmpInParmProbs": {
+                  "name": "icmpInParmProbs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInParmProbs.rrd"
+                },
+                "icmpInRedirects": {
+                  "name": "icmpInRedirects",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInRedirects.rrd"
+                },
+                "icmpInSrcQuenchs": {
+                  "name": "icmpInSrcQuenchs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInSrcQuenchs.rrd"
+                },
+                "icmpInTimeExcds": {
+                  "name": "icmpInTimeExcds",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInTimeExcds.rrd"
+                },
+                "icmpInTimestampReps": {
+                  "name": "icmpInTimestampReps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInTimestampReps.rrd"
+                },
+                "icmpInTimestamps": {
+                  "name": "icmpInTimestamps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInTimestamps.rrd"
+                },
+                "icmpOutAddrMaskReps": {
+                  "name": "icmpOutAddrMaskReps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutAddrMaskReps.rrd"
+                },
+                "icmpOutAddrMasks": {
+                  "name": "icmpOutAddrMasks",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutAddrMasks.rrd"
+                },
+                "icmpOutDestUnreachs": {
+                  "name": "icmpOutDestUnreachs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutDestUnreachs.rrd"
+                },
+                "icmpOutEchoReps": {
+                  "name": "icmpOutEchoReps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutEchoReps.rrd"
+                },
+                "icmpOutEchos": {
+                  "name": "icmpOutEchos",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutEchos.rrd"
+                },
+                "icmpOutErrors": {
+                  "name": "icmpOutErrors",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutErrors.rrd"
+                },
+                "icmpOutMsgs": {
+                  "name": "icmpOutMsgs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutMsgs.rrd"
+                },
+                "icmpOutParmProbs": {
+                  "name": "icmpOutParmProbs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutParmProbs.rrd"
+                },
+                "icmpOutRedirects": {
+                  "name": "icmpOutRedirects",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutRedirects.rrd"
+                },
+                "icmpOutSrcQuenchs": {
+                  "name": "icmpOutSrcQuenchs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutSrcQuenchs.rrd"
+                },
+                "icmpOutTimeExcds": {
+                  "name": "icmpOutTimeExcds",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutTimeExcds.rrd"
+                },
+                "icmpOutTimestamps": {
+                  "name": "icmpOutTimestamps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutTimestamps.rrd"
+                },
+                "icmpOutTimestmpReps": {
+                  "name": "icmpOutTimestmpReps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutTimestmpReps.rrd"
+                },
+                "loadavg1": {
+                  "name": "loadavg1",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "loadavg1.rrd"
+                },
+                "loadavg15": {
+                  "name": "loadavg15",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "loadavg15.rrd"
+                },
+                "loadavg5": {
+                  "name": "loadavg5",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "loadavg5.rrd"
+                },
+                "mailqcount": {
+                  "name": "mailqcount",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "mailqcount.rrd"
+                },
+                "memAvailReal": {
+                  "name": "memAvailReal",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memAvailReal.rrd"
+                },
+                "memAvailSwap": {
+                  "name": "memAvailSwap",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memAvailSwap.rrd"
+                },
+                "memBuffer": {
+                  "name": "memBuffer",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memBuffer.rrd"
+                },
+                "memCached": {
+                  "name": "memCached",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memCached.rrd"
+                },
+                "memShared": {
+                  "name": "memShared",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memShared.rrd"
+                },
+                "memSwapError": {
+                  "name": "memSwapError",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memSwapError.rrd"
+                },
+                "memTotalFree": {
+                  "name": "memTotalFree",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memTotalFree.rrd"
+                },
+                "memTotalReal": {
+                  "name": "memTotalReal",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memTotalReal.rrd"
+                },
+                "memTotalSwap": {
+                  "name": "memTotalSwap",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memTotalSwap.rrd"
+                },
+                "ntpqdelay": {
+                  "name": "ntpqdelay",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "ntpqdelay.rrd"
+                },
+                "ntpqjitter": {
+                  "name": "ntpqjitter",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "ntpqjitter.rrd"
+                },
+                "ntpqoffset": {
+                  "name": "ntpqoffset",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "ntpqoffset.rrd"
+                },
+                "reboot": {
+                  "name": "reboot",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "reboot.rrd"
+                },
+                "tcpActiveOpens": {
+                  "name": "tcpActiveOpens",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpActiveOpens.rrd"
+                },
+                "tcpAttemptFails": {
+                  "name": "tcpAttemptFails",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpAttemptFails.rrd"
+                },
+                "tcpCurrEstab": {
+                  "name": "tcpCurrEstab",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpCurrEstab.rrd"
+                },
+                "tcpEstabResets": {
+                  "name": "tcpEstabResets",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpEstabResets.rrd"
+                },
+                "tcpInErrors": {
+                  "name": "tcpInErrors",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpInErrors.rrd"
+                },
+                "tcpInSegs": {
+                  "name": "tcpInSegs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpInSegs.rrd"
+                },
+                "tcpOutRsts": {
+                  "name": "tcpOutRsts",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpOutRsts.rrd"
+                },
+                "tcpOutSegs": {
+                  "name": "tcpOutSegs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpOutSegs.rrd"
+                },
+                "tcpPassiveOpens": {
+                  "name": "tcpPassiveOpens",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpPassiveOpens.rrd"
+                },
+                "tcpRetransSegs": {
+                  "name": "tcpRetransSegs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpRetransSegs.rrd"
+                },
+                "udpInDatagrams": {
+                  "name": "udpInDatagrams",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "udpInDatagrams.rrd"
+                },
+                "udpInErrors": {
+                  "name": "udpInErrors",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "udpInErrors.rrd"
+                },
+                "udpNoPorts": {
+                  "name": "udpNoPorts",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "udpNoPorts.rrd"
+                },
+                "udpOutDatagrams": {
+                  "name": "udpOutDatagrams",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "udpOutDatagrams.rrd"
+                }
+              },
+              "stringPropertyAttributes": {},
+              "typeLabel": "SNMP Node Data"
+            },
+            "subAttribute": ""
           },
-          "attribute": "CpuRawInterrupt",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
+          "filter": {},
+          "filterState": {},
           "hide": true,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "key": "",
           "label": "CpuRawInterrupt",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "A",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "A"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": "Last"
+            },
+            "attribute": {
+              "label": "CpuRawUser",
+              "name": "CpuRawUser"
+            },
+            "fallbackAttribute": {},
+            "label": "CpuRawUser",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "children": {
+                "offset": 0,
+                "resource": []
+              },
+              "externalValueAttributes": {},
+              "id": "nodeSnmp[]",
+              "label": "Node-level Performance Data",
+              "name": "",
+              "parentId": "node[linde-devpro-merge:fraliha057-n0.ad1.proemion.com]",
+              "rrdGraphAttributes": {
+                "CpuNumCpus": {
+                  "name": "CpuNumCpus",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuNumCpus.rrd"
+                },
+                "CpuRawGuest": {
+                  "name": "CpuRawGuest",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawGuest.rrd"
+                },
+                "CpuRawGuestNice": {
+                  "name": "CpuRawGuestNice",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawGuestNice.rrd"
+                },
+                "CpuRawIdle": {
+                  "name": "CpuRawIdle",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawIdle.rrd"
+                },
+                "CpuRawInterrupt": {
+                  "name": "CpuRawInterrupt",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawInterrupt.rrd"
+                },
+                "CpuRawKernel": {
+                  "name": "CpuRawKernel",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawKernel.rrd"
+                },
+                "CpuRawNice": {
+                  "name": "CpuRawNice",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawNice.rrd"
+                },
+                "CpuRawSoftIRQ": {
+                  "name": "CpuRawSoftIRQ",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawSoftIRQ.rrd"
+                },
+                "CpuRawSteal": {
+                  "name": "CpuRawSteal",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawSteal.rrd"
+                },
+                "CpuRawSystem": {
+                  "name": "CpuRawSystem",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawSystem.rrd"
+                },
+                "CpuRawUser": {
+                  "name": "CpuRawUser",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawUser.rrd"
+                },
+                "CpuRawWait": {
+                  "name": "CpuRawWait",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawWait.rrd"
+                },
+                "IORawReceived": {
+                  "name": "IORawReceived",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "IORawReceived.rrd"
+                },
+                "IORawSent": {
+                  "name": "IORawSent",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "IORawSent.rrd"
+                },
+                "RawBlksSwapIn": {
+                  "name": "RawBlksSwapIn",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "RawBlksSwapIn.rrd"
+                },
+                "RawBlksSwapOut": {
+                  "name": "RawBlksSwapOut",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "RawBlksSwapOut.rrd"
+                },
+                "SwapIn": {
+                  "name": "SwapIn",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "SwapIn.rrd"
+                },
+                "SwapOut": {
+                  "name": "SwapOut",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "SwapOut.rrd"
+                },
+                "SysContext": {
+                  "name": "SysContext",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "SysContext.rrd"
+                },
+                "SysInterrupts": {
+                  "name": "SysInterrupts",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "SysInterrupts.rrd"
+                },
+                "SysRawContext": {
+                  "name": "SysRawContext",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "SysRawContext.rrd"
+                },
+                "SysRawInterrupts": {
+                  "name": "SysRawInterrupts",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "SysRawInterrupts.rrd"
+                },
+                "cpucores": {
+                  "name": "cpucores",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "cpucores.rrd"
+                },
+                "foremanStatus": {
+                  "name": "foremanStatus",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "foremanStatus.rrd"
+                },
+                "hrMemorySize": {
+                  "name": "hrMemorySize",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "hrMemorySize.rrd"
+                },
+                "hrSystemNumUsers": {
+                  "name": "hrSystemNumUsers",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "hrSystemNumUsers.rrd"
+                },
+                "hrSystemProcesses": {
+                  "name": "hrSystemProcesses",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "hrSystemProcesses.rrd"
+                },
+                "hrSystemUptime": {
+                  "name": "hrSystemUptime",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "hrSystemUptime.rrd"
+                },
+                "icmpInAddrMaskReps": {
+                  "name": "icmpInAddrMaskReps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInAddrMaskReps.rrd"
+                },
+                "icmpInAddrMasks": {
+                  "name": "icmpInAddrMasks",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInAddrMasks.rrd"
+                },
+                "icmpInDestUnreachs": {
+                  "name": "icmpInDestUnreachs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInDestUnreachs.rrd"
+                },
+                "icmpInEchoReps": {
+                  "name": "icmpInEchoReps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInEchoReps.rrd"
+                },
+                "icmpInEchos": {
+                  "name": "icmpInEchos",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInEchos.rrd"
+                },
+                "icmpInErrors": {
+                  "name": "icmpInErrors",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInErrors.rrd"
+                },
+                "icmpInMsgs": {
+                  "name": "icmpInMsgs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInMsgs.rrd"
+                },
+                "icmpInParmProbs": {
+                  "name": "icmpInParmProbs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInParmProbs.rrd"
+                },
+                "icmpInRedirects": {
+                  "name": "icmpInRedirects",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInRedirects.rrd"
+                },
+                "icmpInSrcQuenchs": {
+                  "name": "icmpInSrcQuenchs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInSrcQuenchs.rrd"
+                },
+                "icmpInTimeExcds": {
+                  "name": "icmpInTimeExcds",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInTimeExcds.rrd"
+                },
+                "icmpInTimestampReps": {
+                  "name": "icmpInTimestampReps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInTimestampReps.rrd"
+                },
+                "icmpInTimestamps": {
+                  "name": "icmpInTimestamps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInTimestamps.rrd"
+                },
+                "icmpOutAddrMaskReps": {
+                  "name": "icmpOutAddrMaskReps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutAddrMaskReps.rrd"
+                },
+                "icmpOutAddrMasks": {
+                  "name": "icmpOutAddrMasks",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutAddrMasks.rrd"
+                },
+                "icmpOutDestUnreachs": {
+                  "name": "icmpOutDestUnreachs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutDestUnreachs.rrd"
+                },
+                "icmpOutEchoReps": {
+                  "name": "icmpOutEchoReps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutEchoReps.rrd"
+                },
+                "icmpOutEchos": {
+                  "name": "icmpOutEchos",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutEchos.rrd"
+                },
+                "icmpOutErrors": {
+                  "name": "icmpOutErrors",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutErrors.rrd"
+                },
+                "icmpOutMsgs": {
+                  "name": "icmpOutMsgs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutMsgs.rrd"
+                },
+                "icmpOutParmProbs": {
+                  "name": "icmpOutParmProbs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutParmProbs.rrd"
+                },
+                "icmpOutRedirects": {
+                  "name": "icmpOutRedirects",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutRedirects.rrd"
+                },
+                "icmpOutSrcQuenchs": {
+                  "name": "icmpOutSrcQuenchs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutSrcQuenchs.rrd"
+                },
+                "icmpOutTimeExcds": {
+                  "name": "icmpOutTimeExcds",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutTimeExcds.rrd"
+                },
+                "icmpOutTimestamps": {
+                  "name": "icmpOutTimestamps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutTimestamps.rrd"
+                },
+                "icmpOutTimestmpReps": {
+                  "name": "icmpOutTimestmpReps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutTimestmpReps.rrd"
+                },
+                "loadavg1": {
+                  "name": "loadavg1",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "loadavg1.rrd"
+                },
+                "loadavg15": {
+                  "name": "loadavg15",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "loadavg15.rrd"
+                },
+                "loadavg5": {
+                  "name": "loadavg5",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "loadavg5.rrd"
+                },
+                "mailqcount": {
+                  "name": "mailqcount",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "mailqcount.rrd"
+                },
+                "memAvailReal": {
+                  "name": "memAvailReal",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memAvailReal.rrd"
+                },
+                "memAvailSwap": {
+                  "name": "memAvailSwap",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memAvailSwap.rrd"
+                },
+                "memBuffer": {
+                  "name": "memBuffer",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memBuffer.rrd"
+                },
+                "memCached": {
+                  "name": "memCached",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memCached.rrd"
+                },
+                "memShared": {
+                  "name": "memShared",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memShared.rrd"
+                },
+                "memSwapError": {
+                  "name": "memSwapError",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memSwapError.rrd"
+                },
+                "memTotalFree": {
+                  "name": "memTotalFree",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memTotalFree.rrd"
+                },
+                "memTotalReal": {
+                  "name": "memTotalReal",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memTotalReal.rrd"
+                },
+                "memTotalSwap": {
+                  "name": "memTotalSwap",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memTotalSwap.rrd"
+                },
+                "ntpqdelay": {
+                  "name": "ntpqdelay",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "ntpqdelay.rrd"
+                },
+                "ntpqjitter": {
+                  "name": "ntpqjitter",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "ntpqjitter.rrd"
+                },
+                "ntpqoffset": {
+                  "name": "ntpqoffset",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "ntpqoffset.rrd"
+                },
+                "reboot": {
+                  "name": "reboot",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "reboot.rrd"
+                },
+                "tcpActiveOpens": {
+                  "name": "tcpActiveOpens",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpActiveOpens.rrd"
+                },
+                "tcpAttemptFails": {
+                  "name": "tcpAttemptFails",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpAttemptFails.rrd"
+                },
+                "tcpCurrEstab": {
+                  "name": "tcpCurrEstab",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpCurrEstab.rrd"
+                },
+                "tcpEstabResets": {
+                  "name": "tcpEstabResets",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpEstabResets.rrd"
+                },
+                "tcpInErrors": {
+                  "name": "tcpInErrors",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpInErrors.rrd"
+                },
+                "tcpInSegs": {
+                  "name": "tcpInSegs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpInSegs.rrd"
+                },
+                "tcpOutRsts": {
+                  "name": "tcpOutRsts",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpOutRsts.rrd"
+                },
+                "tcpOutSegs": {
+                  "name": "tcpOutSegs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpOutSegs.rrd"
+                },
+                "tcpPassiveOpens": {
+                  "name": "tcpPassiveOpens",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpPassiveOpens.rrd"
+                },
+                "tcpRetransSegs": {
+                  "name": "tcpRetransSegs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpRetransSegs.rrd"
+                },
+                "udpInDatagrams": {
+                  "name": "udpInDatagrams",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "udpInDatagrams.rrd"
+                },
+                "udpInErrors": {
+                  "name": "udpInErrors",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "udpInErrors.rrd"
+                },
+                "udpNoPorts": {
+                  "name": "udpNoPorts",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "udpNoPorts.rrd"
+                },
+                "udpOutDatagrams": {
+                  "name": "udpOutDatagrams",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "udpOutDatagrams.rrd"
+                }
+              },
+              "stringPropertyAttributes": {},
+              "typeLabel": "SNMP Node Data"
+            }
           },
-          "attribute": "CpuRawUser",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
+          "filter": {},
+          "filterState": {},
           "hide": true,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "key": "",
           "label": "CpuRawUser",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "B",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "B"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": "Last"
+            },
+            "attribute": {
+              "label": "CpuRawWait",
+              "name": "CpuRawWait"
+            },
+            "fallbackAttribute": {},
+            "label": "CpuRawWait",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "children": {
+                "offset": 0,
+                "resource": []
+              },
+              "externalValueAttributes": {},
+              "id": "nodeSnmp[]",
+              "label": "Node-level Performance Data",
+              "name": "",
+              "parentId": "node[linde-devpro-merge:fraliha057-n0.ad1.proemion.com]",
+              "rrdGraphAttributes": {
+                "CpuNumCpus": {
+                  "name": "CpuNumCpus",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuNumCpus.rrd"
+                },
+                "CpuRawGuest": {
+                  "name": "CpuRawGuest",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawGuest.rrd"
+                },
+                "CpuRawGuestNice": {
+                  "name": "CpuRawGuestNice",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawGuestNice.rrd"
+                },
+                "CpuRawIdle": {
+                  "name": "CpuRawIdle",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawIdle.rrd"
+                },
+                "CpuRawInterrupt": {
+                  "name": "CpuRawInterrupt",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawInterrupt.rrd"
+                },
+                "CpuRawKernel": {
+                  "name": "CpuRawKernel",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawKernel.rrd"
+                },
+                "CpuRawNice": {
+                  "name": "CpuRawNice",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawNice.rrd"
+                },
+                "CpuRawSoftIRQ": {
+                  "name": "CpuRawSoftIRQ",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawSoftIRQ.rrd"
+                },
+                "CpuRawSteal": {
+                  "name": "CpuRawSteal",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawSteal.rrd"
+                },
+                "CpuRawSystem": {
+                  "name": "CpuRawSystem",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawSystem.rrd"
+                },
+                "CpuRawUser": {
+                  "name": "CpuRawUser",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawUser.rrd"
+                },
+                "CpuRawWait": {
+                  "name": "CpuRawWait",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawWait.rrd"
+                },
+                "IORawReceived": {
+                  "name": "IORawReceived",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "IORawReceived.rrd"
+                },
+                "IORawSent": {
+                  "name": "IORawSent",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "IORawSent.rrd"
+                },
+                "RawBlksSwapIn": {
+                  "name": "RawBlksSwapIn",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "RawBlksSwapIn.rrd"
+                },
+                "RawBlksSwapOut": {
+                  "name": "RawBlksSwapOut",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "RawBlksSwapOut.rrd"
+                },
+                "SwapIn": {
+                  "name": "SwapIn",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "SwapIn.rrd"
+                },
+                "SwapOut": {
+                  "name": "SwapOut",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "SwapOut.rrd"
+                },
+                "SysContext": {
+                  "name": "SysContext",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "SysContext.rrd"
+                },
+                "SysInterrupts": {
+                  "name": "SysInterrupts",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "SysInterrupts.rrd"
+                },
+                "SysRawContext": {
+                  "name": "SysRawContext",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "SysRawContext.rrd"
+                },
+                "SysRawInterrupts": {
+                  "name": "SysRawInterrupts",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "SysRawInterrupts.rrd"
+                },
+                "cpucores": {
+                  "name": "cpucores",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "cpucores.rrd"
+                },
+                "foremanStatus": {
+                  "name": "foremanStatus",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "foremanStatus.rrd"
+                },
+                "hrMemorySize": {
+                  "name": "hrMemorySize",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "hrMemorySize.rrd"
+                },
+                "hrSystemNumUsers": {
+                  "name": "hrSystemNumUsers",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "hrSystemNumUsers.rrd"
+                },
+                "hrSystemProcesses": {
+                  "name": "hrSystemProcesses",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "hrSystemProcesses.rrd"
+                },
+                "hrSystemUptime": {
+                  "name": "hrSystemUptime",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "hrSystemUptime.rrd"
+                },
+                "icmpInAddrMaskReps": {
+                  "name": "icmpInAddrMaskReps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInAddrMaskReps.rrd"
+                },
+                "icmpInAddrMasks": {
+                  "name": "icmpInAddrMasks",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInAddrMasks.rrd"
+                },
+                "icmpInDestUnreachs": {
+                  "name": "icmpInDestUnreachs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInDestUnreachs.rrd"
+                },
+                "icmpInEchoReps": {
+                  "name": "icmpInEchoReps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInEchoReps.rrd"
+                },
+                "icmpInEchos": {
+                  "name": "icmpInEchos",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInEchos.rrd"
+                },
+                "icmpInErrors": {
+                  "name": "icmpInErrors",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInErrors.rrd"
+                },
+                "icmpInMsgs": {
+                  "name": "icmpInMsgs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInMsgs.rrd"
+                },
+                "icmpInParmProbs": {
+                  "name": "icmpInParmProbs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInParmProbs.rrd"
+                },
+                "icmpInRedirects": {
+                  "name": "icmpInRedirects",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInRedirects.rrd"
+                },
+                "icmpInSrcQuenchs": {
+                  "name": "icmpInSrcQuenchs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInSrcQuenchs.rrd"
+                },
+                "icmpInTimeExcds": {
+                  "name": "icmpInTimeExcds",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInTimeExcds.rrd"
+                },
+                "icmpInTimestampReps": {
+                  "name": "icmpInTimestampReps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInTimestampReps.rrd"
+                },
+                "icmpInTimestamps": {
+                  "name": "icmpInTimestamps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInTimestamps.rrd"
+                },
+                "icmpOutAddrMaskReps": {
+                  "name": "icmpOutAddrMaskReps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutAddrMaskReps.rrd"
+                },
+                "icmpOutAddrMasks": {
+                  "name": "icmpOutAddrMasks",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutAddrMasks.rrd"
+                },
+                "icmpOutDestUnreachs": {
+                  "name": "icmpOutDestUnreachs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutDestUnreachs.rrd"
+                },
+                "icmpOutEchoReps": {
+                  "name": "icmpOutEchoReps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutEchoReps.rrd"
+                },
+                "icmpOutEchos": {
+                  "name": "icmpOutEchos",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutEchos.rrd"
+                },
+                "icmpOutErrors": {
+                  "name": "icmpOutErrors",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutErrors.rrd"
+                },
+                "icmpOutMsgs": {
+                  "name": "icmpOutMsgs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutMsgs.rrd"
+                },
+                "icmpOutParmProbs": {
+                  "name": "icmpOutParmProbs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutParmProbs.rrd"
+                },
+                "icmpOutRedirects": {
+                  "name": "icmpOutRedirects",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutRedirects.rrd"
+                },
+                "icmpOutSrcQuenchs": {
+                  "name": "icmpOutSrcQuenchs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutSrcQuenchs.rrd"
+                },
+                "icmpOutTimeExcds": {
+                  "name": "icmpOutTimeExcds",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutTimeExcds.rrd"
+                },
+                "icmpOutTimestamps": {
+                  "name": "icmpOutTimestamps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutTimestamps.rrd"
+                },
+                "icmpOutTimestmpReps": {
+                  "name": "icmpOutTimestmpReps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutTimestmpReps.rrd"
+                },
+                "loadavg1": {
+                  "name": "loadavg1",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "loadavg1.rrd"
+                },
+                "loadavg15": {
+                  "name": "loadavg15",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "loadavg15.rrd"
+                },
+                "loadavg5": {
+                  "name": "loadavg5",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "loadavg5.rrd"
+                },
+                "mailqcount": {
+                  "name": "mailqcount",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "mailqcount.rrd"
+                },
+                "memAvailReal": {
+                  "name": "memAvailReal",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memAvailReal.rrd"
+                },
+                "memAvailSwap": {
+                  "name": "memAvailSwap",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memAvailSwap.rrd"
+                },
+                "memBuffer": {
+                  "name": "memBuffer",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memBuffer.rrd"
+                },
+                "memCached": {
+                  "name": "memCached",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memCached.rrd"
+                },
+                "memShared": {
+                  "name": "memShared",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memShared.rrd"
+                },
+                "memSwapError": {
+                  "name": "memSwapError",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memSwapError.rrd"
+                },
+                "memTotalFree": {
+                  "name": "memTotalFree",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memTotalFree.rrd"
+                },
+                "memTotalReal": {
+                  "name": "memTotalReal",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memTotalReal.rrd"
+                },
+                "memTotalSwap": {
+                  "name": "memTotalSwap",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memTotalSwap.rrd"
+                },
+                "ntpqdelay": {
+                  "name": "ntpqdelay",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "ntpqdelay.rrd"
+                },
+                "ntpqjitter": {
+                  "name": "ntpqjitter",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "ntpqjitter.rrd"
+                },
+                "ntpqoffset": {
+                  "name": "ntpqoffset",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "ntpqoffset.rrd"
+                },
+                "reboot": {
+                  "name": "reboot",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "reboot.rrd"
+                },
+                "tcpActiveOpens": {
+                  "name": "tcpActiveOpens",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpActiveOpens.rrd"
+                },
+                "tcpAttemptFails": {
+                  "name": "tcpAttemptFails",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpAttemptFails.rrd"
+                },
+                "tcpCurrEstab": {
+                  "name": "tcpCurrEstab",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpCurrEstab.rrd"
+                },
+                "tcpEstabResets": {
+                  "name": "tcpEstabResets",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpEstabResets.rrd"
+                },
+                "tcpInErrors": {
+                  "name": "tcpInErrors",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpInErrors.rrd"
+                },
+                "tcpInSegs": {
+                  "name": "tcpInSegs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpInSegs.rrd"
+                },
+                "tcpOutRsts": {
+                  "name": "tcpOutRsts",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpOutRsts.rrd"
+                },
+                "tcpOutSegs": {
+                  "name": "tcpOutSegs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpOutSegs.rrd"
+                },
+                "tcpPassiveOpens": {
+                  "name": "tcpPassiveOpens",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpPassiveOpens.rrd"
+                },
+                "tcpRetransSegs": {
+                  "name": "tcpRetransSegs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpRetransSegs.rrd"
+                },
+                "udpInDatagrams": {
+                  "name": "udpInDatagrams",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "udpInDatagrams.rrd"
+                },
+                "udpInErrors": {
+                  "name": "udpInErrors",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "udpInErrors.rrd"
+                },
+                "udpNoPorts": {
+                  "name": "udpNoPorts",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "udpNoPorts.rrd"
+                },
+                "udpOutDatagrams": {
+                  "name": "udpOutDatagrams",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "udpOutDatagrams.rrd"
+                }
+              },
+              "stringPropertyAttributes": {},
+              "typeLabel": "SNMP Node Data"
+            }
           },
-          "attribute": "CpuRawWait",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
+          "filter": {},
+          "filterState": {},
           "hide": true,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "key": "",
           "label": "CpuRawWait",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "C",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "C"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": "Last"
+            },
+            "attribute": {
+              "label": "CpuRawNice",
+              "name": "CpuRawNice"
+            },
+            "fallbackAttribute": {},
+            "label": "CpuRawNice",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "children": {
+                "offset": 0,
+                "resource": []
+              },
+              "externalValueAttributes": {},
+              "id": "nodeSnmp[]",
+              "label": "Node-level Performance Data",
+              "name": "",
+              "parentId": "node[linde-devpro-merge:fraliha057-n0.ad1.proemion.com]",
+              "rrdGraphAttributes": {
+                "CpuNumCpus": {
+                  "name": "CpuNumCpus",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuNumCpus.rrd"
+                },
+                "CpuRawGuest": {
+                  "name": "CpuRawGuest",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawGuest.rrd"
+                },
+                "CpuRawGuestNice": {
+                  "name": "CpuRawGuestNice",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawGuestNice.rrd"
+                },
+                "CpuRawIdle": {
+                  "name": "CpuRawIdle",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawIdle.rrd"
+                },
+                "CpuRawInterrupt": {
+                  "name": "CpuRawInterrupt",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawInterrupt.rrd"
+                },
+                "CpuRawKernel": {
+                  "name": "CpuRawKernel",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawKernel.rrd"
+                },
+                "CpuRawNice": {
+                  "name": "CpuRawNice",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawNice.rrd"
+                },
+                "CpuRawSoftIRQ": {
+                  "name": "CpuRawSoftIRQ",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawSoftIRQ.rrd"
+                },
+                "CpuRawSteal": {
+                  "name": "CpuRawSteal",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawSteal.rrd"
+                },
+                "CpuRawSystem": {
+                  "name": "CpuRawSystem",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawSystem.rrd"
+                },
+                "CpuRawUser": {
+                  "name": "CpuRawUser",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawUser.rrd"
+                },
+                "CpuRawWait": {
+                  "name": "CpuRawWait",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawWait.rrd"
+                },
+                "IORawReceived": {
+                  "name": "IORawReceived",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "IORawReceived.rrd"
+                },
+                "IORawSent": {
+                  "name": "IORawSent",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "IORawSent.rrd"
+                },
+                "RawBlksSwapIn": {
+                  "name": "RawBlksSwapIn",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "RawBlksSwapIn.rrd"
+                },
+                "RawBlksSwapOut": {
+                  "name": "RawBlksSwapOut",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "RawBlksSwapOut.rrd"
+                },
+                "SwapIn": {
+                  "name": "SwapIn",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "SwapIn.rrd"
+                },
+                "SwapOut": {
+                  "name": "SwapOut",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "SwapOut.rrd"
+                },
+                "SysContext": {
+                  "name": "SysContext",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "SysContext.rrd"
+                },
+                "SysInterrupts": {
+                  "name": "SysInterrupts",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "SysInterrupts.rrd"
+                },
+                "SysRawContext": {
+                  "name": "SysRawContext",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "SysRawContext.rrd"
+                },
+                "SysRawInterrupts": {
+                  "name": "SysRawInterrupts",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "SysRawInterrupts.rrd"
+                },
+                "cpucores": {
+                  "name": "cpucores",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "cpucores.rrd"
+                },
+                "foremanStatus": {
+                  "name": "foremanStatus",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "foremanStatus.rrd"
+                },
+                "hrMemorySize": {
+                  "name": "hrMemorySize",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "hrMemorySize.rrd"
+                },
+                "hrSystemNumUsers": {
+                  "name": "hrSystemNumUsers",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "hrSystemNumUsers.rrd"
+                },
+                "hrSystemProcesses": {
+                  "name": "hrSystemProcesses",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "hrSystemProcesses.rrd"
+                },
+                "hrSystemUptime": {
+                  "name": "hrSystemUptime",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "hrSystemUptime.rrd"
+                },
+                "icmpInAddrMaskReps": {
+                  "name": "icmpInAddrMaskReps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInAddrMaskReps.rrd"
+                },
+                "icmpInAddrMasks": {
+                  "name": "icmpInAddrMasks",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInAddrMasks.rrd"
+                },
+                "icmpInDestUnreachs": {
+                  "name": "icmpInDestUnreachs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInDestUnreachs.rrd"
+                },
+                "icmpInEchoReps": {
+                  "name": "icmpInEchoReps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInEchoReps.rrd"
+                },
+                "icmpInEchos": {
+                  "name": "icmpInEchos",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInEchos.rrd"
+                },
+                "icmpInErrors": {
+                  "name": "icmpInErrors",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInErrors.rrd"
+                },
+                "icmpInMsgs": {
+                  "name": "icmpInMsgs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInMsgs.rrd"
+                },
+                "icmpInParmProbs": {
+                  "name": "icmpInParmProbs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInParmProbs.rrd"
+                },
+                "icmpInRedirects": {
+                  "name": "icmpInRedirects",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInRedirects.rrd"
+                },
+                "icmpInSrcQuenchs": {
+                  "name": "icmpInSrcQuenchs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInSrcQuenchs.rrd"
+                },
+                "icmpInTimeExcds": {
+                  "name": "icmpInTimeExcds",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInTimeExcds.rrd"
+                },
+                "icmpInTimestampReps": {
+                  "name": "icmpInTimestampReps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInTimestampReps.rrd"
+                },
+                "icmpInTimestamps": {
+                  "name": "icmpInTimestamps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInTimestamps.rrd"
+                },
+                "icmpOutAddrMaskReps": {
+                  "name": "icmpOutAddrMaskReps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutAddrMaskReps.rrd"
+                },
+                "icmpOutAddrMasks": {
+                  "name": "icmpOutAddrMasks",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutAddrMasks.rrd"
+                },
+                "icmpOutDestUnreachs": {
+                  "name": "icmpOutDestUnreachs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutDestUnreachs.rrd"
+                },
+                "icmpOutEchoReps": {
+                  "name": "icmpOutEchoReps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutEchoReps.rrd"
+                },
+                "icmpOutEchos": {
+                  "name": "icmpOutEchos",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutEchos.rrd"
+                },
+                "icmpOutErrors": {
+                  "name": "icmpOutErrors",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutErrors.rrd"
+                },
+                "icmpOutMsgs": {
+                  "name": "icmpOutMsgs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutMsgs.rrd"
+                },
+                "icmpOutParmProbs": {
+                  "name": "icmpOutParmProbs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutParmProbs.rrd"
+                },
+                "icmpOutRedirects": {
+                  "name": "icmpOutRedirects",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutRedirects.rrd"
+                },
+                "icmpOutSrcQuenchs": {
+                  "name": "icmpOutSrcQuenchs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutSrcQuenchs.rrd"
+                },
+                "icmpOutTimeExcds": {
+                  "name": "icmpOutTimeExcds",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutTimeExcds.rrd"
+                },
+                "icmpOutTimestamps": {
+                  "name": "icmpOutTimestamps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutTimestamps.rrd"
+                },
+                "icmpOutTimestmpReps": {
+                  "name": "icmpOutTimestmpReps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutTimestmpReps.rrd"
+                },
+                "loadavg1": {
+                  "name": "loadavg1",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "loadavg1.rrd"
+                },
+                "loadavg15": {
+                  "name": "loadavg15",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "loadavg15.rrd"
+                },
+                "loadavg5": {
+                  "name": "loadavg5",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "loadavg5.rrd"
+                },
+                "mailqcount": {
+                  "name": "mailqcount",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "mailqcount.rrd"
+                },
+                "memAvailReal": {
+                  "name": "memAvailReal",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memAvailReal.rrd"
+                },
+                "memAvailSwap": {
+                  "name": "memAvailSwap",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memAvailSwap.rrd"
+                },
+                "memBuffer": {
+                  "name": "memBuffer",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memBuffer.rrd"
+                },
+                "memCached": {
+                  "name": "memCached",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memCached.rrd"
+                },
+                "memShared": {
+                  "name": "memShared",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memShared.rrd"
+                },
+                "memSwapError": {
+                  "name": "memSwapError",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memSwapError.rrd"
+                },
+                "memTotalFree": {
+                  "name": "memTotalFree",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memTotalFree.rrd"
+                },
+                "memTotalReal": {
+                  "name": "memTotalReal",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memTotalReal.rrd"
+                },
+                "memTotalSwap": {
+                  "name": "memTotalSwap",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memTotalSwap.rrd"
+                },
+                "ntpqdelay": {
+                  "name": "ntpqdelay",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "ntpqdelay.rrd"
+                },
+                "ntpqjitter": {
+                  "name": "ntpqjitter",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "ntpqjitter.rrd"
+                },
+                "ntpqoffset": {
+                  "name": "ntpqoffset",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "ntpqoffset.rrd"
+                },
+                "reboot": {
+                  "name": "reboot",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "reboot.rrd"
+                },
+                "tcpActiveOpens": {
+                  "name": "tcpActiveOpens",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpActiveOpens.rrd"
+                },
+                "tcpAttemptFails": {
+                  "name": "tcpAttemptFails",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpAttemptFails.rrd"
+                },
+                "tcpCurrEstab": {
+                  "name": "tcpCurrEstab",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpCurrEstab.rrd"
+                },
+                "tcpEstabResets": {
+                  "name": "tcpEstabResets",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpEstabResets.rrd"
+                },
+                "tcpInErrors": {
+                  "name": "tcpInErrors",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpInErrors.rrd"
+                },
+                "tcpInSegs": {
+                  "name": "tcpInSegs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpInSegs.rrd"
+                },
+                "tcpOutRsts": {
+                  "name": "tcpOutRsts",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpOutRsts.rrd"
+                },
+                "tcpOutSegs": {
+                  "name": "tcpOutSegs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpOutSegs.rrd"
+                },
+                "tcpPassiveOpens": {
+                  "name": "tcpPassiveOpens",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpPassiveOpens.rrd"
+                },
+                "tcpRetransSegs": {
+                  "name": "tcpRetransSegs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpRetransSegs.rrd"
+                },
+                "udpInDatagrams": {
+                  "name": "udpInDatagrams",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "udpInDatagrams.rrd"
+                },
+                "udpInErrors": {
+                  "name": "udpInErrors",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "udpInErrors.rrd"
+                },
+                "udpNoPorts": {
+                  "name": "udpNoPorts",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "udpNoPorts.rrd"
+                },
+                "udpOutDatagrams": {
+                  "name": "udpOutDatagrams",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "udpOutDatagrams.rrd"
+                }
+              },
+              "stringPropertyAttributes": {},
+              "typeLabel": "SNMP Node Data"
+            }
           },
-          "attribute": "CpuRawNice",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
+          "filter": {},
+          "filterState": {},
           "hide": true,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "key": "",
           "label": "CpuRawNice",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "D",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "D"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": "Last"
+            },
+            "attribute": {
+              "label": "CpuRawSystem",
+              "name": "CpuRawSystem"
+            },
+            "fallbackAttribute": {},
+            "label": "CpuRawSystem",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "children": {
+                "offset": 0,
+                "resource": []
+              },
+              "externalValueAttributes": {},
+              "id": "nodeSnmp[]",
+              "label": "Node-level Performance Data",
+              "name": "",
+              "parentId": "node[linde-devpro-merge:fraliha057-n0.ad1.proemion.com]",
+              "rrdGraphAttributes": {
+                "CpuNumCpus": {
+                  "name": "CpuNumCpus",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuNumCpus.rrd"
+                },
+                "CpuRawGuest": {
+                  "name": "CpuRawGuest",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawGuest.rrd"
+                },
+                "CpuRawGuestNice": {
+                  "name": "CpuRawGuestNice",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawGuestNice.rrd"
+                },
+                "CpuRawIdle": {
+                  "name": "CpuRawIdle",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawIdle.rrd"
+                },
+                "CpuRawInterrupt": {
+                  "name": "CpuRawInterrupt",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawInterrupt.rrd"
+                },
+                "CpuRawKernel": {
+                  "name": "CpuRawKernel",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawKernel.rrd"
+                },
+                "CpuRawNice": {
+                  "name": "CpuRawNice",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawNice.rrd"
+                },
+                "CpuRawSoftIRQ": {
+                  "name": "CpuRawSoftIRQ",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawSoftIRQ.rrd"
+                },
+                "CpuRawSteal": {
+                  "name": "CpuRawSteal",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawSteal.rrd"
+                },
+                "CpuRawSystem": {
+                  "name": "CpuRawSystem",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawSystem.rrd"
+                },
+                "CpuRawUser": {
+                  "name": "CpuRawUser",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawUser.rrd"
+                },
+                "CpuRawWait": {
+                  "name": "CpuRawWait",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawWait.rrd"
+                },
+                "IORawReceived": {
+                  "name": "IORawReceived",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "IORawReceived.rrd"
+                },
+                "IORawSent": {
+                  "name": "IORawSent",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "IORawSent.rrd"
+                },
+                "RawBlksSwapIn": {
+                  "name": "RawBlksSwapIn",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "RawBlksSwapIn.rrd"
+                },
+                "RawBlksSwapOut": {
+                  "name": "RawBlksSwapOut",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "RawBlksSwapOut.rrd"
+                },
+                "SwapIn": {
+                  "name": "SwapIn",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "SwapIn.rrd"
+                },
+                "SwapOut": {
+                  "name": "SwapOut",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "SwapOut.rrd"
+                },
+                "SysContext": {
+                  "name": "SysContext",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "SysContext.rrd"
+                },
+                "SysInterrupts": {
+                  "name": "SysInterrupts",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "SysInterrupts.rrd"
+                },
+                "SysRawContext": {
+                  "name": "SysRawContext",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "SysRawContext.rrd"
+                },
+                "SysRawInterrupts": {
+                  "name": "SysRawInterrupts",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "SysRawInterrupts.rrd"
+                },
+                "cpucores": {
+                  "name": "cpucores",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "cpucores.rrd"
+                },
+                "foremanStatus": {
+                  "name": "foremanStatus",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "foremanStatus.rrd"
+                },
+                "hrMemorySize": {
+                  "name": "hrMemorySize",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "hrMemorySize.rrd"
+                },
+                "hrSystemNumUsers": {
+                  "name": "hrSystemNumUsers",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "hrSystemNumUsers.rrd"
+                },
+                "hrSystemProcesses": {
+                  "name": "hrSystemProcesses",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "hrSystemProcesses.rrd"
+                },
+                "hrSystemUptime": {
+                  "name": "hrSystemUptime",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "hrSystemUptime.rrd"
+                },
+                "icmpInAddrMaskReps": {
+                  "name": "icmpInAddrMaskReps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInAddrMaskReps.rrd"
+                },
+                "icmpInAddrMasks": {
+                  "name": "icmpInAddrMasks",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInAddrMasks.rrd"
+                },
+                "icmpInDestUnreachs": {
+                  "name": "icmpInDestUnreachs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInDestUnreachs.rrd"
+                },
+                "icmpInEchoReps": {
+                  "name": "icmpInEchoReps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInEchoReps.rrd"
+                },
+                "icmpInEchos": {
+                  "name": "icmpInEchos",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInEchos.rrd"
+                },
+                "icmpInErrors": {
+                  "name": "icmpInErrors",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInErrors.rrd"
+                },
+                "icmpInMsgs": {
+                  "name": "icmpInMsgs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInMsgs.rrd"
+                },
+                "icmpInParmProbs": {
+                  "name": "icmpInParmProbs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInParmProbs.rrd"
+                },
+                "icmpInRedirects": {
+                  "name": "icmpInRedirects",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInRedirects.rrd"
+                },
+                "icmpInSrcQuenchs": {
+                  "name": "icmpInSrcQuenchs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInSrcQuenchs.rrd"
+                },
+                "icmpInTimeExcds": {
+                  "name": "icmpInTimeExcds",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInTimeExcds.rrd"
+                },
+                "icmpInTimestampReps": {
+                  "name": "icmpInTimestampReps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInTimestampReps.rrd"
+                },
+                "icmpInTimestamps": {
+                  "name": "icmpInTimestamps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInTimestamps.rrd"
+                },
+                "icmpOutAddrMaskReps": {
+                  "name": "icmpOutAddrMaskReps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutAddrMaskReps.rrd"
+                },
+                "icmpOutAddrMasks": {
+                  "name": "icmpOutAddrMasks",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutAddrMasks.rrd"
+                },
+                "icmpOutDestUnreachs": {
+                  "name": "icmpOutDestUnreachs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutDestUnreachs.rrd"
+                },
+                "icmpOutEchoReps": {
+                  "name": "icmpOutEchoReps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutEchoReps.rrd"
+                },
+                "icmpOutEchos": {
+                  "name": "icmpOutEchos",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutEchos.rrd"
+                },
+                "icmpOutErrors": {
+                  "name": "icmpOutErrors",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutErrors.rrd"
+                },
+                "icmpOutMsgs": {
+                  "name": "icmpOutMsgs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutMsgs.rrd"
+                },
+                "icmpOutParmProbs": {
+                  "name": "icmpOutParmProbs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutParmProbs.rrd"
+                },
+                "icmpOutRedirects": {
+                  "name": "icmpOutRedirects",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutRedirects.rrd"
+                },
+                "icmpOutSrcQuenchs": {
+                  "name": "icmpOutSrcQuenchs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutSrcQuenchs.rrd"
+                },
+                "icmpOutTimeExcds": {
+                  "name": "icmpOutTimeExcds",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutTimeExcds.rrd"
+                },
+                "icmpOutTimestamps": {
+                  "name": "icmpOutTimestamps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutTimestamps.rrd"
+                },
+                "icmpOutTimestmpReps": {
+                  "name": "icmpOutTimestmpReps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutTimestmpReps.rrd"
+                },
+                "loadavg1": {
+                  "name": "loadavg1",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "loadavg1.rrd"
+                },
+                "loadavg15": {
+                  "name": "loadavg15",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "loadavg15.rrd"
+                },
+                "loadavg5": {
+                  "name": "loadavg5",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "loadavg5.rrd"
+                },
+                "mailqcount": {
+                  "name": "mailqcount",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "mailqcount.rrd"
+                },
+                "memAvailReal": {
+                  "name": "memAvailReal",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memAvailReal.rrd"
+                },
+                "memAvailSwap": {
+                  "name": "memAvailSwap",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memAvailSwap.rrd"
+                },
+                "memBuffer": {
+                  "name": "memBuffer",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memBuffer.rrd"
+                },
+                "memCached": {
+                  "name": "memCached",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memCached.rrd"
+                },
+                "memShared": {
+                  "name": "memShared",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memShared.rrd"
+                },
+                "memSwapError": {
+                  "name": "memSwapError",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memSwapError.rrd"
+                },
+                "memTotalFree": {
+                  "name": "memTotalFree",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memTotalFree.rrd"
+                },
+                "memTotalReal": {
+                  "name": "memTotalReal",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memTotalReal.rrd"
+                },
+                "memTotalSwap": {
+                  "name": "memTotalSwap",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memTotalSwap.rrd"
+                },
+                "ntpqdelay": {
+                  "name": "ntpqdelay",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "ntpqdelay.rrd"
+                },
+                "ntpqjitter": {
+                  "name": "ntpqjitter",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "ntpqjitter.rrd"
+                },
+                "ntpqoffset": {
+                  "name": "ntpqoffset",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "ntpqoffset.rrd"
+                },
+                "reboot": {
+                  "name": "reboot",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "reboot.rrd"
+                },
+                "tcpActiveOpens": {
+                  "name": "tcpActiveOpens",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpActiveOpens.rrd"
+                },
+                "tcpAttemptFails": {
+                  "name": "tcpAttemptFails",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpAttemptFails.rrd"
+                },
+                "tcpCurrEstab": {
+                  "name": "tcpCurrEstab",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpCurrEstab.rrd"
+                },
+                "tcpEstabResets": {
+                  "name": "tcpEstabResets",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpEstabResets.rrd"
+                },
+                "tcpInErrors": {
+                  "name": "tcpInErrors",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpInErrors.rrd"
+                },
+                "tcpInSegs": {
+                  "name": "tcpInSegs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpInSegs.rrd"
+                },
+                "tcpOutRsts": {
+                  "name": "tcpOutRsts",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpOutRsts.rrd"
+                },
+                "tcpOutSegs": {
+                  "name": "tcpOutSegs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpOutSegs.rrd"
+                },
+                "tcpPassiveOpens": {
+                  "name": "tcpPassiveOpens",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpPassiveOpens.rrd"
+                },
+                "tcpRetransSegs": {
+                  "name": "tcpRetransSegs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpRetransSegs.rrd"
+                },
+                "udpInDatagrams": {
+                  "name": "udpInDatagrams",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "udpInDatagrams.rrd"
+                },
+                "udpInErrors": {
+                  "name": "udpInErrors",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "udpInErrors.rrd"
+                },
+                "udpNoPorts": {
+                  "name": "udpNoPorts",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "udpNoPorts.rrd"
+                },
+                "udpOutDatagrams": {
+                  "name": "udpOutDatagrams",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "udpOutDatagrams.rrd"
+                }
+              },
+              "stringPropertyAttributes": {},
+              "typeLabel": "SNMP Node Data"
+            }
           },
-          "attribute": "CpuRawSystem",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
+          "filter": {},
+          "filterState": {},
           "hide": true,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "key": "",
           "label": "CpuRawSystem",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "F",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "F"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": "Last"
+            },
+            "attribute": {
+              "label": "CpuRawKernel",
+              "name": "CpuRawKernel"
+            },
+            "fallbackAttribute": {},
+            "label": "CpuRawKernel",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "children": {
+                "offset": 0,
+                "resource": []
+              },
+              "externalValueAttributes": {},
+              "id": "nodeSnmp[]",
+              "label": "Node-level Performance Data",
+              "name": "",
+              "parentId": "node[linde-devpro-merge:fraliha057-n0.ad1.proemion.com]",
+              "rrdGraphAttributes": {
+                "CpuNumCpus": {
+                  "name": "CpuNumCpus",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuNumCpus.rrd"
+                },
+                "CpuRawGuest": {
+                  "name": "CpuRawGuest",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawGuest.rrd"
+                },
+                "CpuRawGuestNice": {
+                  "name": "CpuRawGuestNice",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawGuestNice.rrd"
+                },
+                "CpuRawIdle": {
+                  "name": "CpuRawIdle",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawIdle.rrd"
+                },
+                "CpuRawInterrupt": {
+                  "name": "CpuRawInterrupt",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawInterrupt.rrd"
+                },
+                "CpuRawKernel": {
+                  "name": "CpuRawKernel",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawKernel.rrd"
+                },
+                "CpuRawNice": {
+                  "name": "CpuRawNice",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawNice.rrd"
+                },
+                "CpuRawSoftIRQ": {
+                  "name": "CpuRawSoftIRQ",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawSoftIRQ.rrd"
+                },
+                "CpuRawSteal": {
+                  "name": "CpuRawSteal",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawSteal.rrd"
+                },
+                "CpuRawSystem": {
+                  "name": "CpuRawSystem",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawSystem.rrd"
+                },
+                "CpuRawUser": {
+                  "name": "CpuRawUser",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawUser.rrd"
+                },
+                "CpuRawWait": {
+                  "name": "CpuRawWait",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "CpuRawWait.rrd"
+                },
+                "IORawReceived": {
+                  "name": "IORawReceived",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "IORawReceived.rrd"
+                },
+                "IORawSent": {
+                  "name": "IORawSent",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "IORawSent.rrd"
+                },
+                "RawBlksSwapIn": {
+                  "name": "RawBlksSwapIn",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "RawBlksSwapIn.rrd"
+                },
+                "RawBlksSwapOut": {
+                  "name": "RawBlksSwapOut",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "RawBlksSwapOut.rrd"
+                },
+                "SwapIn": {
+                  "name": "SwapIn",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "SwapIn.rrd"
+                },
+                "SwapOut": {
+                  "name": "SwapOut",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "SwapOut.rrd"
+                },
+                "SysContext": {
+                  "name": "SysContext",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "SysContext.rrd"
+                },
+                "SysInterrupts": {
+                  "name": "SysInterrupts",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "SysInterrupts.rrd"
+                },
+                "SysRawContext": {
+                  "name": "SysRawContext",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "SysRawContext.rrd"
+                },
+                "SysRawInterrupts": {
+                  "name": "SysRawInterrupts",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "SysRawInterrupts.rrd"
+                },
+                "cpucores": {
+                  "name": "cpucores",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "cpucores.rrd"
+                },
+                "foremanStatus": {
+                  "name": "foremanStatus",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "foremanStatus.rrd"
+                },
+                "hrMemorySize": {
+                  "name": "hrMemorySize",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "hrMemorySize.rrd"
+                },
+                "hrSystemNumUsers": {
+                  "name": "hrSystemNumUsers",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "hrSystemNumUsers.rrd"
+                },
+                "hrSystemProcesses": {
+                  "name": "hrSystemProcesses",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "hrSystemProcesses.rrd"
+                },
+                "hrSystemUptime": {
+                  "name": "hrSystemUptime",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "hrSystemUptime.rrd"
+                },
+                "icmpInAddrMaskReps": {
+                  "name": "icmpInAddrMaskReps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInAddrMaskReps.rrd"
+                },
+                "icmpInAddrMasks": {
+                  "name": "icmpInAddrMasks",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInAddrMasks.rrd"
+                },
+                "icmpInDestUnreachs": {
+                  "name": "icmpInDestUnreachs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInDestUnreachs.rrd"
+                },
+                "icmpInEchoReps": {
+                  "name": "icmpInEchoReps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInEchoReps.rrd"
+                },
+                "icmpInEchos": {
+                  "name": "icmpInEchos",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInEchos.rrd"
+                },
+                "icmpInErrors": {
+                  "name": "icmpInErrors",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInErrors.rrd"
+                },
+                "icmpInMsgs": {
+                  "name": "icmpInMsgs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInMsgs.rrd"
+                },
+                "icmpInParmProbs": {
+                  "name": "icmpInParmProbs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInParmProbs.rrd"
+                },
+                "icmpInRedirects": {
+                  "name": "icmpInRedirects",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInRedirects.rrd"
+                },
+                "icmpInSrcQuenchs": {
+                  "name": "icmpInSrcQuenchs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInSrcQuenchs.rrd"
+                },
+                "icmpInTimeExcds": {
+                  "name": "icmpInTimeExcds",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInTimeExcds.rrd"
+                },
+                "icmpInTimestampReps": {
+                  "name": "icmpInTimestampReps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInTimestampReps.rrd"
+                },
+                "icmpInTimestamps": {
+                  "name": "icmpInTimestamps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpInTimestamps.rrd"
+                },
+                "icmpOutAddrMaskReps": {
+                  "name": "icmpOutAddrMaskReps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutAddrMaskReps.rrd"
+                },
+                "icmpOutAddrMasks": {
+                  "name": "icmpOutAddrMasks",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutAddrMasks.rrd"
+                },
+                "icmpOutDestUnreachs": {
+                  "name": "icmpOutDestUnreachs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutDestUnreachs.rrd"
+                },
+                "icmpOutEchoReps": {
+                  "name": "icmpOutEchoReps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutEchoReps.rrd"
+                },
+                "icmpOutEchos": {
+                  "name": "icmpOutEchos",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutEchos.rrd"
+                },
+                "icmpOutErrors": {
+                  "name": "icmpOutErrors",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutErrors.rrd"
+                },
+                "icmpOutMsgs": {
+                  "name": "icmpOutMsgs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutMsgs.rrd"
+                },
+                "icmpOutParmProbs": {
+                  "name": "icmpOutParmProbs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutParmProbs.rrd"
+                },
+                "icmpOutRedirects": {
+                  "name": "icmpOutRedirects",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutRedirects.rrd"
+                },
+                "icmpOutSrcQuenchs": {
+                  "name": "icmpOutSrcQuenchs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutSrcQuenchs.rrd"
+                },
+                "icmpOutTimeExcds": {
+                  "name": "icmpOutTimeExcds",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutTimeExcds.rrd"
+                },
+                "icmpOutTimestamps": {
+                  "name": "icmpOutTimestamps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutTimestamps.rrd"
+                },
+                "icmpOutTimestmpReps": {
+                  "name": "icmpOutTimestmpReps",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "icmpOutTimestmpReps.rrd"
+                },
+                "loadavg1": {
+                  "name": "loadavg1",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "loadavg1.rrd"
+                },
+                "loadavg15": {
+                  "name": "loadavg15",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "loadavg15.rrd"
+                },
+                "loadavg5": {
+                  "name": "loadavg5",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "loadavg5.rrd"
+                },
+                "mailqcount": {
+                  "name": "mailqcount",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "mailqcount.rrd"
+                },
+                "memAvailReal": {
+                  "name": "memAvailReal",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memAvailReal.rrd"
+                },
+                "memAvailSwap": {
+                  "name": "memAvailSwap",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memAvailSwap.rrd"
+                },
+                "memBuffer": {
+                  "name": "memBuffer",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memBuffer.rrd"
+                },
+                "memCached": {
+                  "name": "memCached",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memCached.rrd"
+                },
+                "memShared": {
+                  "name": "memShared",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memShared.rrd"
+                },
+                "memSwapError": {
+                  "name": "memSwapError",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memSwapError.rrd"
+                },
+                "memTotalFree": {
+                  "name": "memTotalFree",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memTotalFree.rrd"
+                },
+                "memTotalReal": {
+                  "name": "memTotalReal",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memTotalReal.rrd"
+                },
+                "memTotalSwap": {
+                  "name": "memTotalSwap",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "memTotalSwap.rrd"
+                },
+                "ntpqdelay": {
+                  "name": "ntpqdelay",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "ntpqdelay.rrd"
+                },
+                "ntpqjitter": {
+                  "name": "ntpqjitter",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "ntpqjitter.rrd"
+                },
+                "ntpqoffset": {
+                  "name": "ntpqoffset",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "ntpqoffset.rrd"
+                },
+                "reboot": {
+                  "name": "reboot",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "reboot.rrd"
+                },
+                "tcpActiveOpens": {
+                  "name": "tcpActiveOpens",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpActiveOpens.rrd"
+                },
+                "tcpAttemptFails": {
+                  "name": "tcpAttemptFails",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpAttemptFails.rrd"
+                },
+                "tcpCurrEstab": {
+                  "name": "tcpCurrEstab",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpCurrEstab.rrd"
+                },
+                "tcpEstabResets": {
+                  "name": "tcpEstabResets",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpEstabResets.rrd"
+                },
+                "tcpInErrors": {
+                  "name": "tcpInErrors",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpInErrors.rrd"
+                },
+                "tcpInSegs": {
+                  "name": "tcpInSegs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpInSegs.rrd"
+                },
+                "tcpOutRsts": {
+                  "name": "tcpOutRsts",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpOutRsts.rrd"
+                },
+                "tcpOutSegs": {
+                  "name": "tcpOutSegs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpOutSegs.rrd"
+                },
+                "tcpPassiveOpens": {
+                  "name": "tcpPassiveOpens",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpPassiveOpens.rrd"
+                },
+                "tcpRetransSegs": {
+                  "name": "tcpRetransSegs",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "tcpRetransSegs.rrd"
+                },
+                "udpInDatagrams": {
+                  "name": "udpInDatagrams",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "udpInDatagrams.rrd"
+                },
+                "udpInErrors": {
+                  "name": "udpInErrors",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "udpInErrors.rrd"
+                },
+                "udpNoPorts": {
+                  "name": "udpNoPorts",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "udpNoPorts.rrd"
+                },
+                "udpOutDatagrams": {
+                  "name": "udpOutDatagrams",
+                  "relativePath": "snmp/fs/linde-devpro-merge/fraliha057-n0.ad1.proemion.com",
+                  "rrdFile": "udpOutDatagrams.rrd"
+                }
+              },
+              "stringPropertyAttributes": {},
+              "typeLabel": "SNMP Node Data"
+            }
           },
-          "attribute": "CpuRawKernel",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
+          "filter": {},
+          "filterState": {},
           "hide": true,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "key": "",
           "label": "CpuRawKernel",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "G",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
+          "queryType": "",
+          "refId": "G"
+        },
+        {
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
-          "type": "attribute"
-        },
-        {
-          "expression": "CpuRawUser + nice",
-          "label": "user",
-          "refId": "J",
-          "type": "expression"
-        },
-        {
-          "expression": "CpuRawNice + wait",
-          "label": "nice",
-          "refId": "I",
-          "type": "expression"
-        },
-        {
           "expression": "CpuRawSystem + CpuRawInterrupt",
+          "hide": false,
           "label": "system",
-          "refId": "E",
-          "type": "expression"
+          "performanceType": {
+            "label": "Expression",
+            "value": 2
+          },
+          "refId": "E"
         },
         {
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
           "expression": "system + CpuRawWait",
+          "hide": false,
           "label": "wait",
-          "refId": "H",
-          "type": "expression"
+          "performanceType": {
+            "label": "Expression",
+            "value": 2
+          },
+          "refId": "H"
         },
         {
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "expression": "CpuRawNice + wait",
+          "hide": false,
+          "label": "nice",
+          "performanceType": {
+            "label": "Expression",
+            "value": 2
+          },
+          "refId": "I"
+        },
+        {
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "expression": "CpuRawUser + nice",
+          "hide": false,
+          "label": "user",
+          "performanceType": {
+            "label": "Expression",
+            "value": 2
+          },
+          "refId": "J"
+        },
+        {
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
           "expression": "CpuRawInterrupt",
-          "label": "Interrupts",
-          "refId": "K",
-          "type": "expression"
+          "hide": false,
+          "label": "interrupts",
+          "performanceType": {
+            "label": "Expression",
+            "value": 2
+          },
+          "refId": "K"
         }
       ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "CPU Statistics",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "none",
-          "label": "Ticks",
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "type": "timeseries"
     },
     {
       "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "$instance",
-      "decimals": null,
-      "fill": 1,
+      "datasource": {
+        "type": "opennms-performance-datasource",
+        "uid": "${DS_OPENNMS_PERFORMANCE}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "kbytes"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "memCached"
+            },
+            "properties": [
+              {
+                "id": "custom.stacking",
+                "value": {
+                  "group": true,
+                  "mode": "normal"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "memBuffer"
+            },
+            "properties": [
+              {
+                "id": "custom.stacking",
+                "value": {
+                  "group": true,
+                  "mode": "normal"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "memAvailSwap"
+            },
+            "properties": [
+              {
+                "id": "custom.stacking",
+                "value": {
+                  "group": true,
+                  "mode": "normal"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "memShared"
+            },
+            "properties": [
+              {
+                "id": "custom.stacking",
+                "value": {
+                  "group": true,
+                  "mode": "normal"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "memUsed"
+            },
+            "properties": [
+              {
+                "id": "custom.stacking",
+                "value": {
+                  "group": true,
+                  "mode": "normal"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "memAvailReal"
+            },
+            "properties": [
+              {
+                "id": "custom.stacking",
+                "value": {
+                  "group": true,
+                  "mode": "normal"
+                }
+              }
+            ]
+          }
+        ]
+      },
       "gridPos": {
         "h": 9,
         "w": 6,
@@ -742,26 +3704,23 @@
         "y": 1
       },
       "id": 6,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": true,
-        "min": true,
-        "rightSide": false,
-        "show": true,
-        "sideWidth": 250,
-        "total": false,
-        "values": true
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "min"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
       },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "connected",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
+      "pluginVersion": "9.4.7",
       "seriesOverrides": [
         {
           "alias": "memCached",
@@ -793,252 +3752,314 @@
           "zindex": 3
         }
       ],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
       "targets": [
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "memAvailSwap",
+              "name": "memAvailSwap"
+            },
+            "fallbackAttribute": {},
+            "label": "memAvailSwap",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "memAvailSwap",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
+          "filter": {},
+          "filterState": {},
           "hide": false,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "key": "",
           "label": "memAvailSwap",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "A",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "A"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "memBuffer",
+              "name": "memBuffer"
+            },
+            "fallbackAttribute": {},
+            "label": "memBuffer",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "memBuffer",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
+          "filter": {},
+          "filterState": {},
           "hide": false,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "key": "",
           "label": "memBuffer",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "D",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "D"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "memCached",
+              "name": "memCached"
+            },
+            "fallbackAttribute": {},
+            "label": "memCached",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "memCached",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
+          "filter": {},
+          "filterState": {},
           "hide": false,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "key": "",
           "label": "memCached",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "E",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "E"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "memAvailReal",
+              "name": "memAvailReal"
+            },
+            "fallbackAttribute": {},
+            "label": "memAvailReal",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "memAvailReal",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
+          "filter": {},
+          "filterState": {},
           "hide": false,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "key": "",
           "label": "memAvailReal",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "C",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "C"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "memShared",
+              "name": "memShared"
+            },
+            "fallbackAttribute": {},
+            "label": "memShared",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "memShared",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
+          "filter": {},
+          "filterState": {},
           "hide": false,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "key": "",
           "label": "memShared",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "F",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "F"
         },
         {
+          "attribute": {},
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
           "expression": "memTotalReal - memBuffer - memCached - memShared - memAvailReal",
+          "filter": {},
+          "filterState": {},
           "hide": false,
+          "key": "",
           "label": "memUsed",
-          "refId": "G",
-          "type": "expression"
+          "performanceState": {},
+          "performanceType": {
+            "label": "Expression",
+            "value": 2
+          },
+          "queryType": "",
+          "refId": "G"
         },
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "memTotalReal",
+              "name": "memTotalReal"
+            },
+            "fallbackAttribute": {},
+            "label": "memTotalReal",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "memTotalReal",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
+          "filter": {},
+          "filterState": {},
           "hide": false,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
+          "key": "",
           "label": "memTotalReal",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
           },
-          "refId": "B",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
+          "queryType": "",
+          "refId": "B"
         }
       ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Memory Statistics",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "kbytes",
-          "label": "",
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "type": "timeseries"
     },
     {
       "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "$instance",
-      "decimals": null,
-      "fill": 1,
+      "datasource": {
+        "type": "opennms-performance-datasource",
+        "uid": "${DS_OPENNMS_PERFORMANCE}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "Load",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 9,
         "w": 6,
@@ -1046,202 +4067,248 @@
         "y": 1
       },
       "id": 3,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": true,
-        "min": true,
-        "rightSide": false,
-        "show": true,
-        "sideWidth": 250,
-        "total": false,
-        "values": true
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "min"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
       },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null as zero",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
+      "pluginVersion": "9.4.7",
       "seriesOverrides": [
         {
           "alias": "Cores",
           "fill": 0
         }
       ],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
       "targets": [
         {
-          "application": {
-            "filter": ""
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "loadavg1",
+              "name": "loadavg1"
+            },
+            "fallbackAttribute": {},
+            "label": "avg1",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
           },
-          "attribute": "loadavg1",
-          "functions": [],
-          "group": {
-            "filter": ""
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
           },
-          "hide": true,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
-          "label": "avg1",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
-          },
-          "refId": "A",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
-        },
-        {
-          "application": {
-            "filter": ""
-          },
-          "attribute": "loadavg5",
-          "functions": [],
-          "group": {
-            "filter": ""
-          },
-          "hide": true,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
-          "label": "avg5",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
-          },
-          "refId": "B",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
-        },
-        {
-          "application": {
-            "filter": ""
-          },
-          "attribute": "loadavg15",
-          "functions": [],
-          "group": {
-            "filter": ""
-          },
-          "hide": true,
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
-          "label": "avg15",
-          "mode": 0,
-          "nodeId": "$netSnmpLinux",
-          "options": {
-            "showDisabledItems": false
-          },
-          "refId": "C",
-          "resourceId": "nodeSnmp[]",
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          },
-          "type": "attribute"
-        },
-        {
-          "expression": "avg1/100",
-          "label": "1 Minute",
-          "refId": "E",
-          "type": "expression"
-        },
-        {
-          "expression": "avg5/100",
-          "label": "5 Minutes",
-          "refId": "D",
-          "type": "expression"
-        },
-        {
-          "expression": "avg15/100",
-          "label": "15 Minutes",
-          "refId": "F",
-          "type": "expression"
-        },
-        {
-          "attribute": "CpuNumCpus",
-          "fallbackAttribute": "cpucores",
+          "filter": {},
+          "filterState": {},
           "hide": false,
-          "label": "Cores",
-          "nodeId": "$netSnmpLinux",
-          "refId": "G",
-          "resourceId": "nodeSnmp[]",
-          "type": "attribute"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "System Load",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "none",
-          "label": "Load",
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
+          "key": "",
+          "label": "avg1",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "A"
         },
         {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "loadavg5",
+              "name": "loadavg5"
+            },
+            "fallbackAttribute": {},
+            "label": "avg5",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "avg5",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "B"
+        },
+        {
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "loadavg15",
+              "name": "loadavg15"
+            },
+            "fallbackAttribute": {},
+            "label": "avg15",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "avg15",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "C"
+        },
+        {
+          "attribute": {},
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "expression": "avg1/100",
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "1 Minute",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Expression",
+            "value": 2
+          },
+          "queryType": "",
+          "refId": "E"
+        },
+        {
+          "attribute": {},
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "expression": "avg5/100",
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "5 Minutes",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Expression",
+            "value": 2
+          },
+          "queryType": "",
+          "refId": "D"
+        },
+        {
+          "attribute": {},
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "expression": "avg15/100",
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "15 Minutes",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Expression",
+            "value": 2
+          },
+          "queryType": "",
+          "refId": "F"
+        },
+        {
+          "attribute": {
+            "aggregation": {
+              "label": ""
+            },
+            "attribute": {
+              "label": "CpuNumCpus",
+              "name": "CpuNumCpus"
+            },
+            "fallbackAttribute": {
+              "label": "cpucores",
+              "name": "cpucores"
+            },
+            "label": "Cores",
+            "node": {
+              "id": "$netSnmpLinux",
+              "label": "$netSnmpLinux"
+            },
+            "resource": {
+              "id": "nodeSnmp[]",
+              "label": "nodeSnmp[]"
+            }
+          },
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "filter": {},
+          "filterState": {},
+          "hide": false,
+          "key": "",
+          "label": "Cores",
+          "performanceState": {},
+          "performanceType": {
+            "label": "Attribute",
+            "value": 1
+          },
+          "queryType": "",
+          "refId": "G"
         }
       ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "title": "System Load",
+      "type": "timeseries"
     }
   ],
   "refresh": "5m",
-  "schemaVersion": 16,
-  "style": "dark",
+  "schemaVersion": 39,
   "tags": [
     "OpenNMS"
   ],
@@ -1249,23 +4316,29 @@
     "list": [
       {
         "current": {
-          "text": "OpenNMS FRA Performance",
-          "value": "OpenNMS FRA Performance"
+          "selected": false,
+          "text": "OpenNMS Performance",
+          "value": "PF64BB6D6ECC8F3F8"
         },
         "hide": 0,
+        "includeAll": false,
         "label": "OpenNMS Instance",
+        "multi": false,
         "name": "instance",
         "options": [],
-        "query": "opennms-helm-performance-datasource",
+        "query": "opennms-performance-datasource",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
         "type": "datasource"
       },
       {
-        "allValue": null,
         "current": {},
-        "datasource": "$instance",
+        "datasource": {
+          "type": "opennms-performance-datasource",
+          "uid": "${DS_OPENNMS_PERFORMANCE}"
+        },
+        "definition": "",
         "hide": 0,
         "includeAll": false,
         "label": "Net-SNMP node",
@@ -1278,7 +4351,6 @@
         "skipUrlSync": false,
         "sort": 1,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
@@ -1287,7 +4359,7 @@
   },
   "time": {
     "from": "now-12h",
-    "to": "now-5m"
+    "to": "now"
   },
   "timepicker": {
     "refresh_intervals": [
@@ -1316,6 +4388,7 @@
   },
   "timezone": "",
   "title": "OpenNMS Linux Node Performance (multirow)",
-  "uid": "000000063",
-  "version": 26
+  "uid": "ddlwqi138ks8we",
+  "version": 9,
+  "weekStart": ""
 }
