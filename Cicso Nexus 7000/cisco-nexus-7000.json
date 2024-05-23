@@ -1,0 +1,2099 @@
+{
+    "__inputs": [
+      {
+        "name": "DS_OPENNMS_PERFORMANCE",
+        "label": "OpenNMS Performance",
+        "description": "",
+        "type": "datasource",
+        "pluginId": "opennms-performance-datasource",
+        "pluginName": "OpenNMS Performance"
+      }
+    ],
+    "__elements": {},
+    "__requires": [
+      {
+        "type": "grafana",
+        "id": "grafana",
+        "name": "Grafana",
+        "version": "10.4.2"
+      },
+      {
+        "type": "datasource",
+        "id": "opennms-performance-datasource",
+        "name": "OpenNMS Performance",
+        "version": "9"
+      },
+      {
+        "type": "panel",
+        "id": "table",
+        "name": "Table",
+        "version": ""
+      },
+      {
+        "type": "panel",
+        "id": "timeseries",
+        "name": "Time series",
+        "version": ""
+      }
+    ],
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "gnetId": 5564,
+    "graphTooltip": 0,
+    "id": null,
+    "links": [],
+    "panels": [
+      {
+        "collapsed": false,
+        "datasource": {
+          "type": "opennms-performance-datasource",
+          "uid": "PF64BB6D6ECC8F3F8"
+        },
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "id": 21,
+        "panels": [],
+        "targets": [
+          {
+            "datasource": {
+              "type": "opennms-performance-datasource",
+              "uid": "PF64BB6D6ECC8F3F8"
+            },
+            "refId": "A"
+          }
+        ],
+        "title": "System",
+        "type": "row"
+      },
+      {
+        "aliasColors": {},
+        "datasource": {
+          "type": "opennms-performance-datasource",
+          "uid": "${DS_OPENNMS_PERFORMANCE}"
+        },
+        "description": "These statistics represent metrics collected from the Cisco Process MIB module which describes active system processes.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "normal"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 0,
+          "y": 1
+        },
+        "id": 4,
+        "options": {
+          "legend": {
+            "calcs": [
+              "mean",
+              "max",
+              "min"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "9.4.7",
+        "seriesOverrides": [],
+        "targets": [
+          {
+            "attribute": {
+              "aggregation": {
+                "label": ""
+              },
+              "attribute": {
+                "label": "cpmCPUTotal5minRev",
+                "name": "cpmCPUTotal5minRev"
+              },
+              "fallbackAttribute": {},
+              "label": "cpmCPUTotal5minRev ($index)",
+              "node": {
+                "id": "$node",
+                "label": "$node"
+              },
+              "resource": {
+                "id": "$ciscoNxProc",
+                "label": "$ciscoNxProc"
+              }
+            },
+            "datasource": {
+              "type": "opennms-performance-datasource",
+              "uid": "${DS_OPENNMS_PERFORMANCE}"
+            },
+            "filter": {},
+            "filterState": {},
+            "hide": false,
+            "key": "",
+            "label": "cpmCPUTotal5minRev ($index)",
+            "performanceState": {},
+            "performanceType": {
+              "label": "Attribute",
+              "value": 1
+            },
+            "queryType": "",
+            "refId": "A"
+          }
+        ],
+        "title": "Cisco System CPU Usage",
+        "type": "timeseries"
+      },
+      {
+        "aliasColors": {},
+        "datasource": {
+          "type": "opennms-performance-datasource",
+          "uid": "${DS_OPENNMS_PERFORMANCE}"
+        },
+        "description": "These statistics represent metrics collected from the Cisco Process MIB module which describes active system processes.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "normal"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "deckbytes"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 12,
+          "y": 1
+        },
+        "id": 2,
+        "options": {
+          "legend": {
+            "calcs": [
+              "mean",
+              "max",
+              "min"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "9.4.7",
+        "seriesOverrides": [],
+        "targets": [
+          {
+            "attribute": {
+              "aggregation": {
+                "label": ""
+              },
+              "attribute": {
+                "label": "cpmCPUMemoryFree",
+                "name": "cpmCPUMemoryFree"
+              },
+              "fallbackAttribute": {},
+              "label": "cpmCPUMemoryFree_$index",
+              "node": {
+                "id": "$node",
+                "label": "$node"
+              },
+              "resource": {
+                "id": "$ciscoNxProc",
+                "label": "$ciscoNxProc"
+              }
+            },
+            "datasource": {
+              "type": "opennms-performance-datasource",
+              "uid": "${DS_OPENNMS_PERFORMANCE}"
+            },
+            "filter": {},
+            "filterState": {},
+            "hide": false,
+            "key": "",
+            "label": "cpmCPUMemoryFree_$index",
+            "performanceState": {},
+            "performanceType": {
+              "label": "Attribute",
+              "value": 1
+            },
+            "queryType": "",
+            "refId": "A"
+          },
+          {
+            "attribute": {
+              "aggregation": {
+                "label": ""
+              },
+              "attribute": {
+                "label": "cpmCPUMemoryUsed",
+                "name": "cpmCPUMemoryUsed"
+              },
+              "fallbackAttribute": {},
+              "label": "cpmCPUMemoryUsed_$index",
+              "node": {
+                "id": "$node",
+                "label": "$node"
+              },
+              "resource": {
+                "id": "ciscoNXProcessIndex[22]",
+                "label": "ciscoNXProcessIndex[22]"
+              }
+            },
+            "datasource": {
+              "type": "opennms-performance-datasource",
+              "uid": "${DS_OPENNMS_PERFORMANCE}"
+            },
+            "filter": {},
+            "filterState": {},
+            "hide": false,
+            "key": "",
+            "label": "cpmCPUMemoryUsed_$index",
+            "performanceState": {},
+            "performanceType": {
+              "label": "Attribute",
+              "value": 1
+            },
+            "queryType": "",
+            "refId": "B"
+          },
+          {
+            "attribute": {},
+            "datasource": {
+              "type": "opennms-performance-datasource",
+              "uid": "${DS_OPENNMS_PERFORMANCE}"
+            },
+            "expression": "cpmCPUMemoryFree_$index+cpmCPUMemoryUsed_$index",
+            "filter": {},
+            "filterState": {},
+            "hide": false,
+            "key": "",
+            "label": "cpmCPUMemoryTotal_$index",
+            "performanceState": {},
+            "performanceType": {
+              "label": "Expression",
+              "value": 2
+            },
+            "queryType": "",
+            "refId": "C"
+          }
+        ],
+        "title": "Cisco System Memory Pools",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "opennms-performance-datasource",
+          "uid": "${DS_OPENNMS_PERFORMANCE}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "cellOptions": {
+                "type": "auto"
+              },
+              "inspect": false
+            },
+            "decimals": 2,
+            "displayName": "",
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Time"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "Time"
+                },
+                {
+                  "id": "unit",
+                  "value": "time: YYYY-MM-DD HH:mm:ss"
+                },
+                {
+                  "id": "custom.align"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Metric"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "Sensor"
+                },
+                {
+                  "id": "unit",
+                  "value": "celsius"
+                },
+                {
+                  "id": "decimals",
+                  "value": 2
+                },
+                {
+                  "id": "custom.align"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Avg"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "Temperature"
+                },
+                {
+                  "id": "unit",
+                  "value": "celsius"
+                },
+                {
+                  "id": "decimals",
+                  "value": 2
+                },
+                {
+                  "id": "custom.cellOptions",
+                  "value": {
+                    "type": "color-text"
+                  }
+                },
+                {
+                  "id": "custom.align"
+                },
+                {
+                  "id": "thresholds",
+                  "value": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "rgba(50, 172, 45, 0.97)",
+                        "value": null
+                      },
+                      {
+                        "color": "rgba(237, 129, 40, 0.89)",
+                        "value": 40
+                      },
+                      {
+                        "color": "rgba(245, 54, 54, 0.9)",
+                        "value": 50
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 0,
+          "y": 10
+        },
+        "id": 18,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true
+        },
+        "pluginVersion": "10.4.2",
+        "targets": [
+          {
+            "attribute": {
+              "aggregation": {
+                "label": "AVERAGE"
+              },
+              "attribute": {
+                "label": "entSensorValue",
+                "name": "entSensorValue"
+              },
+              "fallbackAttribute": {},
+              "label": "$node ($index)",
+              "node": {
+                "id": "$node",
+                "label": "$node"
+              },
+              "resource": {
+                "id": "$ciscoNxEnv",
+                "label": "$ciscoNxEnv"
+              }
+            },
+            "datasource": {
+              "type": "opennms-performance-datasource",
+              "uid": "${DS_OPENNMS_PERFORMANCE}"
+            },
+            "filter": {},
+            "filterState": {},
+            "hide": false,
+            "key": "",
+            "label": "$node ($index)",
+            "performanceState": {},
+            "performanceType": {
+              "label": "Attribute",
+              "value": 1
+            },
+            "queryType": "",
+            "refId": "A"
+          }
+        ],
+        "title": "Temperature Sensors",
+        "transformations": [
+          {
+            "id": "reduce",
+            "options": {
+              "includeTimeField": false,
+              "reducers": [
+                "mean"
+              ]
+            }
+          }
+        ],
+        "type": "table"
+      },
+      {
+        "datasource": {
+          "type": "opennms-performance-datasource",
+          "uid": "${DS_OPENNMS_PERFORMANCE}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "cellOptions": {
+                "type": "auto"
+              },
+              "inspect": false
+            },
+            "decimals": 2,
+            "displayName": "",
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Time"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "Time"
+                },
+                {
+                  "id": "unit",
+                  "value": "time: YYYY-MM-DD HH:mm:ss"
+                },
+                {
+                  "id": "custom.align"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Metric"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "Module"
+                },
+                {
+                  "id": "unit",
+                  "value": "celsius"
+                },
+                {
+                  "id": "decimals",
+                  "value": 2
+                },
+                {
+                  "id": "custom.align"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Avg"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "Usage"
+                },
+                {
+                  "id": "unit",
+                  "value": "percent"
+                },
+                {
+                  "id": "decimals",
+                  "value": 2
+                },
+                {
+                  "id": "custom.cellOptions",
+                  "value": {
+                    "type": "color-text"
+                  }
+                },
+                {
+                  "id": "custom.align"
+                },
+                {
+                  "id": "thresholds",
+                  "value": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "rgba(50, 172, 45, 0.97)",
+                        "value": null
+                      },
+                      {
+                        "color": "rgba(237, 129, 40, 0.89)",
+                        "value": 40
+                      },
+                      {
+                        "color": "rgba(245, 54, 54, 0.9)",
+                        "value": 50
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 12,
+          "y": 10
+        },
+        "id": 19,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true
+        },
+        "pluginVersion": "10.4.2",
+        "targets": [
+          {
+            "attribute": {
+              "aggregation": {
+                "label": "AVERAGE"
+              },
+              "attribute": {
+                "label": "cpmCPUTotal5minRev",
+                "name": "cpmCPUTotal5minRev"
+              },
+              "fallbackAttribute": {},
+              "label": "$node ($index)",
+              "node": {
+                "id": "$node",
+                "label": "$node"
+              },
+              "resource": {
+                "id": "$ciscoNxProc",
+                "label": "$ciscoNxProc"
+              }
+            },
+            "datasource": {
+              "type": "opennms-performance-datasource",
+              "uid": "${DS_OPENNMS_PERFORMANCE}"
+            },
+            "filter": {},
+            "filterState": {},
+            "hide": false,
+            "key": "",
+            "label": "$node ($index)",
+            "performanceState": {},
+            "performanceType": {
+              "label": "Attribute",
+              "value": 1
+            },
+            "queryType": "",
+            "refId": "A"
+          }
+        ],
+        "title": "CPU Usage Modules",
+        "transformations": [
+          {
+            "id": "reduce",
+            "options": {
+              "includeTimeField": false,
+              "reducers": [
+                "mean"
+              ]
+            }
+          }
+        ],
+        "type": "table"
+      },
+      {
+        "aliasColors": {},
+        "datasource": {
+          "type": "opennms-performance-datasource",
+          "uid": "${DS_OPENNMS_PERFORMANCE}"
+        },
+        "description": "These statistics represent metrics collected from the Cisco Environmental sensors.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "normal"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "celsius"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 24,
+          "x": 0,
+          "y": 19
+        },
+        "id": 3,
+        "options": {
+          "legend": {
+            "calcs": [
+              "mean",
+              "max",
+              "min"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "9.4.7",
+        "seriesOverrides": [],
+        "targets": [
+          {
+            "attribute": {
+              "aggregation": {
+                "label": ""
+              },
+              "attribute": {
+                "label": "entSensorValue",
+                "name": "entSensorValue"
+              },
+              "fallbackAttribute": {},
+              "label": "entSensorValue_$index",
+              "node": {
+                "id": "$node",
+                "label": "$node"
+              },
+              "resource": {
+                "id": "$ciscoNxEnv",
+                "label": "$ciscoNxEnv"
+              }
+            },
+            "datasource": {
+              "type": "opennms-performance-datasource",
+              "uid": "${DS_OPENNMS_PERFORMANCE}"
+            },
+            "filter": {},
+            "filterState": {},
+            "hide": false,
+            "key": "",
+            "label": "entSensorValue_$index",
+            "performanceState": {},
+            "performanceType": {
+              "label": "Attribute",
+              "value": 1
+            },
+            "queryType": "",
+            "refId": "A"
+          }
+        ],
+        "title": "Cisco Environment Monitors",
+        "type": "timeseries"
+      },
+      {
+        "collapsed": false,
+        "datasource": {
+          "type": "opennms-performance-datasource",
+          "uid": "PF64BB6D6ECC8F3F8"
+        },
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 28
+        },
+        "id": 23,
+        "panels": [],
+        "targets": [
+          {
+            "datasource": {
+              "type": "opennms-performance-datasource",
+              "uid": "PF64BB6D6ECC8F3F8"
+            },
+            "refId": "A"
+          }
+        ],
+        "title": "Network Interfaces",
+        "type": "row"
+      },
+      {
+        "aliasColors": {},
+        "datasource": {
+          "type": "opennms-performance-datasource",
+          "uid": "${DS_OPENNMS_PERFORMANCE}"
+        },
+        "description": "The total number of bits received and transmitted on the interface, including framing characters.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "normal"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "bps"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 12,
+          "x": 0,
+          "y": 29
+        },
+        "id": 6,
+        "options": {
+          "legend": {
+            "calcs": [
+              "mean",
+              "max",
+              "min"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "9.4.7",
+        "seriesOverrides": [
+          {
+            "alias": "/^Out.*/i",
+            "transform": "negative-Y"
+          }
+        ],
+        "targets": [
+          {
+            "attribute": {
+              "aggregation": {
+                "label": ""
+              },
+              "attribute": {
+                "label": "ifHCInOctets",
+                "name": "ifHCInOctets"
+              },
+              "fallbackAttribute": {},
+              "label": "$index_in",
+              "node": {
+                "id": "$node",
+                "label": "$node"
+              },
+              "resource": {
+                "id": "$snmpInterface",
+                "label": "$snmpInterface"
+              }
+            },
+            "datasource": {
+              "type": "opennms-performance-datasource",
+              "uid": "${DS_OPENNMS_PERFORMANCE}"
+            },
+            "filter": {},
+            "filterState": {},
+            "hide": false,
+            "key": "",
+            "label": "$index_in",
+            "performanceState": {},
+            "performanceType": {
+              "label": "Attribute",
+              "value": 1
+            },
+            "queryType": "",
+            "refId": "A"
+          },
+          {
+            "attribute": {},
+            "datasource": {
+              "type": "opennms-performance-datasource",
+              "uid": "${DS_OPENNMS_PERFORMANCE}"
+            },
+            "expression": "$index_in*8",
+            "filter": {},
+            "filterState": {},
+            "hide": false,
+            "key": "",
+            "label": "In on $node $interface_$index",
+            "performanceState": {},
+            "performanceType": {
+              "label": "Expression",
+              "value": 2
+            },
+            "queryType": "",
+            "refId": "B"
+          },
+          {
+            "attribute": {
+              "aggregation": {
+                "label": ""
+              },
+              "attribute": {
+                "label": "ifOutOctets",
+                "name": "ifOutOctets"
+              },
+              "fallbackAttribute": {},
+              "label": "$index_out",
+              "node": {
+                "id": "$node",
+                "label": "$node"
+              },
+              "resource": {
+                "id": "$snmpInterface",
+                "label": "$snmpInterface"
+              }
+            },
+            "datasource": {
+              "type": "opennms-performance-datasource",
+              "uid": "${DS_OPENNMS_PERFORMANCE}"
+            },
+            "filter": {},
+            "filterState": {},
+            "hide": false,
+            "key": "",
+            "label": "$index_out",
+            "performanceState": {},
+            "performanceType": {
+              "label": "Attribute",
+              "value": 1
+            },
+            "queryType": "",
+            "refId": "C"
+          },
+          {
+            "attribute": {},
+            "datasource": {
+              "type": "opennms-performance-datasource",
+              "uid": "${DS_OPENNMS_PERFORMANCE}"
+            },
+            "expression": "$index_out*8",
+            "filter": {},
+            "filterState": {},
+            "hide": false,
+            "key": "",
+            "label": "Out on $node $interface_$index",
+            "performanceState": {},
+            "performanceType": {
+              "label": "Expression",
+              "value": 2
+            },
+            "queryType": "",
+            "refId": "D"
+          }
+        ],
+        "title": "Bandwidth",
+        "type": "timeseries"
+      },
+      {
+        "aliasColors": {},
+        "datasource": {
+          "type": "opennms-performance-datasource",
+          "uid": "${DS_OPENNMS_PERFORMANCE}"
+        },
+        "description": "Network interface utilisation.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "normal"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 12,
+          "x": 12,
+          "y": 29
+        },
+        "id": 10,
+        "options": {
+          "legend": {
+            "calcs": [
+              "mean",
+              "max",
+              "min"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "9.4.7",
+        "seriesOverrides": [
+          {
+            "alias": "/^Out.*/i",
+            "transform": "negative-Y"
+          }
+        ],
+        "targets": [
+          {
+            "attribute": {
+              "aggregation": {
+                "label": ""
+              },
+              "attribute": {
+                "label": "ifHCInOctets",
+                "name": "ifHCInOctets"
+              },
+              "fallbackAttribute": {},
+              "label": "$index_in",
+              "node": {
+                "id": "$node",
+                "label": "$node"
+              },
+              "resource": {
+                "id": "$snmpInterface",
+                "label": "$snmpInterface"
+              }
+            },
+            "datasource": {
+              "type": "opennms-performance-datasource",
+              "uid": "${DS_OPENNMS_PERFORMANCE}"
+            },
+            "filter": {},
+            "filterState": {},
+            "hide": false,
+            "key": "",
+            "label": "$index_in",
+            "performanceState": {},
+            "performanceType": {
+              "label": "Attribute",
+              "value": 1
+            },
+            "queryType": "",
+            "refId": "A"
+          },
+          {
+            "attribute": {
+              "aggregation": {
+                "label": ""
+              },
+              "attribute": {
+                "label": "ifOutOctets",
+                "name": "ifOutOctets"
+              },
+              "fallbackAttribute": {},
+              "label": "$index_out",
+              "node": {
+                "id": "$node",
+                "label": "$node"
+              },
+              "resource": {
+                "id": "$snmpInterface",
+                "label": "$snmpInterface"
+              }
+            },
+            "datasource": {
+              "type": "opennms-performance-datasource",
+              "uid": "${DS_OPENNMS_PERFORMANCE}"
+            },
+            "filter": {},
+            "filterState": {},
+            "hide": false,
+            "key": "",
+            "label": "$index_out",
+            "performanceState": {},
+            "performanceType": {
+              "label": "Attribute",
+              "value": 1
+            },
+            "queryType": "",
+            "refId": "C"
+          },
+          {
+            "attribute": {},
+            "datasource": {
+              "type": "opennms-performance-datasource",
+              "uid": "${DS_OPENNMS_PERFORMANCE}"
+            },
+            "expression": "$index_in*8*100/1000000000",
+            "filter": {},
+            "filterState": {},
+            "hide": false,
+            "key": "",
+            "label": "In $node on $interface_$index",
+            "performanceState": {},
+            "performanceType": {
+              "label": "Expression",
+              "value": 2
+            },
+            "queryType": "",
+            "refId": "E"
+          },
+          {
+            "attribute": {},
+            "datasource": {
+              "type": "opennms-performance-datasource",
+              "uid": "${DS_OPENNMS_PERFORMANCE}"
+            },
+            "expression": "$index_out*8*100/1000000000",
+            "filter": {},
+            "filterState": {},
+            "hide": false,
+            "key": "",
+            "label": "Out $node on $interface_$index",
+            "performanceState": {},
+            "performanceType": {
+              "label": "Expression",
+              "value": 2
+            },
+            "queryType": "",
+            "refId": "B"
+          }
+        ],
+        "title": "Interface Utilization",
+        "type": "timeseries"
+      },
+      {
+        "aliasColors": {},
+        "datasource": {
+          "type": "opennms-performance-datasource",
+          "uid": "${DS_OPENNMS_PERFORMANCE}"
+        },
+        "description": "For packet-oriented interfaces, the number of inbound or outbound packets that contained errors preventing them from being deliverable to a higher-layer protocol.  For character-oriented or fixed-length interfaces, the number of inbound transmission units that contained errors preventing them from being deliverable to a higher-layer protocol.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "packets",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "normal"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 12,
+          "x": 0,
+          "y": 35
+        },
+        "id": 8,
+        "options": {
+          "legend": {
+            "calcs": [
+              "mean",
+              "max",
+              "min"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "9.4.7",
+        "seriesOverrides": [
+          {
+            "alias": "/^Out.*/i",
+            "transform": "negative-Y"
+          }
+        ],
+        "targets": [
+          {
+            "attribute": {
+              "aggregation": {
+                "label": "AVERAGE"
+              },
+              "attribute": {
+                "label": "ifInErrors",
+                "name": "ifInErrors"
+              },
+              "fallbackAttribute": {},
+              "label": "Out on $node $interface_$index",
+              "node": {
+                "id": "$node",
+                "label": "$node"
+              },
+              "resource": {
+                "id": "$snmpInterface",
+                "label": "$snmpInterface"
+              }
+            },
+            "datasource": {
+              "type": "opennms-performance-datasource",
+              "uid": "${DS_OPENNMS_PERFORMANCE}"
+            },
+            "filter": {},
+            "filterState": {},
+            "hide": false,
+            "key": "",
+            "label": "Out on $node $interface_$index",
+            "performanceState": {},
+            "performanceType": {
+              "label": "Attribute",
+              "value": 1
+            },
+            "queryType": "",
+            "refId": "A"
+          },
+          {
+            "attribute": {
+              "aggregation": {
+                "label": "AVERAGE"
+              },
+              "attribute": {
+                "label": "ifOutErrors",
+                "name": "ifOutErrors"
+              },
+              "fallbackAttribute": {},
+              "label": "In on $node $interface_$index",
+              "node": {
+                "id": "$node",
+                "label": "$node"
+              },
+              "resource": {
+                "id": "$snmpInterface",
+                "label": "$snmpInterface"
+              }
+            },
+            "datasource": {
+              "type": "opennms-performance-datasource",
+              "uid": "${DS_OPENNMS_PERFORMANCE}"
+            },
+            "filter": {},
+            "filterState": {},
+            "hide": false,
+            "key": "",
+            "label": "In on $node $interface_$index",
+            "performanceState": {},
+            "performanceType": {
+              "label": "Attribute",
+              "value": 1
+            },
+            "queryType": "",
+            "refId": "B"
+          }
+        ],
+        "title": "Errors",
+        "type": "timeseries"
+      },
+      {
+        "aliasColors": {},
+        "datasource": {
+          "type": "opennms-performance-datasource",
+          "uid": "${DS_OPENNMS_PERFORMANCE}"
+        },
+        "description": "The number of outbound and inbound packets which were chosen to be discarded even though no errors had been detected to prevent their being deliverable to a higher-layer protocol. One possible reason for discarding such a packet could be to free up buffer space.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "packets",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "normal"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 12,
+          "x": 12,
+          "y": 35
+        },
+        "id": 11,
+        "options": {
+          "legend": {
+            "calcs": [
+              "mean",
+              "max",
+              "min"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "9.4.7",
+        "seriesOverrides": [
+          {
+            "alias": "/^Out.*/i",
+            "transform": "negative-Y"
+          }
+        ],
+        "targets": [
+          {
+            "attribute": {
+              "aggregation": {
+                "label": "AVERAGE"
+              },
+              "attribute": {
+                "label": "ifInDiscards",
+                "name": "ifInDiscards"
+              },
+              "fallbackAttribute": {},
+              "label": "Out on $node $interface_$index",
+              "node": {
+                "id": "$node",
+                "label": "$node"
+              },
+              "resource": {
+                "id": "$snmpInterface",
+                "label": "$snmpInterface"
+              }
+            },
+            "datasource": {
+              "type": "opennms-performance-datasource",
+              "uid": "${DS_OPENNMS_PERFORMANCE}"
+            },
+            "filter": {},
+            "filterState": {},
+            "hide": false,
+            "key": "",
+            "label": "Out on $node $interface_$index",
+            "performanceState": {},
+            "performanceType": {
+              "label": "Attribute",
+              "value": 1
+            },
+            "queryType": "",
+            "refId": "A"
+          },
+          {
+            "attribute": {
+              "aggregation": {
+                "label": "AVERAGE"
+              },
+              "attribute": {
+                "label": "ifOutDiscards",
+                "name": "ifOutDiscards"
+              },
+              "fallbackAttribute": {},
+              "label": "In on $node $interface_$index",
+              "node": {
+                "id": "$node",
+                "label": "$node"
+              },
+              "resource": {
+                "id": "$snmpInterface",
+                "label": "$snmpInterface"
+              }
+            },
+            "datasource": {
+              "type": "opennms-performance-datasource",
+              "uid": "${DS_OPENNMS_PERFORMANCE}"
+            },
+            "filter": {},
+            "filterState": {},
+            "hide": false,
+            "key": "",
+            "label": "In on $node $interface_$index",
+            "performanceState": {},
+            "performanceType": {
+              "label": "Attribute",
+              "value": 1
+            },
+            "queryType": "",
+            "refId": "B"
+          }
+        ],
+        "title": "Discarded",
+        "type": "timeseries"
+      },
+      {
+        "aliasColors": {},
+        "datasource": {
+          "type": "opennms-performance-datasource",
+          "uid": "${DS_OPENNMS_PERFORMANCE}"
+        },
+        "description": "Number of received or transmitted Unicast, Broadcast and Multicast packets.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "packets",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "normal"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 24,
+          "x": 0,
+          "y": 41
+        },
+        "id": 13,
+        "options": {
+          "legend": {
+            "calcs": [
+              "mean",
+              "max",
+              "min"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "9.4.7",
+        "seriesOverrides": [
+          {
+            "alias": "/^Out.*/i",
+            "transform": "negative-Y"
+          }
+        ],
+        "targets": [
+          {
+            "attribute": {
+              "aggregation": {
+                "label": "AVERAGE"
+              },
+              "attribute": {
+                "label": "ifInUcastpkts",
+                "name": "ifInUcastpkts"
+              },
+              "fallbackAttribute": {},
+              "label": "In Unicast $node $interface ($index)",
+              "node": {
+                "id": "$node",
+                "label": "$node"
+              },
+              "resource": {
+                "id": "$snmpInterface",
+                "label": "$snmpInterface"
+              }
+            },
+            "datasource": {
+              "type": "opennms-performance-datasource",
+              "uid": "${DS_OPENNMS_PERFORMANCE}"
+            },
+            "filter": {},
+            "filterState": {},
+            "hide": false,
+            "key": "",
+            "label": "In Unicast $node $interface ($index)",
+            "performanceState": {},
+            "performanceType": {
+              "label": "Attribute",
+              "value": 1
+            },
+            "queryType": "",
+            "refId": "A"
+          },
+          {
+            "attribute": {
+              "aggregation": {
+                "label": "AVERAGE"
+              },
+              "attribute": {
+                "label": "ifInNUcastpkts",
+                "name": "ifInNUcastpkts"
+              },
+              "fallbackAttribute": {},
+              "label": "In Non-Unicast $node $interface ($index)",
+              "node": {
+                "id": "$node",
+                "label": "$node"
+              },
+              "resource": {
+                "id": "$snmpInterface",
+                "label": "$snmpInterface"
+              }
+            },
+            "datasource": {
+              "type": "opennms-performance-datasource",
+              "uid": "${DS_OPENNMS_PERFORMANCE}"
+            },
+            "filter": {},
+            "filterState": {},
+            "hide": false,
+            "key": "",
+            "label": "In Non-Unicast $node $interface ($index)",
+            "performanceState": {},
+            "performanceType": {
+              "label": "Attribute",
+              "value": 1
+            },
+            "queryType": "",
+            "refId": "B"
+          },
+          {
+            "attribute": {
+              "aggregation": {
+                "label": "AVERAGE"
+              },
+              "attribute": {
+                "label": "ifOutUcastPkts",
+                "name": "ifOutUcastPkts"
+              },
+              "fallbackAttribute": {},
+              "label": "Out Unicast $node $interface ($index)",
+              "node": {
+                "id": "$node",
+                "label": "$node"
+              },
+              "resource": {
+                "id": "$snmpInterface",
+                "label": "$snmpInterface"
+              }
+            },
+            "datasource": {
+              "type": "opennms-performance-datasource",
+              "uid": "${DS_OPENNMS_PERFORMANCE}"
+            },
+            "filter": {},
+            "filterState": {},
+            "hide": false,
+            "key": "",
+            "label": "Out Unicast $node $interface ($index)",
+            "performanceState": {},
+            "performanceType": {
+              "label": "Attribute",
+              "value": 1
+            },
+            "queryType": "",
+            "refId": "D"
+          },
+          {
+            "attribute": {
+              "aggregation": {
+                "label": "AVERAGE"
+              },
+              "attribute": {
+                "label": "ifOutNUcastPkts",
+                "name": "ifOutNUcastPkts"
+              },
+              "fallbackAttribute": {},
+              "label": "Out Non-Unicast $node $interface ($index)",
+              "node": {
+                "id": "$node",
+                "label": "$node"
+              },
+              "resource": {
+                "id": "$snmpInterface",
+                "label": "$snmpInterface"
+              }
+            },
+            "datasource": {
+              "type": "opennms-performance-datasource",
+              "uid": "${DS_OPENNMS_PERFORMANCE}"
+            },
+            "filter": {},
+            "filterState": {},
+            "hide": false,
+            "key": "",
+            "label": "Out Non-Unicast $node $interface ($index)",
+            "performanceState": {},
+            "performanceType": {
+              "label": "Attribute",
+              "value": 1
+            },
+            "queryType": "",
+            "refId": "C"
+          }
+        ],
+        "title": "Packet Statistics",
+        "type": "timeseries"
+      }
+    ],
+    "refresh": false,
+    "schemaVersion": 39,
+    "tags": [],
+    "templating": {
+      "list": [
+        {
+          "current": {},
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "definition": "",
+          "hide": 0,
+          "includeAll": false,
+          "multi": false,
+          "name": "node",
+          "options": [],
+          "query": "nodeFilter(nodeSysOid == '.1.3.6.1.4.1.9.12.3.1.3.932')",
+          "refresh": 2,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 1,
+          "tagValuesQuery": "",
+          "tagsQuery": "",
+          "type": "query",
+          "useTags": false
+        },
+        {
+          "current": {},
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "definition": "",
+          "hide": 0,
+          "includeAll": true,
+          "multi": true,
+          "name": "snmpInterface",
+          "options": [],
+          "query": "nodeResources($node)",
+          "refresh": 2,
+          "regex": "^interfaceSnmp\\[.*",
+          "skipUrlSync": false,
+          "sort": 1,
+          "tagValuesQuery": "",
+          "tagsQuery": "",
+          "type": "query",
+          "useTags": false
+        },
+        {
+          "current": {},
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "definition": "",
+          "hide": 0,
+          "includeAll": true,
+          "multi": true,
+          "name": "ciscoNxEnv",
+          "options": [],
+          "query": "nodeResources($node)",
+          "refresh": 2,
+          "regex": "^ciscoNXEnvMonStatusIndex\\[.*",
+          "skipUrlSync": false,
+          "sort": 1,
+          "tagValuesQuery": "",
+          "tagsQuery": "",
+          "type": "query",
+          "useTags": false
+        },
+        {
+          "current": {},
+          "datasource": {
+            "type": "opennms-performance-datasource",
+            "uid": "${DS_OPENNMS_PERFORMANCE}"
+          },
+          "definition": "",
+          "hide": 0,
+          "includeAll": true,
+          "multi": true,
+          "name": "ciscoNxProc",
+          "options": [],
+          "query": "nodeResources($node)",
+          "refresh": 2,
+          "regex": "^ciscoNXProcessIndex\\[.*",
+          "skipUrlSync": false,
+          "sort": 1,
+          "tagValuesQuery": "",
+          "tagsQuery": "",
+          "type": "query",
+          "useTags": false
+        }
+      ]
+    },
+    "time": {
+      "from": "2018-03-14T13:22:35.541Z",
+      "to": "2018-04-04T13:54:25.565Z"
+    },
+    "timepicker": {
+      "refresh_intervals": [
+        "5s",
+        "10s",
+        "30s",
+        "1m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "1d"
+      ],
+      "time_options": [
+        "5m",
+        "15m",
+        "1h",
+        "6h",
+        "12h",
+        "24h",
+        "2d",
+        "7d",
+        "30d"
+      ]
+    },
+    "timezone": "",
+    "title": "Cisco Nexus 7000",
+    "uid": "cdmlpr8xbuwowf",
+    "version": 2,
+    "weekStart": ""
+  }
