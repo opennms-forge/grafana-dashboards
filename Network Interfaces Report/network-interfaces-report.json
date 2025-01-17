@@ -1,8 +1,8 @@
 {
   "__inputs": [
     {
-      "name": "DS_OPENNMS_PERFORMANCE",
-      "label": "OpenNMS Performance",
+      "name": "DS_OPENNMS-PERFORMANCE-DATASOURCE",
+      "label": "opennms-performance-datasource",
       "description": "",
       "type": "datasource",
       "pluginId": "opennms-performance-datasource",
@@ -15,7 +15,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "10.4.2"
+      "version": "11.4.0"
     },
     {
       "type": "datasource",
@@ -49,16 +49,14 @@
   "description": "OpenNMS statistics about network interfaces with Standard MIB 2 metrics.",
   "editable": true,
   "fiscalYearStartMonth": 0,
-  "gnetId": 5053,
   "graphTooltip": 0,
   "id": null,
   "links": [],
   "panels": [
     {
-      "aliasColors": {},
       "datasource": {
         "type": "opennms-performance-datasource",
-        "uid": "${DS_OPENNMS_PERFORMANCE}"
+        "uid": "${DS_OPENNMS-PERFORMANCE-DATASOURCE}"
       },
       "description": "The total number of bits received and transmitted on the interface, including framing characters.",
       "fieldConfig": {
@@ -73,6 +71,7 @@
             "axisLabel": "bits/sec",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 10,
             "gradientMode": "none",
@@ -92,7 +91,7 @@
             "spanNulls": false,
             "stacking": {
               "group": "A",
-              "mode": "normal"
+              "mode": "none"
             },
             "thresholdsStyle": {
               "mode": "off"
@@ -132,20 +131,16 @@
           ],
           "displayMode": "table",
           "placement": "bottom",
-          "showLegend": true
+          "showLegend": true,
+          "sortBy": "Name",
+          "sortDesc": true
         },
         "tooltip": {
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "9.4.7",
-      "seriesOverrides": [
-        {
-          "alias": "/^Out.*/i",
-          "transform": "negative-Y"
-        }
-      ],
+      "pluginVersion": "11.4.0",
       "targets": [
         {
           "attribute": {
@@ -169,11 +164,11 @@
           },
           "datasource": {
             "type": "opennms-performance-datasource",
-            "uid": "${DS_OPENNMS_PERFORMANCE}"
+            "uid": "${DS_OPENNMS-PERFORMANCE-DATASOURCE}"
           },
           "filter": {},
           "filterState": {},
-          "hide": false,
+          "hide": true,
           "key": "",
           "label": "$index_in",
           "performanceState": {},
@@ -188,7 +183,7 @@
           "attribute": {},
           "datasource": {
             "type": "opennms-performance-datasource",
-            "uid": "${DS_OPENNMS_PERFORMANCE}"
+            "uid": "${DS_OPENNMS-PERFORMANCE-DATASOURCE}"
           },
           "expression": "$index_in*8",
           "filter": {},
@@ -226,11 +221,11 @@
           },
           "datasource": {
             "type": "opennms-performance-datasource",
-            "uid": "${DS_OPENNMS_PERFORMANCE}"
+            "uid": "${DS_OPENNMS-PERFORMANCE-DATASOURCE}"
           },
           "filter": {},
           "filterState": {},
-          "hide": false,
+          "hide": true,
           "key": "",
           "label": "$index_out",
           "performanceState": {},
@@ -245,9 +240,9 @@
           "attribute": {},
           "datasource": {
             "type": "opennms-performance-datasource",
-            "uid": "${DS_OPENNMS_PERFORMANCE}"
+            "uid": "${DS_OPENNMS-PERFORMANCE-DATASOURCE}"
           },
-          "expression": "$index_out*8",
+          "expression": "$index_out*-8",
           "filter": {},
           "filterState": {},
           "hide": false,
@@ -266,10 +261,9 @@
       "type": "timeseries"
     },
     {
-      "aliasColors": {},
       "datasource": {
         "type": "opennms-performance-datasource",
-        "uid": "${DS_OPENNMS_PERFORMANCE}"
+        "uid": "${DS_OPENNMS-PERFORMANCE-DATASOURCE}"
       },
       "description": "Network interface utilisation.",
       "fieldConfig": {
@@ -284,6 +278,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 10,
             "gradientMode": "none",
@@ -343,20 +338,16 @@
           ],
           "displayMode": "table",
           "placement": "bottom",
-          "showLegend": true
+          "showLegend": true,
+          "sortBy": "Name",
+          "sortDesc": true
         },
         "tooltip": {
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "9.4.7",
-      "seriesOverrides": [
-        {
-          "alias": "/^Out.*/i",
-          "transform": "negative-Y"
-        }
-      ],
+      "pluginVersion": "11.4.0",
       "targets": [
         {
           "attribute": {
@@ -380,11 +371,11 @@
           },
           "datasource": {
             "type": "opennms-performance-datasource",
-            "uid": "${DS_OPENNMS_PERFORMANCE}"
+            "uid": "${DS_OPENNMS-PERFORMANCE-DATASOURCE}"
           },
           "filter": {},
           "filterState": {},
-          "hide": false,
+          "hide": true,
           "key": "",
           "label": "$index_in",
           "performanceState": {},
@@ -417,11 +408,11 @@
           },
           "datasource": {
             "type": "opennms-performance-datasource",
-            "uid": "${DS_OPENNMS_PERFORMANCE}"
+            "uid": "${DS_OPENNMS-PERFORMANCE-DATASOURCE}"
           },
           "filter": {},
           "filterState": {},
-          "hide": false,
+          "hide": true,
           "key": "",
           "label": "$index_out",
           "performanceState": {},
@@ -436,7 +427,7 @@
           "attribute": {},
           "datasource": {
             "type": "opennms-performance-datasource",
-            "uid": "${DS_OPENNMS_PERFORMANCE}"
+            "uid": "${DS_OPENNMS-PERFORMANCE-DATASOURCE}"
           },
           "expression": "$index_in*8*100/1000000000",
           "filter": {},
@@ -456,7 +447,7 @@
           "attribute": {},
           "datasource": {
             "type": "opennms-performance-datasource",
-            "uid": "${DS_OPENNMS_PERFORMANCE}"
+            "uid": "${DS_OPENNMS-PERFORMANCE-DATASOURCE}"
           },
           "expression": "$index_out*8*100/1000000000",
           "filter": {},
@@ -477,10 +468,9 @@
       "type": "timeseries"
     },
     {
-      "aliasColors": {},
       "datasource": {
         "type": "opennms-performance-datasource",
-        "uid": "${DS_OPENNMS_PERFORMANCE}"
+        "uid": "${DS_OPENNMS-PERFORMANCE-DATASOURCE}"
       },
       "description": "For packet-oriented interfaces, the number of inbound or outbound packets that contained errors preventing them from being deliverable to a higher-layer protocol.  For character-oriented or fixed-length interfaces, the number of inbound transmission units that contained errors preventing them from being deliverable to a higher-layer protocol.",
       "fieldConfig": {
@@ -495,6 +485,7 @@
             "axisLabel": "packets/sec",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 10,
             "gradientMode": "none",
@@ -561,13 +552,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "9.4.7",
-      "seriesOverrides": [
-        {
-          "alias": "/^Out.*/i",
-          "transform": "negative-Y"
-        }
-      ],
+      "pluginVersion": "11.4.0",
       "targets": [
         {
           "attribute": {
@@ -591,7 +576,7 @@
           },
           "datasource": {
             "type": "opennms-performance-datasource",
-            "uid": "${DS_OPENNMS_PERFORMANCE}"
+            "uid": "${DS_OPENNMS-PERFORMANCE-DATASOURCE}"
           },
           "filter": {},
           "filterState": {},
@@ -628,7 +613,7 @@
           },
           "datasource": {
             "type": "opennms-performance-datasource",
-            "uid": "${DS_OPENNMS_PERFORMANCE}"
+            "uid": "${DS_OPENNMS-PERFORMANCE-DATASOURCE}"
           },
           "filter": {},
           "filterState": {},
@@ -648,10 +633,9 @@
       "type": "timeseries"
     },
     {
-      "aliasColors": {},
       "datasource": {
         "type": "opennms-performance-datasource",
-        "uid": "${DS_OPENNMS_PERFORMANCE}"
+        "uid": "${DS_OPENNMS-PERFORMANCE-DATASOURCE}"
       },
       "description": "The number of outbound and inbound packets which were chosen to be discarded even though no errors had been detected to prevent their being deliverable to a higher-layer protocol. One possible reason for discarding such a packet could be to free up buffer space.",
       "fieldConfig": {
@@ -666,6 +650,7 @@
             "axisLabel": "packets/sec",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 10,
             "gradientMode": "none",
@@ -732,13 +717,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "9.4.7",
-      "seriesOverrides": [
-        {
-          "alias": "/^Out.*/i",
-          "transform": "negative-Y"
-        }
-      ],
+      "pluginVersion": "11.4.0",
       "targets": [
         {
           "attribute": {
@@ -762,7 +741,7 @@
           },
           "datasource": {
             "type": "opennms-performance-datasource",
-            "uid": "${DS_OPENNMS_PERFORMANCE}"
+            "uid": "${DS_OPENNMS-PERFORMANCE-DATASOURCE}"
           },
           "filter": {},
           "filterState": {},
@@ -799,7 +778,7 @@
           },
           "datasource": {
             "type": "opennms-performance-datasource",
-            "uid": "${DS_OPENNMS_PERFORMANCE}"
+            "uid": "${DS_OPENNMS-PERFORMANCE-DATASOURCE}"
           },
           "filter": {},
           "filterState": {},
@@ -819,10 +798,9 @@
       "type": "timeseries"
     },
     {
-      "aliasColors": {},
       "datasource": {
         "type": "opennms-performance-datasource",
-        "uid": "${DS_OPENNMS_PERFORMANCE}"
+        "uid": "${DS_OPENNMS-PERFORMANCE-DATASOURCE}"
       },
       "description": "Number of received or transmitted Unicast, Broadcast and Multicast packets.",
       "fieldConfig": {
@@ -837,6 +815,7 @@
             "axisLabel": "packets/sec",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 10,
             "gradientMode": "none",
@@ -903,13 +882,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "9.4.7",
-      "seriesOverrides": [
-        {
-          "alias": "/^Out.*/i",
-          "transform": "negative-Y"
-        }
-      ],
+      "pluginVersion": "11.4.0",
       "targets": [
         {
           "attribute": {
@@ -933,7 +906,7 @@
           },
           "datasource": {
             "type": "opennms-performance-datasource",
-            "uid": "${DS_OPENNMS_PERFORMANCE}"
+            "uid": "${DS_OPENNMS-PERFORMANCE-DATASOURCE}"
           },
           "filter": {},
           "filterState": {},
@@ -970,7 +943,7 @@
           },
           "datasource": {
             "type": "opennms-performance-datasource",
-            "uid": "${DS_OPENNMS_PERFORMANCE}"
+            "uid": "${DS_OPENNMS-PERFORMANCE-DATASOURCE}"
           },
           "filter": {},
           "filterState": {},
@@ -1007,7 +980,7 @@
           },
           "datasource": {
             "type": "opennms-performance-datasource",
-            "uid": "${DS_OPENNMS_PERFORMANCE}"
+            "uid": "${DS_OPENNMS-PERFORMANCE-DATASOURCE}"
           },
           "filter": {},
           "filterState": {},
@@ -1044,7 +1017,7 @@
           },
           "datasource": {
             "type": "opennms-performance-datasource",
-            "uid": "${DS_OPENNMS_PERFORMANCE}"
+            "uid": "${DS_OPENNMS-PERFORMANCE-DATASOURCE}"
           },
           "filter": {},
           "filterState": {},
@@ -1081,7 +1054,7 @@
           },
           "datasource": {
             "type": "opennms-performance-datasource",
-            "uid": "${DS_OPENNMS_PERFORMANCE}"
+            "uid": "${DS_OPENNMS-PERFORMANCE-DATASOURCE}"
           },
           "filter": {},
           "filterState": {},
@@ -1118,7 +1091,7 @@
           },
           "datasource": {
             "type": "opennms-performance-datasource",
-            "uid": "${DS_OPENNMS_PERFORMANCE}"
+            "uid": "${DS_OPENNMS-PERFORMANCE-DATASOURCE}"
           },
           "filter": {},
           "filterState": {},
@@ -1139,7 +1112,7 @@
     }
   ],
   "refresh": false,
-  "schemaVersion": 39,
+  "schemaVersion": 40,
   "tags": [],
   "templating": {
     "list": [
@@ -1147,32 +1120,24 @@
         "current": {},
         "datasource": {
           "type": "opennms-performance-datasource",
-          "uid": "${DS_OPENNMS_PERFORMANCE}"
+          "uid": "${DS_OPENNMS-PERFORMANCE-DATASOURCE}"
         },
         "definition": "",
-        "hide": 0,
         "includeAll": false,
-        "multi": false,
         "name": "node",
         "options": [],
         "query": "nodeFilter(nodeSysOid like '.1.3.6.1.4.1.%')",
         "refresh": 1,
         "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
+        "type": "query"
       },
       {
         "current": {},
         "datasource": {
           "type": "opennms-performance-datasource",
-          "uid": "${DS_OPENNMS_PERFORMANCE}"
+          "uid": "${DS_OPENNMS-PERFORMANCE-DATASOURCE}"
         },
         "definition": "",
-        "hide": 0,
         "includeAll": false,
         "multi": true,
         "name": "interface",
@@ -1180,12 +1145,8 @@
         "query": "nodeResources($node)",
         "refresh": 1,
         "regex": "^interfaceSnmp\\[.*",
-        "skipUrlSync": false,
         "sort": 1,
-        "tagValuesQuery": "",
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
+        "type": "query"
       }
     ]
   },
@@ -1193,34 +1154,10 @@
     "from": "now-24h",
     "to": "now"
   },
-  "timepicker": {
-    "refresh_intervals": [
-      "5s",
-      "10s",
-      "30s",
-      "1m",
-      "5m",
-      "15m",
-      "30m",
-      "1h",
-      "2h",
-      "1d"
-    ],
-    "time_options": [
-      "5m",
-      "15m",
-      "1h",
-      "6h",
-      "12h",
-      "24h",
-      "2d",
-      "7d",
-      "30d"
-    ]
-  },
+  "timepicker": {},
   "timezone": "",
   "title": "OpenNMS Network Interfaces Report",
   "uid": "cdlwos8f73xmod",
-  "version": 2,
+  "version": 3,
   "weekStart": ""
 }
