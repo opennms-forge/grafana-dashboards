@@ -19,7 +19,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 0,
+  "id": 84,
   "links": [],
   "panels": [
     {
@@ -50,6 +50,7 @@
             "cellOptions": {
               "type": "auto"
             },
+            "filterable": true,
             "footer": {
               "reducers": []
             },
@@ -127,6 +128,7 @@
               "type": "value"
             }
           ],
+          "noValue": "✨ All Good!",
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -206,7 +208,7 @@
           ]
         }
       ],
-      "title": "Node Alarms in Category: $category",
+      "title": "Business Service Alarms",
       "type": "table"
     },
     {
@@ -237,6 +239,7 @@
             "cellOptions": {
               "type": "auto"
             },
+            "filterable": true,
             "footer": {
               "reducers": []
             },
@@ -245,6 +248,7 @@
           "decimals": 2,
           "displayName": "",
           "mappings": [],
+          "noValue": "✨ All Good!",
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -398,7 +402,7 @@
         ]
       },
       "gridPos": {
-        "h": 6,
+        "h": 8,
         "w": 7,
         "x": 0,
         "y": 7
@@ -406,6 +410,7 @@
       "id": 9,
       "options": {
         "cellHeight": "sm",
+        "enablePagination": false,
         "showHeader": true,
         "sortBy": [
           {
@@ -492,6 +497,7 @@
             "cellOptions": {
               "type": "auto"
             },
+            "filterable": true,
             "footer": {
               "reducers": []
             },
@@ -500,6 +506,7 @@
           "decimals": 2,
           "displayName": "",
           "mappings": [],
+          "noValue": "✨ All Good!",
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -703,7 +710,7 @@
         ]
       },
       "gridPos": {
-        "h": 6,
+        "h": 8,
         "w": 7,
         "x": 7,
         "y": 7
@@ -791,6 +798,7 @@
             "cellOptions": {
               "type": "auto"
             },
+            "filterable": true,
             "footer": {
               "reducers": []
             },
@@ -799,6 +807,7 @@
           "decimals": 2,
           "displayName": "",
           "mappings": [],
+          "noValue": "✨ All Good!",
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -998,7 +1007,7 @@
         ]
       },
       "gridPos": {
-        "h": 6,
+        "h": 8,
         "w": 10,
         "x": 14,
         "y": 7
@@ -1006,7 +1015,13 @@
       "id": 11,
       "options": {
         "cellHeight": "sm",
-        "showHeader": true
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Service Name"
+          }
+        ]
       },
       "pluginVersion": "12.3.0",
       "targets": [
@@ -1063,9 +1078,11 @@
       "title": "Service Alarms in Category: $category",
       "transformations": [
         {
-          "id": "merge",
+          "id": "filterByValue",
           "options": {
-            "reducers": []
+            "filters": [],
+            "match": "any",
+            "type": "include"
           }
         }
       ],
@@ -1077,7 +1094,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 13
+        "y": 15
       },
       "id": 2,
       "panels": [],
@@ -1100,6 +1117,7 @@
             "cellOptions": {
               "type": "auto"
             },
+            "filterable": true,
             "footer": {
               "reducers": []
             },
@@ -1108,6 +1126,7 @@
           "decimals": 2,
           "displayName": "",
           "mappings": [],
+          "noValue": "✨ All Good!",
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -1283,10 +1302,10 @@
         ]
       },
       "gridPos": {
-        "h": 6,
+        "h": 8,
         "w": 7,
         "x": 0,
-        "y": 14
+        "y": 16
       },
       "id": 5,
       "options": {
@@ -1354,6 +1373,7 @@
             "cellOptions": {
               "type": "auto"
             },
+            "filterable": true,
             "footer": {
               "reducers": []
             },
@@ -1362,6 +1382,7 @@
           "decimals": 2,
           "displayName": "",
           "mappings": [],
+          "noValue": "✨ All Good!",
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -1560,10 +1581,10 @@
         ]
       },
       "gridPos": {
-        "h": 6,
+        "h": 8,
         "w": 7,
         "x": 7,
-        "y": 14
+        "y": 16
       },
       "id": 6,
       "options": {
@@ -1631,14 +1652,18 @@
             "cellOptions": {
               "type": "auto"
             },
+            "filterable": true,
             "footer": {
               "reducers": []
             },
-            "inspect": false
+            "inspect": false,
+            "wrapHeaderText": false,
+            "wrapText": false
           },
           "decimals": 2,
           "displayName": "",
           "mappings": [],
+          "noValue": "✨ All Good!",
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -1860,14 +1885,15 @@
         ]
       },
       "gridPos": {
-        "h": 6,
+        "h": 8,
         "w": 10,
         "x": 14,
-        "y": 14
+        "y": 16
       },
       "id": 7,
       "options": {
         "cellHeight": "sm",
+        "enablePagination": false,
         "showHeader": true
       },
       "pluginVersion": "12.3.0",
@@ -1992,5 +2018,5 @@
   "timezone": "",
   "title": "OpenNMS Outage Dashboard",
   "uid": "ddlnrdx8fmayoe",
-  "version": 11
+  "version": 12
 }
