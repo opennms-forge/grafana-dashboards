@@ -5,25 +5,25 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "5.3.4"
+      "version": "6.1.5"
     },
     {
       "type": "panel",
       "id": "heatmap",
       "name": "Heatmap",
-      "version": "5.0.0"
+      "version": ""
     },
     {
       "type": "datasource",
       "id": "postgres",
       "name": "PostgreSQL",
-      "version": "5.0.0"
+      "version": "1.0.0"
     },
     {
       "type": "panel",
       "id": "table",
       "name": "Table",
-      "version": "5.0.0"
+      "version": ""
     }
   ],
   "annotations": {
@@ -44,7 +44,7 @@
   "gnetId": 8499,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1543870393976,
+  "iteration": 1556557862812,
   "links": [],
   "panels": [
     {
@@ -68,12 +68,14 @@
         "y": 0
       },
       "heatmap": {},
+      "hideZeroBuckets": false,
       "highlightCards": true,
       "id": 13,
       "legend": {
         "show": true
       },
       "links": [],
+      "reverseYBuckets": false,
       "targets": [
         {
           "format": "time_series",
@@ -508,14 +510,14 @@
       "datasource": "$instance",
       "fontSize": "100%",
       "gridPos": {
-        "h": 6,
+        "h": 11,
         "w": 24,
         "x": 0,
         "y": 19
       },
       "id": 5,
       "links": [],
-      "pageSize": 4,
+      "pageSize": 10,
       "scroll": false,
       "showHeader": true,
       "sort": {
@@ -697,7 +699,7 @@
     }
   ],
   "refresh": false,
-  "schemaVersion": 16,
+  "schemaVersion": 18,
   "style": "dark",
   "tags": [
     "opennms",
@@ -709,16 +711,18 @@
       {
         "current": {
           "tags": [],
-          "text": "OpenNMS FUL PSQL",
-          "value": "OpenNMS FUL PSQL"
+          "text": "OpenNMS PG WDC",
+          "value": "OpenNMS PG WDC"
         },
         "hide": 0,
-        "label": "OpenNMS Instance",
+        "includeAll": false,
+        "label": null,
+        "multi": false,
         "name": "instance",
         "options": [],
         "query": "postgres",
         "refresh": 1,
-        "regex": "/.*OpenNMS.*/",
+        "regex": ".*OpenNMS.*",
         "skipUrlSync": false,
         "type": "datasource"
       },
@@ -726,6 +730,7 @@
         "allValue": null,
         "current": {},
         "datasource": "$instance",
+        "definition": "SELECT location FROM node_outages;",
         "hide": 0,
         "includeAll": true,
         "label": "Location",
@@ -747,6 +752,7 @@
         "allValue": null,
         "current": {},
         "datasource": "$instance",
+        "definition": "SELECT 'no category' UNION (SELECT categoryname FROM node_outages)",
         "hide": 0,
         "includeAll": true,
         "label": "Surveillance Category",
@@ -768,6 +774,7 @@
         "allValue": null,
         "current": {},
         "datasource": "$instance",
+        "definition": "SELECT nodelabel FROM node_outages",
         "hide": 0,
         "includeAll": true,
         "label": "Node Label",
@@ -789,6 +796,7 @@
         "allValue": null,
         "current": {},
         "datasource": "$instance",
+        "definition": "SELECT DISTINCT(servicename) FROM node_outages",
         "hide": 0,
         "includeAll": true,
         "label": "Service Name",
@@ -840,5 +848,5 @@
   "timezone": "",
   "title": "OpenNMS Outage Statistics",
   "uid": "Ffe-A0xmz",
-  "version": 5
+  "version": 6
 }
